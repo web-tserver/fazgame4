@@ -1,597 +1,1003 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAZGAME | Faz Service, Faz Gaming</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes, viewport-fit=cover">
+    <title>FAZ GAME EMPIRE – Pro Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600..700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --bg: #08080d;
+            --surface: #0a0a0f;
+            --surface-light: #12121a;
+            --accent: #FFD700;
+            --accent-glow: rgba(255, 215, 0, 0.2);
+            --text: #e2e2f0;
+            --text-dim: #8888a0;
+            --border: #1e1e2e;
+            --danger: #ff4d6a;
+            --success: #10b981;
+            --white: #ffffff;
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+            --radius-lg: 24px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --shadow-card: 0 20px 50px rgba(0,0,0,0.7);
+            --input-bg: #161625;
+            --input-border: #2a2a3a;
+            --navbar-height: 70px;
+            --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+        * { margin:0; padding:0; box-sizing:border-box; }
 
-<style>
-:root {
-  --bg: #000;
-  --card: rgba(255, 255, 255, .08);
-  --text: #fff;
-  --muted: #d1d1d1;
-  --accent: #ffd84d;
-  --accent-dark: #e6c43d;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+        body {
+            background: var(--bg);
+            font-family: var(--font);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px 12px calc(var(--navbar-height) + var(--safe-area-bottom) + 16px);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+        }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.5; }
-a { text-decoration: none; color: inherit; }
+        /* Top Header */
+        .app-topbar {
+            width: 100%;
+            max-width: 1300px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        .logo-area { display:flex; align-items:center; gap:10px; }
+        .logo-icon {
+            width:36px; height:36px; background: linear-gradient(135deg, var(--accent), #e6b800);
+            border-radius: 12px; display:flex; align-items:center; justify-content:center;
+            font-weight:900; color:#0a0a0f; font-size:16px; box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .app-topbar h1 { font-size:1.1rem; font-weight:800; color: var(--white); }
+        .app-topbar .subtitle { font-size:0.6rem; color: var(--text-dim); text-transform:uppercase; letter-spacing:1px; }
 
-/* Header */
-header { position: sticky; top: 0; z-index: 1000; background: rgba(0, 0, 0, .9); backdrop-filter: blur(15px); padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-.logo { font-weight: 800; font-size: 20px; color: var(--accent); letter-spacing: 1px; }
-.header-logos { display: flex; gap: 16px; }
-.header-logos img { width: 22px; filter: invert(1); opacity: .7; transition: var(--transition); }
-.header-logos img:hover { opacity: 1; transform: translateY(-2px); }
+        /* General Button System */
+        .btn {
+            padding: 10px 16px; border-radius: 30px; border: 1px solid var(--border);
+            font-weight:600; font-size:0.8rem; cursor:pointer; font-family:var(--font);
+            transition: all 0.2s; display:inline-flex; align-items:center; gap:5px;
+            background: var(--surface-light); color: var(--text); box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            white-space: nowrap; min-height: 44px; -webkit-tap-highlight-color: transparent;
+        }
+        .btn i { font-size: 0.9rem; }
+        .btn:active { transform: scale(0.96); }
+        .btn-accent { background: var(--accent); color: #0a0a0f; border:none; font-weight:700; }
+        .btn-sm { padding:8px 12px; font-size:0.7rem; min-height: 36px; border-radius: 20px; }
+        .btn-danger { background: rgba(255, 77, 106, 0.15); color: var(--danger); border: 1px solid rgba(255, 77, 106, 0.3); }
+        .btn-danger:hover { background: rgba(255, 77, 106, 0.25); }
 
-/* Banner Section */
-.banner { position: relative; min-height: 450px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.banner-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease; z-index: 1; }
-.banner-slide.active { opacity: 1; }
-.banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.95)); z-index: 2; }
-.banner-content { position: relative; z-index: 3; width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; }
-.banner-card { max-width: 560px; background: rgba(8, 8, 12, 0.85); backdrop-filter: blur(10px); border-radius: 24px; padding: 32px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.4); margin: 0 auto 0 0; }
-.hero-logo { font-size: 40px; font-weight: 800; color: #fff; margin-bottom: 4px; letter-spacing: 2px; }
-.hero-logo span { color: var(--accent); }
-.tagline { font-weight: 600; color: var(--accent); margin-bottom: 20px; font-size: 15px; }
+        /* Workspace Grid Split Layout */
+        .main-container { display: flex; gap: 16px; max-width: 1300px; width:100%; align-items: flex-start; flex:1; }
+        .form-panel { flex: 1 1 480px; min-width: 300px; max-width: 550px; display: flex; flex-direction: column; gap: 12px; }
+        .preview-panel { flex: 1 1 600px; position: sticky; top: 100px; max-height: calc(100vh - 180px); overflow-y: auto; display:flex; justify-content:center; }
 
-/* Service Chips */
-.service-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
-.service-chip { background: rgba(255,255,255,.08); padding: 6px 14px; border-radius: 999px; cursor: pointer; font-size: 13px; font-weight: 600; transition: var(--transition); border: 1px solid transparent; }
-.service-chip:hover { background: rgba(255,255,255,.15); }
-.service-chip.primary { border-color: var(--accent); color: var(--accent); background: rgba(255, 216, 77, 0.05); }
+        /* Card Elements */
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .card-header {
+            display:flex; align-items:center; gap:6px; margin-bottom:0;
+            font-weight:700; font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color: var(--accent);
+            cursor: pointer; user-select: none;
+        }
+        .card-header i { font-size: 0.8rem; }
+        .card-header .toggle-arrow { margin-left: auto; font-size: 0.8rem; color: var(--text-dim); transition: transform 0.2s; }
+        .card.collapsible.collapsed .card-body { display: none; }
+        .card.collapsible.collapsed .toggle-arrow { transform: rotate(-90deg); }
+        .card-body { margin-top: 10px; }
 
-/* Stats */
-.hero-stats { display: flex; gap: 30px; margin: 25px 0; flex-wrap: wrap; }
-.stat h2 { font-size: 28px; font-weight: 800; color: var(--accent); line-height: 1; }
-.stat p { font-size: 12px; color: var(--muted); margin-top: 6px; }
-.counter-glow { animation: counterPulse 1.5s ease-in-out infinite alternate; }
-@keyframes counterPulse { 0% { text-shadow: 0 0 4px rgba(255,216,77,.4); } 100% { text-shadow: 0 0 16px rgba(255,216,77,.9); } }
+        /* Input Configuration Form Layouts */
+        .form-row { display:flex; gap:8px; flex-wrap:wrap; }
+        .form-group { display:flex; flex-direction:column; gap:3px; flex:1; min-width:120px; }
+        .form-group label { font-size:0.6rem; font-weight:600; text-transform:uppercase; color: var(--text-dim); }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px 10px; border: 1.5px solid var(--input-border); border-radius: var(--radius-sm);
+            font-size:0.8rem; background: var(--input-bg); color: var(--text); font-family:var(--font);
+            width:100%; outline: none; transition: all 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,215,0,0.15);
+        }
+        .form-group textarea { resize:vertical; min-height:55px; }
 
-/* Socials & CTA */
-.sticky-cta { position: sticky; top: 68px; z-index: 900; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.btn { display: block; max-width: 360px; margin: 0 auto; padding: 14px; border-radius: 14px; background: var(--accent); color: #000; font-weight: 800; text-align: center; transition: var(--transition); border: none; cursor: pointer; }
-.btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 216, 77, 0.3); }
+        /* Document Storage Manager Styling */
+        .storage-dashboard { display: flex; flex-direction: column; gap: 8px; background: rgba(255,255,255,0.02); padding: 10px; border-radius: var(--radius-sm); border: 1px dashed var(--border); }
+        .doc-list-container { max-height: 160px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; margin-top: 4px; padding-right: 4px; }
+        .doc-entry {
+            display: flex; align-items: center; justify-content: space-between; padding: 8px 12px;
+            background: var(--surface-light); border: 1px solid var(--border); border-radius: var(--radius-sm); gap: 10px;
+        }
+        .doc-entry-info { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+        .doc-entry-title { font-size: 0.8rem; font-weight: 700; color: var(--white); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .doc-entry-meta { font-size: 0.65rem; color: var(--text-dim); display: flex; gap: 8px; }
+        .doc-entry-type { font-weight: bold; color: var(--accent); font-size: 0.6rem; text-transform: uppercase; }
+        .doc-entry-actions { display: flex; gap: 4px; }
 
-.social-row { display: flex; gap: 12px; margin-top: 20px; }
-.social-item { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; transition: var(--transition); }
-.social-item img { width: 20px; filter: invert(1); }
-.social-item:hover { background: var(--accent); transform: translateY(-3px); }
-.social-item:hover img { filter: invert(0); }
+        /* Item Search Engine */
+        .item-search-area { display: flex; align-items: center; gap: 6px; margin-left: auto; position: relative; } /* FIXED: added position: relative */
+        .search-input {
+            width: 120px; padding: 6px 10px; border-radius: 20px; border: 1px solid var(--input-border);
+            background: var(--input-bg); color: var(--text); font-size:0.7rem; outline: none;
+            transition: all 0.2s;
+        }
+        .search-input:focus { width: 160px; border-color: var(--accent); }
+        .search-dropdown {
+            position: absolute; top: 100%; right: 0; width: 220px; max-height: 180px; overflow-y: auto;
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6); z-index: 50; display: none;
+        }
+        .search-dropdown.show { display: block; }
+        .search-dropdown .dropdown-item {
+            padding: 8px 12px; font-size:0.75rem; cursor: pointer; color: var(--text);
+            border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 2px;
+        }
+        .search-dropdown .dropdown-item:last-child { border-bottom: none; }
+        .search-dropdown .dropdown-item:hover { background: rgba(255,215,0,0.1); color: var(--accent); }
 
-/* Installment Banner */
-.installment-banner { margin: 20px auto; max-width: 1200px; font-size: 13px; text-align: center; color: rgba(255,216,77,.9); font-weight: 600; letter-spacing: .5px; animation: fadeInInstall 1.2s ease forwards; opacity: 0; }
-@keyframes fadeInInstall { to { opacity: 1; } }
+        /* Dynamic Input Tables */
+        .items-table-wrapper { overflow-x: auto; margin: 0 -4px; }
+        .items-table { width: 100%; min-width: 550px; border-collapse:collapse; font-size:0.75rem; }
+        .items-table th { background: var(--surface-light); padding:8px 5px; text-align:left; font-size:0.6rem; text-transform:uppercase; color: var(--text-dim); }
+        .items-table td { padding:5px 4px; border-bottom:1px solid var(--border); vertical-align:middle; }
+        .items-table input { width:100%; padding:6px 4px; background:transparent; border:1px solid transparent; color: var(--text); font-family:var(--font); font-size:0.75rem; }
+        .items-table input:focus { border-color: var(--accent); background: rgba(255,215,0,0.05); }
+        .item-desc { width:100%; font-weight: 600; }
+        .item-detail { width:100%; font-size:0.65rem; padding:4px 4px; color: var(--text-dim); }
+        .item-qty { width:50px; text-align:center; }
+        .item-price { width:80px; text-align:right; }
+        .amount-display { text-align:right; font-weight:700; color: var(--accent); padding-right: 4px; }
 
-/* Auto-Margin Layouts */
-section { padding: 40px 14px; max-width: 1200px; margin: 0 auto; }
-.section-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
-.section-subtitle { font-size: 13px; color: var(--accent); margin-bottom: 20px; opacity: 0.9; }
+        /* Live A4 Print Canvas Blueprint Rendering */
+        .invoice-preview {
+            background: #ffffff; color: #1e293b; padding: 32px 28px; border-radius: 4px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6); width:100%; max-width:750px;
+            font-size:0.8rem; line-height:1.45; border:1px solid #e2e8f0; position: relative;
+        }
+        .paid-stamp {
+            position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%) rotate(-18deg);
+            font-size: 3.8rem; font-weight: 900; color: rgba(255, 77, 106, 0.18);
+            letter-spacing: 6px; text-transform: uppercase; border: 5px solid rgba(255, 77, 106, 0.18);
+            padding: 8px 32px; border-radius: 14px; pointer-events: none; z-index: 10; display: none;
+        }
+        .paid-stamp.visible { display: block; }
+        .inv-header { display:flex; justify-content:space-between; margin-bottom:20px; padding-bottom:16px; border-bottom:2px solid #1e293b; }
+        .inv-title { font-size:1.6rem; font-weight:800; color:#0f172a; text-transform:uppercase; letter-spacing:-0.5px; line-height:1.1; }
+        .info-grid { display:grid; grid-template-columns:1fr; gap:12px; margin-bottom:16px; }
+        .inv-table { width:100%; border-collapse:collapse; margin:16px 0; }
+        .inv-table th { background:#f1f5f9; padding:8px 6px; font-size:0.65rem; text-transform:uppercase; color:#475569; letter-spacing: 0.5px; }
+        .inv-table td { padding:10px 6px; border-bottom:1px solid #e2e8f0; font-size: 13px; vertical-align: top; }
+        .inv-table th.right, .inv-table td.right { text-align: right; }
+        .inv-item-name { font-weight: 700; color: #0f172a; }
+        .inv-item-detail { font-size: 11px; color: #64748b; margin-top: 2px; }
+        .totals-section { display:flex; justify-content:flex-end; margin-top: 10px; }
+        .totals-table { width:240px; border-collapse: collapse; }
+        .totals-table td { padding:6px 8px; font-size:0.8rem; color:#475569; }
+        .grand-total { font-weight:800; color:#0f172a; border-top:2px solid #1e293b; font-size: 0.95rem !important; }
+        .grand-total td { color: #0f172a !important; padding: 10px 8px; }
+        .payment-details { margin-top:20px; padding-top:12px; border-top:1px solid #e2e8f0; font-size:0.7rem; color:#475569; }
+        .payment-details h4, .notes-section h4 { color: #0f172a; font-size: 0.75rem; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .notes-section { margin-top:12px; font-size:0.7rem; color:#64748b; }
 
-/* Mobile 2-Card Grid System */
-.hot-grid { 
-  display: grid; 
-  gap: 12px; 
-  grid-template-columns: repeat(2, 1fr); 
-  margin: 0 auto; 
-}
+        /* Global Sticky Navigation Footer Bar */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: var(--surface); border-top: 1px solid var(--border);
+            display: flex; justify-content: space-around; align-items: center;
+            padding: 8px 12px calc(8px + var(--safe-area-bottom));
+            z-index: 200; box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+            font-size: 0.6rem; font-weight: 600; color: var(--text-dim);
+            background: transparent; border: none; cursor: pointer;
+            padding: 8px 6px; border-radius: 16px; transition: all 0.2s;
+            min-width: 55px; font-family: var(--font);
+        }
+        .nav-item i { font-size: 1.2rem; }
+        .nav-item.active, .nav-item:active { color: var(--accent); background: rgba(255,215,0,0.1); }
+        .nav-item:disabled { opacity: 0.25; cursor: not-allowed; background: transparent !important; color: var(--text-dim) !important; }
 
-.hot-card { 
-  position: relative; border-radius: 16px; overflow: hidden; background: #111; aspect-ratio: 4/5; 
-  transition: transform 0.4s ease, box-shadow 0.4s ease; cursor: pointer;
-  transform-style: preserve-3d; perspective: 1400px; will-change: transform;
-  margin: 0 auto; width: 100%;
-}
-.hot-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; transform: translateZ(30px) scale(1.05); }
-.hot-card:hover img { transform: translateZ(50px) scale(1.15); }
-.hot-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(255, 216, 77, 0.2); z-index: 5; }
-
-/* Metallic Reflection Shine */
-.hot-card::after {
-  content: ""; position: absolute; top: -40%; left: -150%; width: 70%; height: 200%;
-  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.05) 35%, rgba(255,255,255,0.5) 48%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.5) 52%, rgba(255,255,255,0.05) 65%, transparent 100%);
-  transform: skewX(-25deg); z-index: 3; pointer-events: none; opacity: 0; filter: blur(1px);
-}
-.hot-card:hover::after { animation: metallicShine 0.7s forwards; opacity: 1; }
-@keyframes metallicShine { to { left: 180%; } }
-
-.hot-card::before {
-  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s ease; z-index: 4;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,.15), transparent 60%);
-}
-.hot-card:hover::before { opacity: 1; }
-
-.hot-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); z-index: 4; transform: translateZ(60px); }
-.hot-title { font-weight: 800; font-size: 13px; margin-bottom: 2px; line-height: 1.2; }
-.hot-desc { font-size: 11px; color: var(--muted); font-weight: 600; }
-
-.badge { position: absolute; top: 10px; z-index: 5; font-size: 8px; font-weight: 800; padding: 4px 8px; border-radius: 20px; transform: translateZ(60px); }
-.badge-left { left: 10px; background: rgba(255,255,255,0.9); color: #000; }
-.badge-right { right: 10px; background: var(--accent); color: #000; }
-.badge-red { background: #ff3b3b; color: #fff; }
-
-/* Desktop Grid Adjustments */
-@media (min-width: 600px) {
-  section { padding: 60px 20px; }
-  .hot-grid { gap: 20px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-  .hot-card-content { padding: 24px; }
-  .hot-title { font-size: 16px; margin-bottom: 4px; }
-  .hot-desc { font-size: 13px; }
-  .badge { font-size: 10px; padding: 6px 12px; top: 15px; }
-  .badge-left { left: 15px; }
-  .badge-right { right: 15px; }
-}
-
-/* Stock Grid & Search */
-.controls { margin: 0 auto; width: 100%; max-width: 1200px; }
-.search-box { width: 100%; max-width: 400px; padding: 14px 24px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); background: #111; color: #fff; margin-bottom: 20px; font-size: 14px; outline: none; transition: var(--transition); }
-.search-box:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 216, 77, 0.1); }
-
-.filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; margin: 0 auto 24px auto; }
-.filter-btn { padding: 8px 16px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); background: #111; color: #fff; cursor: pointer; white-space: nowrap; font-size: 12px; font-weight: 600; transition: var(--transition); }
-.filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
-.filter-count { margin-left: 6px; background: #000; color: #fff; padding: 2px 6px; border-radius: 999px; font-size: 10px; }
-.filter-btn.active .filter-count { background: rgba(0,0,0,0.2); color: #000; }
-
-.product-grid { display: grid; gap: 14px; grid-template-columns: 1fr; margin: 0 auto; } 
-@media (min-width: 768px) {
-  .product-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); } 
-}
-
-/* =========================================
-   UPDATED PRODUCT CARD (INFO & CHECK BTN) 
-========================================= */
-.product-card { 
-  background: var(--card); border-radius: 16px; padding: 18px 16px; 
-  display: flex; gap: 16px; align-items: center; 
-  border: 1px solid rgba(255,255,255,0.05); transition: var(--transition); 
-  position: relative; margin: 0 auto; width: 100%; 
-}
-.product-card:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,216,77,0.2); }
-.product-icon { width: 64px; height: 64px; background: #111; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.product-icon img { width: 32px; filter: invert(1); }
-
-/* Wrap info and keep button tight against price */
-.product-info { flex: 1; width: 100%; }
-.product-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; padding-top: 10px; line-height: 1.3; }
-
-.price-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.product-price { color: var(--accent); font-weight: 800; font-size: 15px; }
-
-.product-buy { 
-  background: var(--accent); color: #000; border: none; padding: 6px 12px; 
-  border-radius: 8px; font-weight: 800; font-size: 11px; cursor: pointer; 
-  transition: var(--transition); display: inline-block;
-}
-.product-buy:hover { background: var(--accent-dark); transform: scale(1.05); }
-
-/* Tiny Badges */
-.card-badge { position: absolute; font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 8px; text-transform: uppercase; }
-.card-badge-type { top: 12px; right: 12px; }
-.card-badge-cond { top: 12px; left: 12px; }
-
-/* Preloader */
-#preloader { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease; }
-#preloader.hide { opacity: 0; pointer-events: none; }
-.loader-bar-wrap { width: 240px; height: 4px; background: #222; margin-top: 20px; border-radius: 10px; overflow: hidden; }
-.loader-bar { height: 100%; width: 0%; background: var(--accent); transition: width 0.1s; }
-
-/* Lightbox */
-#imageModal { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(6px); z-index: 10001; display: none; align-items: center; justify-content: center; cursor: zoom-out; padding: 20px; }
-#imageModal.show { display: flex; }
-#modalImg { max-width: 95%; max-height: 90vh; border-radius: 16px; box-shadow: 0 0 50px rgba(0,0,0,0.6); transform: scale(0.9); transition: transform 0.3s ease; }
-#imageModal.show #modalImg { transform: scale(1); }
-
-/* Payment Icons */
-.payment-icons { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
-.payment-item { display: flex; align-items: center; gap: 10px; font-size: 14px; opacity: 0.8; }
-.payment-item img { height: 25px; filter: invert(1); }
-
-footer { text-align: center; padding: 40px 20px; color: #aaa; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px; }
-
-@media (max-width: 768px) {
-  .hero-logo { font-size: 32px; }
-  .banner-card { padding: 24px; margin: 0 auto; width: 90%; }
-  .hero-stats { gap: 15px; }
-}
-</style>
+        @media (max-width: 900px) {
+            .main-container { flex-direction: column; }
+            .form-panel { max-width:100%; }
+            .preview-panel { position:static; max-height:none; width: 100%; }
+            .invoice-preview { overflow-x: auto; }
+        }
+        @media print {
+            body { background:white; padding:0; }
+            .app-topbar, .form-panel, .bottom-nav { display:none !important; }
+            .preview-panel { position:static; overflow:visible; width:100%; max-width:none; }
+            .invoice-preview { box-shadow:none; border:none; padding:0; width:100%; max-width:100%; }
+        }
+    </style>
 </head>
 <body>
-
-<div id="preloader">
-  <div style="text-align: center;">
-    <div class="logo" style="font-size: 28px;">FAZ<span>GAME</span></div>
-    <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
-  </div>
-</div>
-
-<div id="imageModal"><img id="modalImg" src="" alt="Preview"></div>
-
-<header>
-  <div class="header-inner">
-    <div class="logo">FAZGAME</div>
-    <div class="header-logos">
-      <img src="https://api.iconify.design/simple-icons/playstation.svg" alt="PS">
-      <img src="https://api.iconify.design/simple-icons/xbox.svg" alt="Xbox">
-      <img src="https://api.iconify.design/simple-icons/nintendoswitch.svg" alt="Switch">
-      <img src="https://api.iconify.design/mdi/desktop-classic.svg" alt="PC">
-    </div>
-  </div>
-</header>
-
-<div class="banner">
-  <div class="banner-slide active" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e')"></div>
-  <div class="banner-slide" style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420')"></div>
-  <div class="banner-content">
-    <div class="banner-card">
-      <h1 class="hero-logo">FAZ<span>GAME</span></h1>
-      <p class="tagline"><strong>Faz</strong> Service, <strong>Faz</strong> Gaming</p>
-      
-      <div class="service-chips">
-        <span class="service-chip primary" data-scroll="hot">Custom PC Build</span>
-        <span class="service-chip" data-scroll="hot">PC Parts & Upgrade</span>
-        <span class="service-chip" data-scroll="stock">Console & Games</span>
-        <span class="service-chip" data-scroll="stock">Inventory & Stock</span>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat"><h2 data-target="50">0</h2><p>Custom Builds</p></div>
-        <div class="stat"><h2 data-target="500">0</h2><p>Happy Customers</p></div>
-        <div class="stat"><h2 data-target="1">0</h2><p>Years Warranty</p></div>
-      </div>
-
-      <div class="social-row">
-        <a class="social-item" href="https://www.tiktok.com/@syazeone" target="_blank"><img src="https://api.iconify.design/simple-icons/tiktok.svg"></a>
-        <a class="social-item" href="https://wa.me/60163691936" target="_blank"><img src="https://api.iconify.design/simple-icons/whatsapp.svg"></a>
-        <a class="social-item" href="https://www.instagram.com/fazgame_empire/" target="_blank"><img src="https://api.iconify.design/simple-icons/instagram.svg"></a>
-        <a class="social-item" href="https://www.facebook.com/share/1DHZdLi62G/" target="_blank"><img src="https://api.iconify.design/simple-icons/facebook.svg"></a>
-        <a class="social-item" href="https://t.me/fazgameofficial" target="_blank"><img src="https://api.iconify.design/simple-icons/telegram.svg"></a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="sticky-cta">
-  <a id="cta-whatsapp" href="#" class="btn">Chat on WhatsApp</a>
-</div>
-
-<section id="fast-sales" style="display:none;">
-  <h2 class="section-title">Fast Sales</h2>
-  <div class="section-subtitle">🔥 While Stock Lasts</div>
-  <div class="hot-grid">
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span>
-      <span class="badge badge-right badge-red">LIMITED</span>
-      <img src="images/ps5.jpg" alt="PS5">
-      <div class="hot-card-content">
-        <div class="hot-title">PS5 Disc Set</div>
-        <div class="hot-desc">RM 1450 • Limited Stock</div>
-      </div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span>
-      <span class="badge badge-right badge-red">LIMITED</span>
-      <img src="images/switch.jpg" alt="Switch">
-      <div class="hot-card-content">
-        <div class="hot-title">Nintendo Switch 2</div>
-        <div class="hot-desc">RM 1500 • Limited Stock</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="hot">
-  <h2 class="section-title">Preorder PC Builds</h2>
-  <div class="section-subtitle">🖥 Custom Gaming PCs • Built On Demand</div>
-  <div class="hot-grid">
-    <div class="hot-card tilt-card"><span class="badge badge-right">PRE-ORDER</span><img src="images/pc1000.jpg" alt="PC"><div class="hot-card-content"><div class="hot-title">PC Budget RM1,000+</div><div class="hot-desc">Entry Gaming</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-right">PRE-ORDER</span><img src="images/pc2000.jpg" alt="PC"><div class="hot-card-content"><div class="hot-title">PC Budget RM2,000+</div><div class="hot-desc">Entry Gaming</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-right">PRE-ORDER</span><img src="images/pc3000.jpg" alt="PC"><div class="hot-card-content"><div class="hot-title">PC Budget RM3,000+</div><div class="hot-desc">Balanced Build</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-right">PRE-ORDER</span><img src="images/pc3500.jpg" alt="PC"><div class="hot-card-content"><div class="hot-title">PC Budget RM3,500+</div><div class="hot-desc">High Performance</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-right">PRE-ORDER</span><img src="images/custompc.jpg" alt="PC"><div class="hot-card-content"><div class="hot-title">Custom PC</div><div class="hot-desc">Free Setup</div></div></div>
-  </div>
-</section>
-
-<div class="installment-banner">💳 0% Interest Installment Available • SPayLater</div>
-
-<section id="preorder-console">
-  <h2 class="section-title">Preorder Consoles</h2>
-  <div class="section-subtitle">🎮 Used Units • Reserve Before Stock Arrival</div>
-
-  <div class="hot-grid">
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps4-slim.jpg" alt="PS4 Slim">
-      <div class="hot-card-content"><div class="hot-title">PS4 Slim 500GB</div><div class="hot-desc">RM550</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps4-pro.jpg" alt="PS4 Pro">
-      <div class="hot-card-content"><div class="hot-title">PS4 Pro 1TB</div><div class="hot-desc">RM650</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps5-fat.jpg" alt="PS5 Fat">
-      <div class="hot-card-content"><div class="hot-title">PS5 Fat Disc</div><div class="hot-desc">RM1450</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps5-slim.jpg" alt="PS5 Slim">
-      <div class="hot-card-content"><div class="hot-title">PS5 Slim Disc</div><div class="hot-desc">RM1650</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps5-pro.jpg" alt="PS5 Pro">
-      <div class="hot-card-content"><div class="hot-title">PS5 Pro Digital</div><div class="hot-desc">RM2750</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-lite.jpg" alt="Switch Lite">
-      <div class="hot-card-content"><div class="hot-title">Switch Lite</div><div class="hot-desc">RM400</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-oled-white.jpg" alt="OLED White">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED White</div><div class="hot-desc">RM750</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-oled-neon.jpg" alt="OLED Neon">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED Neon</div><div class="hot-desc">RM750</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-zelda.jpg" alt="OLED Zelda">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED Zelda</div><div class="hot-desc">RM850</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-splatoon.jpg" alt="OLED Splatoon">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED Splatoon</div><div class="hot-desc">RM850</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-mario.jpg" alt="OLED Mario">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED Mario</div><div class="hot-desc">RM850</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-pokemon.jpg" alt="OLED Pokemon">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED Pokemon</div><div class="hot-desc">RM850</div></div>
-    </div>
-    <div class="hot-card tilt-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-2.jpg" alt="Switch 2">
-      <div class="hot-card-content"><div class="hot-title">Switch 2 Edition</div><div class="hot-desc">RM1700</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="stock">
-  <h2 class="section-title">Stock Available</h2>
-  <div class="controls"><input id="search" class="search-box" placeholder="Search item..."></div>
-  <div class="filter-tabs" id="filters"></div>
-  <div class="product-grid" id="grid"></div>
-</section>
-
-<section id="payment">
-  <h2 class="section-title" style="text-align:center">Payment Methods</h2>
-  <div class="payment-icons">
-    <div class="payment-item"><img src="https://cdn.simpleicons.org/shopee/ee4d2d" alt="SPayLater"><span class="shopee-text">SPayLater Available</span></div>
-    <div class="payment-item"><img src="https://cdn.simpleicons.org/visa/1a1f71" alt="Visa"><span>FPX Online Banking</span></div>
-  </div>
-</section>
-
-<footer>© 2026 FAZGAME • Faz Service, Faz Gaming</footer>
-
-<script src="stock.js"></script>
-
-<script>
-/* --- 1. STOCK INVENTORY LOGIC --- */
-let products = window.STOCK || []; // Fallback if stock.js is missing
-
-const icons = {
-  console:'https://api.iconify.design/mdi/console.svg',
-  ps5:'https://api.iconify.design/simple-icons/playstation.svg',
-  ps4:'https://api.iconify.design/simple-icons/playstation.svg',
-  xbox:'https://api.iconify.design/simple-icons/xbox.svg',
-  switch:'https://api.iconify.design/simple-icons/nintendoswitch.svg',
-  pc:'https://api.iconify.design/mdi/desktop-classic.svg',
-  other:'https://api.iconify.design/mdi/gamepad-variant.svg'
-};
-
-const categories = ['all', 'console', 'ps5', 'ps4', 'xbox', 'switch', 'pc', 'other'];
-let activeCat = 'all';
-
-const filters = document.getElementById('filters');
-const grid = document.getElementById('grid');
-const search = document.getElementById('search');
-
-// Create Filter Buttons
-categories.forEach(cat => {
-  const btn = document.createElement('button');
-  btn.className = 'filter-btn' + (cat === 'all' ? ' active' : '');
-  btn.innerHTML = `${cat.toUpperCase()} <span class="filter-count" id="count-${cat}">0</span>`;
-  btn.onclick = () => {
-    activeCat = cat;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderProducts();
-  };
-  filters.appendChild(btn);
-});
-
-// Render Grid
-function renderProducts() {
-  const q = search.value.toLowerCase();
-  const filtered = products.filter(p => (activeCat === 'all' || p.c === activeCat) && p.n.toLowerCase().includes(q));
-  
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--accent)">No items found matching your search.</div>`;
-  } else {
-    grid.innerHTML = filtered.map(p => {
-      // Determine badge colors dynamically based on your original setup
-      const condClass = p.cond === 'new' ? 'rgba(255,216,77,.45)' : 'rgba(255,255,255,.12)';
-      const typeClass = p.type === 'game' ? '#3cff7f' : '#ffd84d';
-      
-      return `
-      <div class="product-card">
-        <span class="card-badge card-badge-cond" style="background:${condClass}; color:#fff;">${p.cond || 'USED'}</span>
-        <span class="card-badge card-badge-type" style="background:${typeClass}; color:#000;">${p.type || 'CONSOLE'}</span>
-        
-        <div class="product-icon"><img src="${icons[p.c] || icons.other}"></div>
-        
-        <div class="product-info">
-          <h4>${p.n}</h4>
-          <div class="price-row">
-            <span class="product-price">RM${p.p}</span>
-            <button class="product-buy" onclick="window.open('https://wa.me/60163691936?text=Inquiry: ${encodeURIComponent(p.n)}')">CHECK</button>
-          </div>
+    <div class="app-topbar">
+        <div class="logo-area">
+            <div class="logo-icon">FGE</div>
+            <div>
+                <h1>FAZ GAME EMPIRE</h1>
+                <span class="subtitle" id="topbarDocLabel">Invoice Studio</span>
+            </div>
         </div>
-      </div>
-    `}).join('');
-  }
+    </div>
 
-  // Update counts
-  categories.forEach(c => {
-    const el = document.getElementById('count-' + c);
-    if(el) el.textContent = c === 'all' ? products.length : products.filter(p => p.c === c).length;
-  });
-}
+    <div class="main-container">
+        <div class="form-panel" id="formPanel">
+            
+            <!-- File Manager Workspace Section -->
+            <div class="card" id="storageCard">
+                <div class="card-header"><i class="fa-solid fa-folder-tree"></i> File Manager</div>
+                <div class="card-body">
+                    <div class="storage-dashboard">
+                        <div class="form-group">
+                            <label>File Name / Profile Name</label>
+                            <div style="display:flex; gap:6px;">
+                                <input type="text" id="storageKeyName" placeholder="e.g., Invoice Fikri Rig v1" style="flex:1;">
+                                <button class="btn btn-accent btn-sm" onclick="app.saveToLocalStorage()"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                            </div>
+                        </div>
+                        <div style="font-size:0.6rem; text-transform:uppercase; color:var(--text-dim); margin-top:6px; font-weight:700; border-bottom:1px solid var(--border); padding-bottom:2px;">Stored Files</div>
+                        <div class="doc-list-container" id="localDocsList">
+                            <!-- Injected Dynamically by System Engines -->
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-search.oninput = renderProducts;
-renderProducts();
+            <!-- Configuration Settings Section -->
+            <div class="card">
+                <div class="card-header"><i class="fa-solid fa-sliders"></i> Settings</div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Document Type</label>
+                            <select id="docTypeSelect" onchange="app.handleDocTypeSwitch()">
+                                <option value="INVOICE">Invoice</option>
+                                <option value="QUOTATION">Quotation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Currency</label>
+                            <select id="invCurrency" oninput="app.updatePreview()">
+                                <option value="MYR">MYR (RM)</option>
+                                <option value="USD">USD ($)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-/* --- 2. FAST SALES SORT --- */
-const fastGrid = document.querySelector('#fast-sales .hot-grid');
-if(fastGrid) {
-  const cardsList = Array.from(fastGrid.children);
-  cardsList.sort((a,b) => (b.querySelector('.badge-left')?1:0) - (a.querySelector('.badge-left')?1:0));
-  cardsList.forEach(c => fastGrid.appendChild(c));
-}
+            <!-- Company Details Section -->
+            <div class="card collapsible collapsed" id="companyCard">
+                <div class="card-header" onclick="toggleCard('companyCard')"><i class="fa-solid fa-building"></i> Company Details <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group" style="flex:2;"><label>Company Name</label><input type="text" id="compName" value="FAZ GAME EMPIRE" oninput="app.updatePreview()"></div>
+                        <div class="form-group"><label>SSM Reg No</label><input type="text" id="compSSM" value="LA0077351-H" oninput="app.updatePreview()"></div>
+                    </div>
+                    <div class="form-group"><label>Address</label><textarea id="compAddr" rows="2" oninput="app.updatePreview()">Block B, Cerrado Executive Suites,
+JIn Southville 1, Southville City
+43800 Dengkil Selangor</textarea></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Phone</label><input type="text" id="compPhone" value="0163691936" oninput="app.updatePreview()"></div>
+                        <div class="form-group"><label>Email</label><input type="email" id="compEmail" value="fazgame.empire@gmail.com" oninput="app.updatePreview()"></div>
+                    </div>
+                </div>
+            </div>
 
-/* --- 3. UI, PRELOADER, & COUNTERS --- */
-window.addEventListener("DOMContentLoaded", () => {
-  // Loader
-  let progress = 0;
-  const bar = document.getElementById("loaderBar");
-  const preloader = document.getElementById("preloader");
-  const interval = setInterval(() => {
-    progress += 5;
-    if(bar) bar.style.width = progress + "%";
-    if(progress >= 100) {
-      clearInterval(interval);
-      setTimeout(() => {
-        preloader.classList.add("hide");
-        startCounters();
-      }, 400);
-    }
-  }, 40);
+            <!-- Client Details Section -->
+            <div class="card">
+                <div class="card-header"><i class="fa-solid fa-user"></i> Client Details</div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group" style="flex:2;"><label>Client Name</label><input type="text" id="custName" value="Ahmad Fikri" oninput="app.updatePreview()"></div>
+                        <div class="form-group"><label>Company Name</label><input type="text" id="custCompany" placeholder="Optional" oninput="app.updatePreview()"></div>
+                    </div>
+                    <div class="form-group"><label>Billing Address</label><textarea id="custAddr" rows="2" oninput="app.updatePreview()">Jalan Ampang, 68000 Ampang</textarea></div>
+                    <div class="form-group"><label>Contact Email / Phone</label><input type="text" id="custEmail" value="ahmad@email.com" oninput="app.updatePreview()"></div>
+                </div>
+            </div>
 
-  // Lightbox
-  const modal = document.getElementById("imageModal");
-  const modalImg = document.getElementById("modalImg");
+            <!-- Invoice Details Section -->
+            <div class="card">
+                <div class="card-header"><i class="fa-solid fa-file-invoice"></i> Invoice Details</div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group"><label id="formSerialLabel">Invoice Number</label><input type="text" id="invNumber" value="INV-2026-0042" oninput="app.updatePreview()"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Date Issued</label><input type="date" id="invDate" oninput="app.updatePreview()"></div>
+                        <div class="form-group"><label>Due Date</label><input type="date" id="invDueDate" oninput="app.updatePreview()"></div>
+                    </div>
+                </div>
+            </div>
 
-  document.addEventListener("click", (e) => {
-    const card = e.target.closest(".hot-card");
-    if(card) {
-      const img = card.querySelector("img");
-      if(img) {
-        modalImg.src = img.src;
-        modal.classList.add("show");
-        document.body.style.overflow = "hidden";
-      }
-    }
-  });
+            <!-- Item List Section -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-box"></i> Item List
+                    <div class="item-search-area">
+                        <input type="text" class="search-input" id="itemSearch" placeholder="Search item list..." autocomplete="off">
+                        <i class="fa-solid fa-magnifying-glass" style="color:var(--text-dim); position:absolute; right:8px; top:50%; transform:translateY(-50%); pointer-events:none; font-size:0.7rem;"></i>
+                        <div class="search-dropdown" id="searchDropdown"></div>
+                        <button class="btn btn-sm btn-accent" id="addItemBtn" style="margin-left:4px;"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="items-table-wrapper">
+                        <table class="items-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:25px; text-align:center;">#</th>
+                                    <th>Item Name / Description</th>
+                                    <th>Specifications</th>
+                                    <th style="width:50px; text-align:center;">Qty</th>
+                                    <th style="width:85px; text-align:right;">Unit Price</th>
+                                    <th style="width:85px; text-align:right; padding-right: 4px;">Total</th>
+                                    <th style="width:30px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="itemsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-  modal.onclick = () => {
-    modal.classList.remove("show");
-    document.body.style.overflow = "auto";
-  };
-});
+            <!-- Total Calculations Adjustments Section -->
+            <div class="card">
+                <div class="card-header"><i class="fa-solid fa-calculator"></i> Discount / Summary</div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group"><label>Discount Type</label><select id="discountType" onchange="app.updatePreview()"><option value="none">No Discount</option><option value="percent">Percentage (%)</option><option value="fixed">Fixed Flat Rate</option></select></div>
+                        <div class="form-group"><label>Discount Value</label><input type="number" id="discountValue" value="0" step="0.01" oninput="app.updatePreview()"></div>
+                    </div>
+                    <div class="form-row" style="margin-top: 6px;">
+                        <div class="form-group"><label>Subtotal</label><input type="text" id="subtotalDisplay" readonly style="opacity:0.65; background:var(--surface-light)"></div>
+                        <div class="form-group"><label>Grand Total</label><input type="text" id="grandTotalDisplay" readonly style="color:var(--accent); font-weight:800; background:var(--surface-light)"></div>
+                    </div>
+                </div>
+            </div>
 
-// Counters
-function startCounters() {
-  document.querySelectorAll(".stat h2").forEach(counter => {
-    const target = parseInt(counter.dataset.target);
-    let current = 0;
-    const speedDivisor = 60; // adjusted for smoother speed
-    const update = () => {
-      current += target / speedDivisor;
-      if(current < target) {
-        counter.innerText = Math.ceil(current);
-        requestAnimationFrame(update);
-      } else {
-        counter.innerText = target + "+";
-        counter.classList.add("counter-glow"); 
-      }
-    };
-    update();
-  });
-}
+            <!-- Payment Details Section -->
+            <div class="card collapsible collapsed" id="paymentCard">
+                <div class="card-header" onclick="toggleCard('paymentCard')"><i class="fa-solid fa-credit-card"></i> Payment Details <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group"><label>Bank Name</label><input type="text" id="bankName" value="OCBC Bank" oninput="app.updatePreview()"></div>
+                        <div class="form-group"><label>Account Name</label><input type="text" id="acctName" value="FAZ GAME EMPIRE" oninput="app.updatePreview()"></div>
+                    </div>
+                    <div class="form-group"><label>Account Number</label><input type="text" id="acctNumber" value="1061030056" oninput="app.updatePreview()"></div>
+                </div>
+            </div>
 
-// Banner Slider
-let currentSlide = 0;
-const slides = document.querySelectorAll('.banner-slide');
-setInterval(() => {
-  slides[currentSlide].classList.remove('active');
-  currentSlide = (currentSlide + 1) % slides.length;
-  slides[currentSlide].classList.add('active');
-}, 5000);
+            <!-- Notes Section -->
+            <div class="card collapsible collapsed" id="notesCard">
+                <div class="card-header" onclick="toggleCard('notesCard')"><i class="fa-solid fa-note-sticky"></i> Notes <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
+                <div class="card-body"><textarea id="notesText" rows="2" oninput="app.updatePreview()">Thank you for your purchase.</textarea></div>
+            </div>
+        </div>
 
-// Smooth Scroll for chips
-document.querySelectorAll('[data-scroll]').forEach(chip => {
-  chip.onclick = () => {
-    const target = document.getElementById(chip.dataset.scroll);
-    if(target) {
-      // Offset for sticky header
-      const y = target.getBoundingClientRect().top + window.pageYOffset - 120;
-      window.scrollTo({top: y, behavior: 'smooth'});
-    }
-  };
-});
+        <!-- Document Canvas Preview Layout -->
+        <div class="preview-panel">
+            <div class="invoice-preview" id="invoicePreview">
+                <!-- Programmatic Sheet Render Output Context -->
+            </div>
+        </div>
+    </div>
 
-/* --- 4. 3D TILT EFFECT --- */
-const tiltCards = document.querySelectorAll('.tilt-card');
-tiltCards.forEach(card => {
-  if ('ontouchstart' in window) return; // Disable 3D tilt on touch devices for performance
+    <!-- Sticky Navigation Actions Matrix Footer Bar -->
+    <div class="bottom-nav">
+        <button class="nav-item" onclick="app.clearForm()"><i class="fa-solid fa-eraser"></i> Clear Form</button>
+        <button class="nav-item" id="paidNavBtn" onclick="app.togglePaidStamp()"><i class="fa-solid fa-circle-check"></i> Paid Stamp</button>
+        <button class="nav-item" onclick="app.downloadPDF()"><i class="fa-solid fa-file-pdf"></i> Save PDF</button>
+        <button class="nav-item" onclick="app.printInvoice()"><i class="fa-solid fa-print"></i> Print</button>
+        <button class="nav-item" onclick="app.sharePDF()"><i class="fa-solid fa-share-nodes"></i> Share</button>
+    </div>
 
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    <script>
+        // Global toggle function available immediately
+        window.toggleCard = function(id) {
+            document.getElementById(id)?.classList.toggle('collapsed');
+        };
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+        const app = (function() {
+            const PRODUCT_LIST = [
+                { name: "CPU - Intel Core i9-13900K", price: 2850 },
+                { name: "CPU - AMD Ryzen 9 7950X", price: 2700 },
+                { name: "GPU - NVIDIA RTX 4090 24GB", price: 7200 },
+                { name: "GPU - AMD Radeon RX 7900 XTX", price: 4800 },
+                { name: "RAM - Corsair DDR5 32GB 6000MHz", price: 650 },
+                { name: "Motherboard - ASUS ROG Z790 Hero", price: 2300 },
+                { name: "SSD - Samsung 990 Pro 2TB", price: 850 },
+                { name: "PSU - Corsair RM1000x", price: 750 },
+                { name: "Cooling - NZXT Kraken X73", price: 850 },
+                { name: "Case - Lian Li O11 Dynamic", price: 650 },
+                { name: "Assembly & Testing", price: 500 }
+            ];
 
-    const rotateX = -(y - centerY) / 10;
-    const rotateY = (x - centerX) / 10;
+            let isPaid = false;
+            const tbody = document.getElementById('itemsBody');
+            const searchInput = document.getElementById('itemSearch');
+            const searchDropdown = document.getElementById('searchDropdown');
 
-    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-    card.style.setProperty('--x', `${x}px`);
-    card.style.setProperty('--y', `${y}px`);
-  });
+            // Re-index row numbers
+            function reindexRows() {
+                [...tbody.children].forEach((row, i) => {
+                    const counter = row.querySelector('.index-counter');
+                    if (counter) counter.textContent = i + 1;
+                });
+            }
 
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = `rotateX(0deg) rotateY(0deg) translateY(0px)`;
-  });
-});
+            function initializeSystem() {
+                searchInput.addEventListener('input', runSearchProcessing);
+                searchInput.addEventListener('focus', runSearchProcessing);
+                
+                // Keyboard Enter for search dropdown
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        const firstResult = searchDropdown.querySelector('.dropdown-item:first-child');
+                        if (firstResult && searchDropdown.classList.contains('show')) {
+                            firstResult.click();
+                        }
+                    }
+                });
 
-/* --- 5. CTA BUTTON --- */
-document.getElementById("cta-whatsapp").addEventListener("click", function(e){
-  e.preventDefault();
-  const phone = "60163691936";
-  const message = "Hi FAZGAME 👋 I would like to inquire about your products.";
-  window.location.href = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + encodeURIComponent(message);
-});
-</script>
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.item-search-area')) {
+                        searchDropdown.classList.remove('show');
+                    }
+                });
+
+                document.getElementById('addItemBtn').onclick = (e) => { e.stopPropagation(); appendRowEntry(); };
+
+                const nativeToday = new Date().toISOString().split('T')[0];
+                document.getElementById('invDate').value = nativeToday;
+                const dynamicDue = new Date(); dynamicDue.setDate(dynamicDue.getDate() + 14);
+                document.getElementById('invDueDate').value = dynamicDue.toISOString().split('T')[0];
+
+                appendRowEntry(true); 
+                appendRowEntry(true);
+                
+                const matrixRows = tbody.querySelectorAll('tr');
+                if (matrixRows.length >= 2) {
+                    matrixRows[0].querySelector('.item-desc').value = PRODUCT_LIST[0].name;
+                    matrixRows[0].querySelector('.item-price').value = PRODUCT_LIST[0].price.toFixed(2);
+                    matrixRows[1].querySelector('.item-desc').value = PRODUCT_LIST[2].name;
+                    matrixRows[1].querySelector('.item-price').value = PRODUCT_LIST[2].price.toFixed(2);
+                }
+
+                refreshStorageIndexView();
+                updatePreview();
+            }
+
+            function handleDocTypeSwitch() {
+                const profileType = document.getElementById('docTypeSelect').value;
+                const serialLabel = document.getElementById('formSerialLabel');
+                const serialInput = document.getElementById('invNumber');
+                const paidTriggerButton = document.getElementById('paidNavBtn');
+
+                if(profileType === "QUOTATION") {
+                    serialLabel.textContent = "Quotation Number";
+                    if(serialInput.value === "INV-2026-0042" || serialInput.value.startsWith("INV-")) {
+                        serialInput.value = "QTN-2026-0042";
+                    }
+                    isPaid = false;
+                    paidTriggerButton.classList.remove('active');
+                    paidTriggerButton.disabled = true;
+                } else {
+                    serialLabel.textContent = "Invoice Number";
+                    if(serialInput.value === "QTN-2026-0042" || serialInput.value.startsWith("QTN-")) {
+                        serialInput.value = "INV-2026-0042";
+                    }
+                    paidTriggerButton.disabled = false;
+                }
+                updatePreview();
+            }
+
+            function runSearchProcessing() {
+                const criteria = searchInput.value.toLowerCase().trim();
+                if (criteria === '') { searchDropdown.innerHTML = ''; searchDropdown.classList.remove('show'); return; }
+                
+                const filtered = PRODUCT_LIST.filter(item => item.name.toLowerCase().includes(criteria));
+                searchDropdown.innerHTML = filtered.length === 0
+                    ? '<div class="dropdown-item" style="color:var(--text-dim); text-align:center;">No matching items</div>'
+                    : filtered.map(item => `
+                        <div class="dropdown-item" onclick="app.selectSearchItem('${escapeAttributeStr(item.name)}', ${item.price})">
+                            <span style="font-weight:600;">${escapeHtmlEncoding(item.name)}</span>
+                            <span style="font-size:0.65rem; color:var(--text-dim)">Price: ${getCurrencySymbol()} ${item.price.toFixed(2)}</span>
+                        </div>
+                    `).join('');
+                searchDropdown.classList.add('show');
+            }
+
+            function selectSearchItem(name, price) {
+                appendRowEntry(true);
+                const targetedRow = tbody.lastChild;
+                targetedRow.querySelector('.item-desc').value = name;
+                targetedRow.querySelector('.item-price').value = price.toFixed(2);
+                searchInput.value = '';
+                searchDropdown.classList.remove('show');
+                updatePreview();
+            }
+
+            function appendRowEntry(silentMode = false) {
+                const rowElement = document.createElement('tr');
+                rowElement.innerHTML = `
+                    <td class="index-counter" style="text-align:center; color:var(--text-dim); font-size:0.65rem; font-weight:700;">${tbody.children.length + 1}</td>
+                    <td><input class="item-desc" placeholder="Item name or package blueprint" oninput="app.updatePreview()"></td>
+                    <td><input class="item-detail" placeholder="Specs or hardware parameters" oninput="app.updatePreview()"></td>
+                    <td><input class="item-qty" type="number" value="1" step="1" min="1" oninput="app.updatePreview()"></td>
+                    <td><input class="item-price" type="number" value="0.00" step="0.01" style="text-align:right;" oninput="app.updatePreview()"></td>
+                    <td class="amount-display">RM 0.00</td>
+                    <td style="text-align:center;"><button class="btn-sm" onclick="app.deleteRowEntry(this)" style="color:var(--danger); background:transparent; border:none; box-shadow:none; min-height:auto; padding:4px;"><i class="fa-solid fa-trash-can"></i></button></td>
+                `;
+                tbody.appendChild(rowElement);
+                reindexRows(); // FIX: ensure all row numbers are correct
+                if (!silentMode) updatePreview();
+            }
+
+            function deleteRowEntry(elementTrigger) {
+                if (tbody.children.length <= 1) return;
+                elementTrigger.closest('tr').remove();
+                reindexRows(); // FIX: centralized re-indexing
+                updatePreview();
+            }
+
+            function readFormLineItems() {
+                const capturedRowsData = [];
+                tbody.querySelectorAll('tr').forEach(row => {
+                    const name = row.querySelector('.item-desc')?.value || '';
+                    const detail = row.querySelector('.item-detail')?.value || '';
+                    const qty = parseFloat(row.querySelector('.item-qty')?.value) || 0;
+                    const price = parseFloat(row.querySelector('.item-price')?.value) || 0;
+                    const accumulatedSum = qty * price;
+                    
+                    row.querySelector('.amount-display').textContent = formatFinancialString(accumulatedSum);
+                    capturedRowsData.push({ name, detail, qty, price, amount: accumulatedSum });
+                });
+                return capturedRowsData;
+            }
+
+            const getCurrencySymbol = () => document.getElementById('invCurrency').value === 'USD' ? '$' : 'RM';
+            function formatFinancialString(value) { return `${getCurrencySymbol()} ${Math.abs(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; }
+
+            function executeCalculations() {
+                const compiledItems = readFormLineItems();
+                const totalRawSubtotal = compiledItems.reduce((acc, current) => acc + current.amount, 0);
+                
+                const deductionMethod = document.getElementById('discountType').value;
+                const rawDeductionValue = parseFloat(document.getElementById('discountValue').value) || 0;
+                
+                let processedDiscount = 0;
+                if (deductionMethod === 'percent') {
+                    processedDiscount = totalRawSubtotal * (rawDeductionValue / 100);
+                } else if (deductionMethod === 'fixed') {
+                    processedDiscount = Math.min(rawDeductionValue, totalRawSubtotal);
+                }
+
+                const processedGrandTotal = totalRawSubtotal - processedDiscount;
+
+                document.getElementById('subtotalDisplay').value = formatFinancialString(totalRawSubtotal);
+                document.getElementById('grandTotalDisplay').value = formatFinancialString(processedGrandTotal);
+
+                return { items: compiledItems, subtotal: totalRawSubtotal, discount: processedDiscount, total: processedGrandTotal };
+            }
+
+            function updatePreview() {
+                const { items, subtotal, discount, total } = executeCalculations();
+                const previewCanvasTarget = document.getElementById('invoicePreview');
+                const docProfileType = document.getElementById('docTypeSelect').value;
+                
+                const cName = getFormVal('compName'), cSSM = getFormVal('compSSM'), cAddr = getFormVal('compAddr'), cPhone = getFormVal('compPhone'), cEmail = getFormVal('compEmail');
+                const custName = getFormVal('custName'), custCo = getFormVal('custCompany'), custAddr = getFormVal('custAddr'), custEmail = getFormVal('custEmail');
+                const docSerial = getFormVal('invNumber'), dateIssued = parseDateTimeString(getFormVal('invDate')), dateLimit = parseDateTimeString(getFormVal('invDueDate'));
+                const bName = getFormVal('bankName'), bHolder = getFormVal('acctName'), bRouteNo = getFormVal('acctNumber');
+                const implementationNotes = getFormVal('notesText');
+
+                document.getElementById('topbarDocLabel').textContent = docProfileType === "QUOTATION" ? "Quotation Studio" : "Invoice Studio";
+
+                let innerTableRowsHtml = '';
+                items.forEach((item, index) => {
+                    const structuralDetailRow = item.detail ? `<div class="inv-item-detail">${escapeHtmlEncoding(item.detail)}</div>` : '';
+                    innerTableRowsHtml += `
+                        <tr>
+                            <td style="text-align:center; color:#64748b; font-size:11px;">${index + 1}</td>
+                            <td><span class="inv-item-name">${escapeHtmlEncoding(item.name)}</span>${structuralDetailRow}</td>
+                            <td class="right">${item.qty}</td>
+                            <td class="right">${formatFinancialString(item.price)}</td>
+                            <td class="right" style="font-weight:700; color:#0f172a;">${formatFinancialString(item.amount)}</td>
+                        </tr>
+                    `;
+                });
+                
+                if (!innerTableRowsHtml) {
+                    innerTableRowsHtml = '<tr><td colspan="5" style="text-align:center; color:#94a3b8;">No items added</td></tr>';
+                }
+
+                const displayTypeHeaderLabel = docProfileType === "QUOTATION" ? "QUOTATION" : "INVOICE";
+                
+                const remittanceTemplateBlock = (docProfileType === "INVOICE" && (bName || bHolder || bRouteNo)) ? `
+                    <div class="payment-details">
+                        <h4>Bank Transfer Details</h4>
+                        <p style="color:#475569; font-size:12px; line-height:1.4;">
+                            Bank: <strong>${escapeHtmlEncoding(bName)}</strong><br>
+                            Account Holder: <strong>${escapeHtmlEncoding(bHolder)}</strong><br>
+                            Account Number: <strong>${escapeHtmlEncoding(bRouteNo)}</strong>
+                        </p>
+                    </div>
+                ` : '';
+
+                previewCanvasTarget.innerHTML = `
+                    <div class="paid-stamp ${isPaid ? 'visible' : ''}" id="paidStamp">PAID</div>
+                    
+                    <div class="inv-header">
+                        <div>
+                            <h3 style="font-size:1.3rem; font-weight:800; color:#0f172a; margin-bottom:2px;">${escapeHtmlEncoding(cName)}</h3>
+                            <p style="font-size:11px; color:#475569; font-weight:600;">SSM: ${escapeHtmlEncoding(cSSM)}</p>
+                            <p style="white-space:pre-line; color:#475569; font-size:11px; margin-top:4px; max-width:320px;">${escapeHtmlEncoding(cAddr)}</p>
+                            <p style="font-size:11px; color:#475569; margin-top:4px;">📞 ${escapeHtmlEncoding(cPhone)}  |  ✉️ ${escapeHtmlEncoding(cEmail)}</p>
+                        </div>
+                        <div style="text-align:right; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end;">
+                            <div class="inv-title">${displayTypeHeaderLabel}</div>
+                            <div style="font-size:11px; color:#475569; text-align:right; margin-top:6px;">
+                                <p style="font-size:13px; font-weight:700; color:#0f172a;">Ref No: ${escapeHtmlEncoding(docSerial)}</p>
+                                <p style="margin-top:2px;">Date: <strong>${dateIssued}</strong></p>
+                                <p>Due Date: <strong>${dateLimit}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div>
+                            <h4 style="font-size:0.7rem; text-transform:uppercase; color:#64748b; letter-spacing:0.5px; margin-bottom:4px;">Bill To</h4>
+                            <p style="font-size:14px; font-weight:700; color:#0f172a;">${escapeHtmlEncoding(custName)}</p>
+                            ${custCo ? `<p style="font-size:12px; font-weight:600; color:#475569; margin-top:1px;">${escapeHtmlEncoding(custCo)}</p>` : ''}
+                            <p style="white-space:pre-line; font-size:12px; color:#475569; margin-top:3px; max-width:400px;">${escapeHtmlEncoding(custAddr)}</p>
+                            <p style="font-size:12px; color:#64748b; margin-top:2px;">Contact: ${escapeHtmlEncoding(custEmail)}</p>
+                        </div>
+                    </div>
+                    
+                    <table class="inv-table">
+                        <thead>
+                            <tr>
+                                <th style="width:5%; text-align:center;">#</th>
+                                <th style="width:55%;">Description</th>
+                                <th class="right" style="width:10%;">Qty</th>
+                                <th class="right" style="width:15%;">Unit Price</th>
+                                <th class="right" style="width:15%;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${innerTableRowsHtml}
+                        </tbody>
+                    </table>
+                    
+                    <div class="totals-section">
+                        <table class="totals-table">
+                            <tr>
+                                <td style="padding-left:0;">Subtotal</td>
+                                <td class="right" style="font-weight:600; color:#0f172a;">${formatFinancialString(subtotal)}</td>
+                            </tr>
+                            ${discount > 0 ? `
+                            <tr>
+                                <td style="padding-left:0; color:#dc2626;">Discount</td>
+                                <td class="right" style="font-weight:600; color:#dc2626;">-${formatFinancialString(discount)}</td>
+                            </tr>
+                            ` : ''}
+                            <tr class="grand-total">
+                                <td style="padding-left:0; font-weight:800;">Total Amount</td>
+                                <td class="right" style="font-weight:800; font-size:1.1rem; color:#0f172a;">${formatFinancialString(total)}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    ${remittanceTemplateBlock}
+                    
+                    ${implementationNotes ? `
+                    <div class="notes-section">
+                        <h4>Notes</h4>
+                        <p style="white-space:pre-line; line-height:1.4;">${escapeHtmlEncoding(implementationNotes)}</p>
+                    </div>
+                    ` : ''}
+                `;
+            }
+
+            function togglePaidStamp() {
+                if(document.getElementById('docTypeSelect').value === "QUOTATION") return;
+                isPaid = !isPaid;
+                document.getElementById('paidStamp')?.classList.toggle('visible', isPaid);
+                document.getElementById('paidNavBtn').classList.toggle('active', isPaid);
+            }
+
+            function getFormVal(id) { return document.getElementById(id)?.value || ''; }
+            function escapeHtmlEncoding(stringData) { const div = document.createElement('div'); div.textContent = stringData; return div.innerHTML; }
+            function escapeAttributeStr(stringData) { return stringData.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+            function parseDateTimeString(rawStringDate) { if (!rawStringDate) return '—'; return new Date(rawStringDate).toLocaleDateString('en-MY', { day: 'numeric', month: 'long', year: 'numeric' }); }
+
+            // Local Storage Logic
+            function saveToLocalStorage() {
+                const storageKeyNameInput = document.getElementById('storageKeyName');
+                let keyName = storageKeyNameInput.value.trim();
+                
+                if(!keyName) {
+                    const documentPrefix = document.getElementById('docTypeSelect').value === "QUOTATION" ? "Quotation" : "Invoice";
+                    keyName = `${documentPrefix} - ${getFormVal('custName') || 'Unnamed'}`;
+                    storageKeyNameInput.value = keyName;
+                }
+
+                const systematicPayloadData = {
+                    docType: getFormVal('docTypeSelect'),
+                    compName: getFormVal('compName'),
+                    compSSM: getFormVal('compSSM'),
+                    compAddr: getFormVal('compAddr'),
+                    compPhone: getFormVal('compPhone'),
+                    compEmail: getFormVal('compEmail'),
+                    custName: getFormVal('custName'),
+                    custCompany: getFormVal('custCompany'),
+                    custAddr: getFormVal('custAddr'),
+                    custEmail: getFormVal('custEmail'),
+                    invNumber: getFormVal('invNumber'),
+                    invCurrency: getFormVal('invCurrency'),
+                    invDate: getFormVal('invDate'),
+                    invDueDate: getFormVal('invDueDate'),
+                    discountType: getFormVal('discountType'),
+                    discountValue: getFormVal('discountValue'),
+                    bankName: getFormVal('bankName'),
+                    acctName: getFormVal('acctName'),
+                    acctNumber: getFormVal('acctNumber'),
+                    notesText: getFormVal('notesText'),
+                    items: readFormLineItems(),
+                    paidState: isPaid,
+                    timestamp: new Date().getTime()
+                };
+
+                let masterIndex = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]');
+                const existingIndex = masterIndex.findIndex(item => item.name.toLowerCase() === keyName.toLowerCase());
+                
+                const metaBlock = {
+                    name: keyName,
+                    type: systematicPayloadData.docType,
+                    serial: systematicPayloadData.invNumber,
+                    totalDisplay: document.getElementById('grandTotalDisplay').value,
+                    date: new Date().toLocaleDateString('en-MY', {day:'numeric', month:'short'})
+                };
+
+                if(existingIndex > -1) {
+                    if(!confirm(`A layout named "${keyName}" already exists. Overwrite layout data?`)) return;
+                    masterIndex[existingIndex] = metaBlock;
+                } else {
+                    masterIndex.push(metaBlock);
+                }
+
+                localStorage.setItem('fge_master_doc_index', JSON.stringify(masterIndex));
+                localStorage.setItem(`fge_doc_file_${keyName.toLowerCase()}`, JSON.stringify(systematicPayloadData));
+                
+                refreshStorageIndexView();
+                alert(`"${keyName}" saved successfully.`);
+            }
+
+            function refreshStorageIndexView() {
+                const targetListView = document.getElementById('localDocsList');
+                const masterIndex = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]');
+
+                if(masterIndex.length === 0) {
+                    targetListView.innerHTML = '<div style="font-size:0.7rem; color:var(--text-dim); padding:6px; text-align:center; font-style:italic;">No saved files found.</div>';
+                    return;
+                }
+
+                targetListView.innerHTML = masterIndex.map(meta => `
+                    <div class="doc-entry">
+                        <div class="doc-entry-info">
+                            <span class="doc-entry-title">${escapeHtmlEncoding(meta.name)}</span>
+                            <div class="doc-entry-meta">
+                                <span class="doc-entry-type">${meta.type}</span>
+                                <span>Ref: ${escapeHtmlEncoding(meta.serial)}</span>
+                                <span style="color:var(--white); font-weight:600;">${meta.totalDisplay}</span>
+                            </div>
+                        </div>
+                        <div class="doc-entry-actions">
+                            <button class="btn btn-sm" style="min-height:28px; padding:2px 8px; font-size:0.6rem; border-color:rgba(255,215,0,0.3)" onclick="app.loadStoredDocument('${escapeAttributeStr(meta.name.toLowerCase())}')"><i class="fa-solid fa-folder-open"></i></button>
+                            <button class="btn btn-sm btn-danger" style="min-height:28px; padding:2px 8px; font-size:0.6rem;" onclick="app.purgeStoredDocument('${escapeAttributeStr(meta.name.toLowerCase())}', '${escapeAttributeStr(meta.name)}')"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            function loadStoredDocument(lowercaseKey) {
+                const targetedPayloadRaw = localStorage.getItem(`fge_doc_file_${lowercaseKey}`);
+                if(!targetedPayloadRaw) return alert("Error: Saved file not found.");
+                
+                try {
+                    const data = JSON.parse(targetedPayloadRaw);
+                    
+                    // FIX: retrieve original name from master index
+                    const masterIndex = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]');
+                    const matched = masterIndex.find(item => item.name.toLowerCase() === lowercaseKey);
+                    document.getElementById('storageKeyName').value = matched ? matched.name : lowercaseKey;
+
+                    document.getElementById('docTypeSelect').value = data.docType || "INVOICE";
+                    document.getElementById('compName').value = data.compName || '';
+                    document.getElementById('compSSM').value = data.compSSM || '';
+                    document.getElementById('compAddr').value = data.compAddr || '';
+                    document.getElementById('compPhone').value = data.compPhone || '';
+                    document.getElementById('compEmail').value = data.compEmail || '';
+                    document.getElementById('custName').value = data.custName || '';
+                    document.getElementById('custCompany').value = data.custCompany || '';
+                    document.getElementById('custAddr').value = data.custAddr || '';
+                    document.getElementById('custEmail').value = data.custEmail || '';
+                    document.getElementById('invNumber').value = data.invNumber || '';
+                    document.getElementById('invCurrency').value = data.invCurrency || 'MYR';
+                    document.getElementById('invDate').value = data.invDate || '';
+                    document.getElementById('invDueDate').value = data.invDueDate || '';
+                    document.getElementById('discountType').value = data.discountType || 'none';
+                    document.getElementById('discountValue').value = data.discountValue || 0;
+                    document.getElementById('bankName').value = data.bankName || '';
+                    document.getElementById('acctName').value = data.acctName || '';
+                    document.getElementById('acctNumber').value = data.acctNumber || '';
+                    document.getElementById('notesText').value = data.notesText || '';
+
+                    tbody.innerHTML = '';
+                    if (data.items && data.items.length > 0) {
+                        data.items.forEach(item => {
+                            appendRowEntry(true);
+                            const activeRow = tbody.lastChild;
+                            activeRow.querySelector('.item-desc').value = item.name || '';
+                            activeRow.querySelector('.item-detail').value = item.detail || '';
+                            activeRow.querySelector('.item-qty').value = item.qty || 1;
+                            activeRow.querySelector('.item-price').value = parseFloat(item.price).toFixed(2);
+                        });
+                    } else {
+                        appendRowEntry(true);
+                    }
+
+                    isPaid = data.paidState || false;
+                    document.getElementById('paidNavBtn').classList.toggle('active', isPaid);
+                    
+                    handleDocTypeSwitch();
+                    updatePreview();
+                } catch(err) {
+                    alert("Error loading document.");
+                }
+            }
+
+            function purgeStoredDocument(lowercaseKey, printableName) {
+                if(!confirm(`Permanently delete "${printableName}"?`)) return;
+                
+                let masterIndex = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]');
+                masterIndex = masterIndex.filter(item => item.name.toLowerCase() !== lowercaseKey);
+                localStorage.setItem('fge_master_doc_index', JSON.stringify(masterIndex));
+                localStorage.removeItem(`fge_doc_file_${lowercaseKey}`);
+                
+                refreshStorageIndexView();
+            }
+
+            // Universal File Generation Module
+            function generateFileNamingString() {
+                const docTypePrefix = document.getElementById('docTypeSelect').value.toLowerCase(); // Returns 'invoice' or 'quotation'
+                return `${docTypePrefix}.pdf`;
+            }
+
+            async function buildPdfBlobData() {
+                const canvasSourceTarget = document.getElementById('invoicePreview');
+                const cachedInlineWidth = canvasSourceTarget.style.width;
+                canvasSourceTarget.style.width = '750px';
+
+                const canvasInstance = await html2canvas(canvasSourceTarget, { scale: 2, backgroundColor: '#ffffff', useCORS: true });
+                canvasSourceTarget.style.width = cachedInlineWidth;
+
+                const structuralImageData = canvasInstance.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                
+                const targetPdfDoc = new jsPDF('p', 'mm', 'a4');
+                const pageMaxWidth = targetPdfDoc.internal.pageSize.getWidth();
+                const imageCalculatedHeight = (canvasInstance.height * pageMaxWidth) / canvasInstance.width;
+                
+                targetPdfDoc.addImage(structuralImageData, 'PNG', 0, 0, pageMaxWidth, imageCalculatedHeight);
+                return targetPdfDoc.output('blob');
+            }
+
+            async function downloadPDF() {
+                try {
+                    const builtBlob = await buildPdfBlobData();
+                    const absoluteFilename = generateFileNamingString();
+                    
+                    const generatedUrl = URL.createObjectURL(builtBlob);
+                    const virtualAnchor = document.createElement('a');
+                    virtualAnchor.href = generatedUrl;
+                    virtualAnchor.download = absoluteFilename;
+                    virtualAnchor.click();
+                    URL.revokeObjectURL(generatedUrl);
+                } catch(error) {
+                    alert("Error generating PDF file.");
+                }
+            }
+
+            async function sharePDF() {
+                try {
+                    const builtBlob = await buildPdfBlobData();
+                    const absoluteFilename = generateFileNamingString();
+                    const standaloneSystemFile = new File([builtBlob], absoluteFilename, { type: 'application/pdf' });
+
+                    if (navigator.share && navigator.canShare && navigator.canShare({ files: [standaloneSystemFile] })) {
+                        await navigator.share({
+                            files: [standaloneSystemFile],
+                            title: `Document - ${getFormVal('invNumber')}`,
+                            text: `Document generated via FAZ GAME EMPIRE.`
+                        });
+                    } else {
+                        downloadPDF();
+                    }
+                } catch (e) {
+                    console.error("Sharing failed:", e);
+                }
+            }
+
+            function printInvoice() { window.print(); }
+
+            function clearForm() {
+                if (!confirm('Reset current configurations back to empty definitions?')) return;
+                
+                document.getElementById('storageKeyName').value = '';
+                document.getElementById('custName').value = '';
+                document.getElementById('custCompany').value = '';
+                document.getElementById('custAddr').value = '';
+                document.getElementById('custEmail').value = '';
+                document.getElementById('discountType').value = 'none';
+                document.getElementById('discountValue').value = '0';
+                document.getElementById('docTypeSelect').value = 'INVOICE';
+                document.getElementById('invNumber').value = 'INV-2026-0042';
+                
+                tbody.innerHTML = '';
+                isPaid = false;
+                document.getElementById('paidNavBtn').classList.remove('active');
+                
+                appendRowEntry(true);
+                handleDocTypeSwitch();
+                updatePreview();
+            }
+
+            return {
+                init: initializeSystem,
+                updatePreview,
+                deleteRowEntry,
+                selectSearchItem,
+                togglePaidStamp,
+                handleDocTypeSwitch,
+                saveToLocalStorage,
+                loadStoredDocument,
+                purgeStoredDocument,
+                downloadPDF,
+                sharePDF,
+                printInvoice,
+                clearForm
+            };
+        })();
+
+        document.addEventListener('DOMContentLoaded', app.init);
+    </script>
 </body>
 </html>
