@@ -178,13 +178,6 @@
             font-size: 14px; line-height: 1.5; position: relative; margin: 0 auto;
         }
         
-        .paid-stamp {
-            position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%) rotate(-18deg);
-            font-size: 4rem; font-weight: 900; color: rgba(255, 77, 106, 0.18);
-            letter-spacing: 8px; text-transform: uppercase; border: 6px solid rgba(255, 77, 106, 0.18);
-            padding: 10px 40px; border-radius: 16px; pointer-events: none; z-index: 10; display: none;
-        }
-        .paid-stamp.visible { display: block; }
         .inv-header { display:flex; justify-content:space-between; margin-bottom:24px; padding-bottom:20px; border-bottom:2px solid #1e293b; }
         .inv-title { font-size:1.8rem; font-weight:800; color:#0f172a; text-transform:uppercase; letter-spacing:-0.5px; line-height:1.1; }
         .info-grid-inv { display:grid; grid-template-columns:1fr; gap:16px; margin-bottom:20px; }
@@ -210,9 +203,25 @@
         .grand-total { border-top:2px solid #1e293b; }
         .grand-total td { color: #0f172a !important; padding: 12px 10px; font-weight: 800; font-size: 16px;}
         
-        .payment-details { margin-top:24px; padding-top:16px; border-top:1px solid #e2e8f0; color:#475569; }
+        /* Updated payment and notes styling to match flex layout */
+        .payment-details, .notes-section { color:#475569; }
         .payment-details h4, .notes-section h4 { color: #0f172a; font-size: 13px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .notes-section { margin-top:16px; color:#64748b; font-size: 13px; white-space: pre-line;}
+
+        /* PAID STAMP - Relocated to the bottom right */
+        .paid-stamp {
+            font-size: 3rem; 
+            font-weight: 900; 
+            color: #dc2626;
+            letter-spacing: 8px; 
+            text-transform: uppercase; 
+            border: 5px solid #dc2626;
+            padding: 10px 30px; 
+            border-radius: 16px; 
+            pointer-events: none;
+            transform: rotate(-15deg);
+            opacity: 0.65;
+            display: inline-block;
+        }
 
         /* Mobile Bottom Nav */
         .bottom-nav {
@@ -830,27 +839,42 @@ JIn Southville 1, Southville City
 
                 const displayTypeHeaderLabel = docProfileType === "QUOTATION" ? "QUOTATION" : "INVOICE";
                 
-                const remittanceTemplateBlock = (docProfileType === "INVOICE" && (bName || bHolder || bRouteNo)) ? `
-                    <div class="payment-details">
-                        <h4>Bank Transfer Details</h4>
-                        <p style="color:#475569; font-size:13px; line-height:1.5;">
-                            Bank: <strong>${escapeHtmlEncoding(bName)}</strong><br>
-                            Account Holder: <strong>${escapeHtmlEncoding(bHolder)}</strong><br>
-                            Account Number: <strong>${escapeHtmlEncoding(bRouteNo)}</strong>
-                        </p>
+                // Construct the footer block using the conditionally rendered stamp
+                const footerFlexContent = `
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top:24px; padding-top:16px; border-top:1px solid #e2e8f0;">
+                        <div style="flex: 1;">
+                            ${(docProfileType === "INVOICE" && (bName || bHolder || bRouteNo)) ? `
+                            <div class="payment-details" style="margin-top:0; padding-top:0; border-top:none;">
+                                <h4>Bank Transfer Details</h4>
+                                <p style="color:#475569; font-size:13px; line-height:1.5;">
+                                    Bank: <strong>${escapeHtmlEncoding(bName)}</strong><br>
+                                    Account Holder: <strong>${escapeHtmlEncoding(bHolder)}</strong><br>
+                                    Account Number: <strong>${escapeHtmlEncoding(bRouteNo)}</strong>
+                                </p>
+                            </div>
+                            ` : ''}
+                            
+                            ${implementationNotes ? `
+                            <div class="notes-section" style="${(docProfileType === "INVOICE" && (bName || bHolder || bRouteNo)) ? 'margin-top:16px;' : 'margin-top:0;'}">
+                                <h4>Notes</h4>
+                                <p style="color:#64748b; font-size: 13px; white-space:pre-line; line-height:1.5;">${escapeHtmlEncoding(implementationNotes)}</p>
+                            </div>
+                            ` : ''}
+                        </div>
+                        <div style="width: 250px; display: flex; justify-content: center; align-items: center; align-self: stretch;">
+                            ${isPaid ? `<div class="paid-stamp">PAID</div>` : ''}
+                        </div>
                     </div>
-                ` : '';
+                `;
 
                 previewCanvasTarget.innerHTML = `
-                    <div class="paid-stamp ${isPaid ? 'visible' : ''}" id="paidStamp">PAID</div>
-                    
                     <div class="inv-header">
-                        <div style="display: flex; gap: 16px; align-items: stretch;">
+                        <div style="display: flex; gap: 16px; align-items: flex-start;">
                             <div style="width: 110px; display: flex; align-items: center; justify-content: center;">
                                 <img src="logo.png" alt="Company Logo" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
                             </div>
-                            <div style="display: flex; flex-direction: column; justify-content: center;">
-                                <h3 style="font-size:1.6rem; font-weight:800; color:#0f172a; margin-bottom:4px;">${escapeHtmlEncoding(cName)}</h3>
+                            <div style="display: flex; flex-direction: column; justify-content: flex-start; padding-top: 4px;">
+                                <h3 style="font-size:1.6rem; font-weight:800; color:#0f172a; margin-bottom:4px; line-height: 1.1;">${escapeHtmlEncoding(cName)}</h3>
                                 <p style="font-size:12px; color:#475569; font-weight:600;">SSM: ${escapeHtmlEncoding(cSSM)}</p>
                                 <p style="white-space:pre-line; color:#475569; font-size:12px; margin-top:6px; max-width:280px; line-height:1.4;">${escapeHtmlEncoding(cAddr)}</p>
                                 <p style="font-size:12px; color:#475569; margin-top:6px;">📞 ${escapeHtmlEncoding(cPhone)}  |  ✉️ ${escapeHtmlEncoding(cEmail)}</p>
@@ -910,22 +934,15 @@ JIn Southville 1, Southville City
                         </table>
                     </div>
                     
-                    ${remittanceTemplateBlock}
-                    
-                    ${implementationNotes ? `
-                    <div class="notes-section">
-                        <h4>Notes</h4>
-                        <p style="white-space:pre-line; line-height:1.5;">${escapeHtmlEncoding(implementationNotes)}</p>
-                    </div>
-                    ` : ''}
+                    ${footerFlexContent}
                 `;
             }
 
             function togglePaidStamp() {
                 if(document.getElementById('docTypeSelect').value === "QUOTATION") return;
                 isPaid = !isPaid;
-                document.getElementById('paidStamp')?.classList.toggle('visible', isPaid);
                 document.getElementById('paidNavBtn').classList.toggle('active', isPaid);
+                updatePreview();
             }
 
             function getFormVal(id) { return document.getElementById(id)?.value || ''; }
