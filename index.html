@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#08080d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>FAZ GAME EMPIRE – Pro Studio</title>
+    <title>Invoice System</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,7 +100,7 @@
         .form-group label { font-size:0.7rem; font-weight:600; text-transform:uppercase; color: var(--text-dim); letter-spacing: 0.5px;}
         .form-group input, .form-group select, .form-group textarea {
             padding: 14px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-md);
-            font-size: 16px; /* 16px prevents iOS auto-zoom */
+            font-size: 16px; 
             background: var(--surface-light); color: var(--text); font-family:var(--font);
             width:100%; outline: none; transition: all 0.2s; appearance: none;
         }
@@ -174,7 +174,7 @@
         }
         .invoice-preview {
             background: #ffffff; color: #1e293b; padding: 40px; 
-            width: 750px; /* Fixed width for perfect A4 scale */
+            width: 750px; 
             font-size: 14px; line-height: 1.5; position: relative; margin: 0 auto;
         }
         
@@ -194,7 +194,6 @@
         .inv-table th.right, .inv-table td.right { text-align: right; color: #0f172a; } 
         .inv-item-name { font-weight: 700; color: #0f172a; display: block; }
         
-        /* Fixed detail section for multiline text */
         .inv-item-detail { 
             font-size: 12px; 
             color: #64748b; 
@@ -251,7 +250,7 @@
         @media print {
             @page { 
                 size: A4 portrait; 
-                margin: 0.5cm; /* Slight margin so printers don't cut off edges */
+                margin: 0.5cm; 
             }
             body { 
                 background: white; 
@@ -278,7 +277,7 @@
                 box-shadow: none; 
                 border: none; 
                 padding: 0; 
-                width: 100% !important; /* Force strictly to physical paper width */
+                width: 100% !important; 
                 max-width: 100% !important; 
                 height: 100%; 
                 margin: 0; 
@@ -290,9 +289,9 @@
 <body>
     <div class="app-topbar">
         <div class="logo-area">
-            <div class="logo-icon">FGE</div>
+            <div class="logo-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
             <div>
-                <h1>FAZ GAME EMPIRE</h1>
+                <h1>Invoice System</h1>
                 <div class="subtitle" id="topbarDocLabel">Invoice Studio</div>
             </div>
         </div>
@@ -301,6 +300,7 @@
 
     <div class="main-container">
         
+        <!-- File Manager -->
         <div class="card collapsible collapsed" id="storageCard">
             <div class="card-header" onclick="toggleCard('storageCard')">
                 <i class="fa-solid fa-folder-open"></i> File Manager <i class="fa-solid fa-chevron-down toggle-arrow"></i>
@@ -320,6 +320,7 @@
             </div>
         </div>
 
+        <!-- Configuration Settings -->
         <div class="card">
             <div class="card-header"><i class="fa-solid fa-sliders"></i> Settings</div>
             <div class="card-body">
@@ -342,6 +343,7 @@
             </div>
         </div>
 
+        <!-- Company Details -->
         <div class="card collapsible collapsed" id="companyCard">
             <div class="card-header" onclick="toggleCard('companyCard')">
                 <i class="fa-solid fa-building"></i> Company Details <i class="fa-solid fa-chevron-down toggle-arrow"></i>
@@ -359,6 +361,7 @@ JIn Southville 1, Southville City
             </div>
         </div>
 
+        <!-- Client & Invoice Details -->
         <div class="card">
             <div class="card-header"><i class="fa-solid fa-user-tag"></i> Client & Billing</div>
             <div class="card-body">
@@ -375,6 +378,7 @@ JIn Southville 1, Southville City
             </div>
         </div>
 
+        <!-- Item List -->
         <div class="card">
             <div class="card-header"><i class="fa-solid fa-box-open"></i> Line Items</div>
             <div class="card-body">
@@ -390,6 +394,7 @@ JIn Southville 1, Southville City
             </div>
         </div>
 
+        <!-- Totals & Discount -->
         <div class="card">
             <div class="card-header"><i class="fa-solid fa-calculator"></i> Summary & Discounts</div>
             <div class="card-body">
@@ -410,6 +415,7 @@ JIn Southville 1, Southville City
             </div>
         </div>
 
+        <!-- Payment & Notes -->
         <div class="card collapsible collapsed" id="paymentCard">
             <div class="card-header" onclick="toggleCard('paymentCard')"><i class="fa-solid fa-credit-card"></i> Payment & Notes <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
             <div class="card-body">
@@ -421,17 +427,21 @@ JIn Southville 1, Southville City
             </div>
         </div>
 
+        <!-- Live Preview Header -->
         <div style="text-align: center; margin-top: 10px;">
             <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px;"><i class="fa-solid fa-eye"></i> Document Preview</span>
         </div>
 
+        <!-- Horizontal Scrolling Preview Wrapper -->
         <div class="preview-wrapper">
             <div class="invoice-preview" id="invoicePreview">
-                </div>
+                <!-- Programmatic Sheet Render Output Context -->
+            </div>
         </div>
 
     </div>
 
+    <!-- Sticky Navigation Actions -->
     <div class="bottom-nav">
         <button class="nav-item" onclick="document.getElementById('invoicePreview').scrollIntoView({behavior: 'smooth'})">
             <i class="fa-regular fa-eye"></i><span>Preview</span>
@@ -452,6 +462,7 @@ JIn Southville 1, Southville City
         </button>
     </div>
 
+    <!-- Hidden clone container for PDF capture -->
     <div class="pdf-clone-container" id="pdfCloneContainer"></div>
 
     <script>
@@ -646,7 +657,7 @@ JIn Southville 1, Southville City
                 if (matrixRows.length >= 2) {
                     matrixRows[0].querySelector('.item-desc').value = PRODUCT_LIST[0].name;
                     matrixRows[0].querySelector('.item-price').value = PRODUCT_LIST[0].price.toFixed(2);
-                    matrixRows[1].querySelector('.item-desc').value = PRODUCT_LIST[38].name; // RTX 3050
+                    matrixRows[1].querySelector('.item-desc').value = PRODUCT_LIST[38].name; 
                     matrixRows[1].querySelector('.item-price').value = PRODUCT_LIST[38].price.toFixed(2);
                 }
 
@@ -1082,7 +1093,6 @@ JIn Southville 1, Southville City
                 const source = document.getElementById('invoicePreview');
                 const cloneContainer = document.getElementById('pdfCloneContainer');
                 
-                // Clone the preview into the hidden container at fixed width for A4 scale
                 const clone = source.cloneNode(true);
                 clone.style.width = '750px';
                 clone.style.maxWidth = '750px';
@@ -1091,7 +1101,6 @@ JIn Southville 1, Southville City
                 cloneContainer.innerHTML = '';
                 cloneContainer.appendChild(clone);
                 
-                // Force visibility for html2canvas
                 cloneContainer.style.visibility = 'visible';
                 cloneContainer.style.position = 'fixed';
                 cloneContainer.style.top = '0';
@@ -1109,7 +1118,6 @@ JIn Southville 1, Southville City
                     windowWidth: 750
                 });
                 
-                // Clean up
                 cloneContainer.innerHTML = '';
                 cloneContainer.style.visibility = 'hidden';
                 cloneContainer.style.position = 'fixed';
@@ -1129,7 +1137,6 @@ JIn Southville 1, Southville City
                 return stringData.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             }
 
-            // --- Updated Dynamic File Naming Function ---
             function generateFileNamingString() {
                 const docTypePrefix = document.getElementById('docTypeSelect').value;
                 const docTypeFormatted = docTypePrefix.charAt(0).toUpperCase() + docTypePrefix.slice(1).toLowerCase();
@@ -1167,7 +1174,7 @@ JIn Southville 1, Southville City
                         await navigator.share({
                             files: [standaloneSystemFile],
                             title: absoluteFilename.replace('.pdf', ''),
-                            text: `Document generated via FAZ GAME EMPIRE.`
+                            text: `Document generated via Invoice Studio.`
                         });
                     } else {
                         downloadPDF();
@@ -1181,7 +1188,6 @@ JIn Southville 1, Southville City
                 const previewEl = document.getElementById('invoicePreview');
                 const originalWidth = previewEl.style.width;
                 
-                // Temporarily alter document title so "Save to PDF" uses the correct filename
                 const originalTitle = document.title;
                 document.title = generateFileNamingString().replace('.pdf', '');
 
@@ -1189,7 +1195,7 @@ JIn Southville 1, Southville City
                 setTimeout(() => {
                     window.print();
                     previewEl.style.width = originalWidth;
-                    document.title = originalTitle; // Revert Title
+                    document.title = originalTitle; 
                 }, 10);
             }
 
