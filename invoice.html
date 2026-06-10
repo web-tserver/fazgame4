@@ -45,12 +45,11 @@
             overflow-x: hidden;
         }
 
-        /* ── HEADER ── */
         header {
             position: sticky; top: 0; z-index: 1000;
             background: var(--header-bg); backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur); border-bottom: var(--glass-border);
-            padding: 12px 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 12px 16px;
         }
         @media (min-width: 768px) { header { padding: 16px 24px; } }
         .header-inner {
@@ -66,9 +65,7 @@
         .header-left .logo-text .yellow-text { color: var(--accent); }
         .header-right-group { display: flex; align-items: center; gap: 16px; }
         .header-logos { display: flex; gap: 12px; align-items: center; }
-        @media (min-width: 768px) { .header-logos { gap: 20px; } }
         .header-logos img { width: 20px; filter: invert(1); opacity: 0.7; transition: var(--transition); }
-        .header-logos img:hover { opacity: 1; transform: translateY(-2px); }
         .btn-icon {
             padding: 14px; border-radius: var(--radius-md); background: var(--surface-light);
             color: var(--text); display: flex; align-items: center; justify-content: center;
@@ -80,10 +77,8 @@
             .header-right-group { justify-content: center; flex-wrap: wrap; }
         }
 
-        /* ── MAIN ── */
         .main-container { padding: 16px; display: flex; flex-direction: column; gap: 16px; max-width: 800px; margin: 0 auto; }
 
-        /* ── CARDS ── */
         .card {
             background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
             padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -98,7 +93,6 @@
         .card.collapsible.collapsed .toggle-arrow { transform: rotate(-90deg); }
         .card-body { margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
 
-        /* ── INPUTS ── */
         .form-row { display: flex; gap: 12px; flex-wrap: wrap; }
         .form-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 120px; }
         .form-group label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
@@ -107,12 +101,9 @@
             font-size: 16px; background: var(--surface-light); color: var(--text); font-family: var(--font);
             width: 100%; outline: none; transition: all 0.2s;
         }
-        .form-group input[type="date"] { appearance: auto; -webkit-appearance: auto; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); background: rgba(255,215,0,0.02); }
         .form-group textarea { resize: vertical; min-height: 80px; }
-        .input-error { border-color: var(--danger) !important; box-shadow: 0 0 0 3px rgba(255,74,104,0.15) !important; }
 
-        /* ── BUTTONS ── */
         .btn {
             padding: 14px 20px; border-radius: var(--radius-md); border: none; font-weight: 700; font-size: 0.9rem;
             cursor: pointer; font-family: var(--font); display: inline-flex; align-items: center; justify-content: center;
@@ -123,9 +114,7 @@
         .btn-sm { padding: 10px 14px; font-size: 0.85rem; }
         .btn-icon-danger { background: rgba(255,74,104,0.1); color: var(--danger); border: none; padding: 10px; border-radius: 8px; cursor: pointer; }
         .json-action-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-        .json-action-group .btn { flex: 1; justify-content: center; }
 
-        /* ── DOCUMENT MANAGER ── */
         .doc-list-container { max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
         .doc-entry {
             display: flex; align-items: center; justify-content: space-between; padding: 12px 14px;
@@ -135,15 +124,12 @@
         .doc-entry-title { font-size: 0.9rem; font-weight: 700; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .doc-entry-meta { font-size: 0.75rem; color: var(--text-dim); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
         .doc-entry-type { font-weight: 800; color: var(--accent); font-size: 0.65rem; text-transform: uppercase; background: rgba(255,215,0,0.1); padding: 2px 6px; border-radius: 4px; }
-        .doc-entry-actions { display: flex; gap: 8px; }
 
-        /* ── ITEM LIST ── */
         .item-search-area { position: relative; margin-bottom: 8px; }
         .search-input {
             width: 100%; padding: 14px 14px 14px 40px; border-radius: var(--radius-md); border: 1.5px solid var(--border);
             background: var(--surface-light); color: var(--text); font-size: 16px; outline: none;
         }
-        .search-input:focus { border-color: var(--accent); }
         .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
         .search-dropdown {
             position: absolute; top: 100%; left: 0; right: 0; max-height: 220px; overflow-y: auto;
@@ -152,14 +138,13 @@
         }
         .search-dropdown.show { display: block; }
         .dropdown-item { padding: 12px 14px; font-size: 0.9rem; cursor: pointer; color: var(--text); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px; }
-        .dropdown-item:active { background: rgba(255,215,0,0.1); }
+
         #itemsBody { display: flex; flex-direction: column; gap: 12px; }
         .item-entry-card { background: var(--surface-light); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; display: flex; flex-direction: column; gap: 10px; }
         .item-entry-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
         .item-math-row { display: flex; gap: 10px; align-items: flex-end; }
         .amount-display { font-size: 1.1rem; font-weight: 800; color: var(--accent); }
 
-        /* ── DOCUMENT PREVIEW ── */
         .preview-wrapper { width: 100%; overflow-x: auto; padding: 20px 0; border-radius: var(--radius-lg); background: rgba(255,255,255,0.02); border: 1px dashed var(--border); }
         .invoice-preview { background: #ffffff; color: #1e293b; padding: 40px; width: 750px; font-size: 14px; line-height: 1.5; margin: 0 auto; }
         .inv-header { display: flex; justify-content: space-between; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 2px solid #1e293b; }
@@ -177,7 +162,6 @@
         .grand-total td { font-weight: 800; font-size: 16px; color: #0f172a; }
         .paid-stamp { font-size: 3rem; font-weight: 900; color: #dc2626; letter-spacing: 8px; text-transform: uppercase; border: 5px solid #dc2626; padding: 10px 30px; border-radius: 16px; transform: rotate(-15deg); opacity: 0.65; display: inline-block; }
 
-        /* ── BOTTOM NAV (neutral download) ── */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; background: rgba(16,16,22,0.9);
             border-top: 1px solid var(--border); display: flex; justify-content: space-between;
@@ -192,14 +176,8 @@
         .nav-item i { font-size: 1.3rem; margin-bottom: 2px; }
         .nav-item.active { color: var(--accent); }
         .nav-item:active { background: rgba(255,255,255,0.05); }
-        .nav-fab {
-            background: transparent; width: auto; height: auto; border-radius: 12px;
-            margin-top: 0; box-shadow: none; border: none; color: var(--text-dim) !important;
-        }
-        .nav-fab i { font-size: 1.3rem; margin-bottom: 2px; }
-        .nav-fab:active { transform: scale(0.95); background: rgba(255,255,255,0.05); }
-
         .pdf-clone-container { position: fixed; top: -9999px; left: -9999px; width: 750px; visibility: hidden; }
+
         @media print {
             @page { size: A4 portrait; margin: 0.5cm; }
             body * { visibility: hidden; }
@@ -230,9 +208,8 @@
 </header>
 
 <div class="main-container">
-    <!-- File Manager -->
     <div class="card collapsible collapsed" id="storageCard">
-        <div class="card-header" onclick="toggleCard('storageCard')">
+        <div class="card-header" onclick="window.toggleCard('storageCard')">
             <i class="fa-solid fa-folder-open"></i> File Manager <i class="fa-solid fa-chevron-down toggle-arrow"></i>
         </div>
         <div class="card-body">
@@ -253,13 +230,12 @@
         </div>
     </div>
 
-    <!-- Settings -->
     <div class="card">
         <div class="card-header"><i class="fa-solid fa-sliders"></i> Settings</div>
         <div class="card-body">
             <div class="form-row">
                 <div class="form-group"><label>Document Type</label>
-                    <select id="docTypeSelect" onchange="app.handleDocTypeSwitch()">
+                    <select id="docTypeSelect">
                         <option value="INVOICE">Invoice</option>
                         <option value="QUOTATION">Quotation</option>
                         <option value="RECEIPT">Receipt</option>
@@ -270,35 +246,32 @@
         </div>
     </div>
 
-    <!-- Company Details -->
     <div class="card collapsible collapsed" id="companyCard">
-        <div class="card-header" onclick="toggleCard('companyCard')"><i class="fa-solid fa-building"></i> Company Details <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
+        <div class="card-header" onclick="window.toggleCard('companyCard')"><i class="fa-solid fa-building"></i> Company Details <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
         <div class="card-body">
-            <div class="form-group"><label>Company Name</label><input type="text" id="compName" value="FAZ GAME EMPIRE" oninput="app.updatePreview()"></div>
-            <div class="form-group"><label>SSM Reg No</label><input type="text" id="compSSM" value="LA0077351-H" oninput="app.updatePreview()"></div>
-            <div class="form-group"><label>Address</label><textarea id="compAddr" rows="3" oninput="app.updatePreview()">Block B, Cerrado Executive Suites,
+            <div class="form-group"><label>Company Name</label><input type="text" id="compName" value="FAZ GAME EMPIRE"></div>
+            <div class="form-group"><label>SSM Reg No</label><input type="text" id="compSSM" value="LA0077351-H"></div>
+            <div class="form-group"><label>Address</label><textarea id="compAddr" rows="3">Block B, Cerrado Executive Suites,
 JIn Southville 1, Southville City,
 43800 Dengkil Selangor</textarea></div>
-            <div class="form-row"><div class="form-group"><label>Phone</label><input type="tel" id="compPhone" value="0163691936" oninput="app.updatePreview()"></div><div class="form-group"><label>Email</label><input type="email" id="compEmail" value="fazgame.empire@gmail.com" oninput="app.updatePreview()"></div></div>
+            <div class="form-row"><div class="form-group"><label>Phone</label><input type="tel" id="compPhone" value="0163691936"></div><div class="form-group"><label>Email</label><input type="email" id="compEmail" value="fazgame.empire@gmail.com"></div></div>
         </div>
     </div>
 
-    <!-- Client & Billing -->
     <div class="card">
         <div class="card-header"><i class="fa-solid fa-user-tag"></i> Client & Billing</div>
         <div class="card-body">
-            <div class="form-group"><label>Client Name <span style="color:var(--danger);">*</span></label><input type="text" id="custName" placeholder="e.g. Ahmad Fikri" oninput="app.updatePreview()"></div>
-            <div class="form-group"><label>Phone <span style="color:var(--danger);">*</span></label><input type="tel" id="custPhone" placeholder="e.g. 0123456789" oninput="app.updatePreview()"></div>
-            <div class="form-group"><label>Email (Optional)</label><input type="email" id="custEmail" placeholder="e.g. ahmad@email.com" oninput="app.updatePreview()"></div>
-            <div class="form-group"><label>Company Name (Optional)</label><input type="text" id="custCompany" placeholder="e.g. Fikri Enterprise" oninput="app.updatePreview()"></div>
-            <div class="form-group"><label>Billing Address (Optional)</label><textarea id="custAddr" rows="2" placeholder="e.g. Jalan Ampang, 68000 Ampang" oninput="app.updatePreview()"></textarea></div>
+            <div class="form-group"><label>Client Name <span style="color:var(--danger);">*</span></label><input type="text" id="custName" placeholder="e.g. Ahmad Fikri"></div>
+            <div class="form-group"><label>Phone <span style="color:var(--danger);">*</span></label><input type="tel" id="custPhone" placeholder="e.g. 0123456789"></div>
+            <div class="form-group"><label>Email (Optional)</label><input type="email" id="custEmail" placeholder="e.g. ahmad@email.com"></div>
+            <div class="form-group"><label>Company Name (Optional)</label><input type="text" id="custCompany" placeholder="e.g. Fikri Enterprise"></div>
+            <div class="form-group"><label>Billing Address (Optional)</label><textarea id="custAddr" rows="2" placeholder="e.g. Jalan Ampang, 68000 Ampang"></textarea></div>
             <hr style="border-color:var(--border);">
-            <div class="form-group"><label id="formSerialLabel">Document No.</label><input type="text" id="invNumber" value="INV-2026-0042" oninput="app.updatePreview()"></div>
-            <div class="form-row"><div class="form-group"><label>Date Issued</label><input type="date" id="invDate" oninput="app.updatePreview()"></div><div class="form-group"><label>Due Date</label><input type="date" id="invDueDate" oninput="app.updatePreview()"></div></div>
+            <div class="form-group"><label id="formSerialLabel">Document No.</label><input type="text" id="invNumber" value="INV-2026-0042"></div>
+            <div class="form-row"><div class="form-group"><label>Date Issued</label><input type="date" id="invDate"></div><div class="form-group"><label>Due Date</label><input type="date" id="invDueDate"></div></div>
         </div>
     </div>
 
-    <!-- Line Items -->
     <div class="card">
         <div class="card-header"><i class="fa-solid fa-box-open"></i> Line Items</div>
         <div class="card-body">
@@ -312,7 +285,6 @@ JIn Southville 1, Southville City,
         </div>
     </div>
 
-    <!-- Summary & Discount -->
     <div class="card">
         <div class="card-header"><i class="fa-solid fa-calculator"></i> Summary & Discounts</div>
         <div class="card-body">
@@ -327,15 +299,14 @@ JIn Southville 1, Southville City,
         </div>
     </div>
 
-    <!-- Payment & Notes (Bank details only used for Invoice) -->
     <div class="card collapsible collapsed" id="paymentCard">
-        <div class="card-header" onclick="toggleCard('paymentCard')"><i class="fa-solid fa-credit-card"></i> Payment & Notes <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
+        <div class="card-header" onclick="window.toggleCard('paymentCard')"><i class="fa-solid fa-credit-card"></i> Payment & Notes <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
         <div class="card-body">
-            <div class="form-group"><label>Bank Name</label><input type="text" id="bankName" value="OCBC Bank" oninput="app.updatePreview()"></div>
-            <div class="form-group"><label>Account Name</label><input type="text" id="acctName" value="FAZ GAME EMPIRE" oninput="app.updatePreview()"></div>
-            <div class="form-group"><label>Account Number</label><input type="text" id="acctNumber" value="1061030056" oninput="app.updatePreview()"></div>
+            <div class="form-group"><label>Bank Name</label><input type="text" id="bankName" value="OCBC Bank"></div>
+            <div class="form-group"><label>Account Name</label><input type="text" id="acctName" value="FAZ GAME EMPIRE"></div>
+            <div class="form-group"><label>Account Number</label><input type="text" id="acctNumber" value="1061030056"></div>
             <hr style="border-color:var(--border);">
-            <div class="form-group"><label>Footer Notes</label><textarea id="notesText" rows="2" oninput="app.updatePreview()">Thank you for your purchase.</textarea></div>
+            <div class="form-group"><label>Footer Notes</label><textarea id="notesText" rows="2"></textarea></div>
         </div>
     </div>
 
@@ -346,26 +317,178 @@ JIn Southville 1, Southville City,
 <div class="bottom-nav">
     <button class="nav-item" onclick="app.clearForm()"><i class="fa-solid fa-rotate-right"></i><span>Reset</span></button>
     <button class="nav-item" id="paidNavBtn" onclick="app.togglePaidStamp()"><i class="fa-solid fa-certificate"></i><span>Stamp</span></button>
-    <button class="nav-item nav-fab" onclick="app.downloadPDF()"><i class="fa-solid fa-download"></i></button>
+    <button class="nav-item" onclick="app.downloadPDF()"><i class="fa-solid fa-download"></i><span>Download</span></button>
     <button class="nav-item" onclick="app.sharePDF()"><i class="fa-solid fa-share-nodes"></i><span>Share</span></button>
 </div>
 
 <div class="pdf-clone-container" id="pdfCloneContainer"></div>
 
 <script>
-    window.toggleCard = function(id) { document.getElementById(id)?.classList.toggle('collapsed'); };
+    window.toggleCard = function(id) {
+        document.getElementById(id)?.classList.toggle('collapsed');
+    };
 
     const app = (function() {
-        // Product database (shortened but functional)
         const PRODUCT_LIST = [
-            { name: "AMD Ryzen 5 5500", price: 415 }, { name: "AMD Ryzen 5 5600", price: 540 }, { name: "AMD Ryzen 7 5700X", price: 680 }, { name: "AMD Ryzen 7 5800X", price: 830 }, { name: "AMD Ryzen 7 7800X3D", price: 1320 }, { name: "MSI B550M-A PRO", price: 345 }, { name: "MSI B550M PRO-VDH WIFI", price: 465 }, { name: "GIGABYTE B650M GAMING WIFI", price: 600 }, { name: "MSI VENTUS 2X RTX3050 6GB", price: 900 }, { name: "GIGABYTE WINDFORCE RTX5050 8GB", price: 1285 }, { name: "MSI SHADOW 2X RTX5060 8GB", price: 1500 }, { name: "Thermalright Assassin X 120 SE", price: 110 }, { name: "Segotep LUMI 3T Black", price: 250 }, { name: "GS24F14 23.8\" 144Hz IPS", price: 325 }
+            { name: "AMD Ryzen 5 5500", category: "cpu", price: 415 },
+            { name: "AMD Ryzen 5 5600", category: "cpu", price: 540 },
+            { name: "AMD Ryzen 5 5600X (Tray)", category: "cpu", price: 585 },
+            { name: "AMD Ryzen 7 5700X", category: "cpu", price: 680 },
+            { name: "AMD Ryzen 7 5800X", category: "cpu", price: 830 },
+            { name: "AMD Ryzen 7 7800X3D", category: "cpu", price: 1320 },
+            { name: "AMD Ryzen 5 7500F", category: "cpu", price: 565 },
+            { name: "AMD Ryzen 9 7950X", category: "cpu", price: 2050 },
+            { name: "AMD Ryzen 5 8400F (Tray)", category: "cpu", price: 550 },
+            { name: "AMD Ryzen 5 7600 (Tray)", category: "cpu", price: 700 },
+            { name: "AMD Ryzen 5 7600X (Tray)", category: "cpu", price: 785 },
+            { name: "AMD Ryzen 7 7700 (Tray)", category: "cpu", price: 930 },
+            { name: "AMD Ryzen 7 7700X (Tray)", category: "cpu", price: 1010 },
+            { name: "AMD Ryzen 7 9700X (Tray)", category: "cpu", price: 1070 },
+            { name: "AMD Ryzen 9 9900X (Tray)", category: "cpu", price: 1720 },
+            { name: "AMD Ryzen 9 9950X (Tray)", category: "cpu", price: 2050 },
+            { name: "AMD Ryzen 9 9950X3D (Tray)", category: "cpu", price: 2800 },
+            { name: "MSI A520M-A PRO", category: "motherboard", price: 245 },
+            { name: "GIGABYTE A520M-A PRO", category: "motherboard", price: 245 },
+            { name: "MSI B550M-A PRO", category: "motherboard", price: 345 },
+            { name: "MSI B550M PRO-VDH WIFI", category: "motherboard", price: 465 },
+            { name: "ASROCK A520M/AC (WIFI)", category: "motherboard", price: 300 },
+            { name: "ASUS PRIME B550M-A WIFI II", category: "motherboard", price: 480 },
+            { name: "MSI A620AM EVO PRO", category: "motherboard", price: 350 },
+            { name: "GIGABYTE B650M GAMING WIFI", category: "motherboard", price: 600 },
+            { name: "ASROCK B650M-H/M.2 + WIFI", category: "motherboard", price: 500 },
+            { name: "ASROCK B850M-X WIFI R2.0", category: "motherboard", price: 580 },
+            { name: "GIGABYTE B850M FORCE WIFI 6E", category: "motherboard", price: 615 },
+            { name: "Colorful CVN B850I Gaming Frozen ITX", category: "motherboard", price: 760 },
+            { name: "GIGABYTE A620M-H", category: "motherboard", price: 350 },
+            { name: "MSI B850M GAMING PRO WIFI 6E", category: "motherboard", price: 735 },
+            { name: "GIGABYTE B850M EAGLE WIFI6E ICE", category: "motherboard", price: 795 },
+            { name: "GIGABYTE B650M GAMING PLUS WIFI", category: "motherboard", price: 630 },
+            { name: "GIGABYTE B850M GAMING X WIFI 6E", category: "motherboard", price: 830 },
+            { name: "ASUS B850M AYW GAMING WIFI", category: "motherboard", price: 665 },
+            { name: "MSI TOMAHAWK B850 MAX WIFI", category: "motherboard", price: 1210 },
+            { name: "MSI PRO B850M-P WIFI", category: "motherboard", price: 730 },
+            { name: "MSI VENTUS 2X RTX3050 6GB", category: "gpu", price: 900 },
+            { name: "GIGABYTE WINDFORCE RTX5050 8GB", category: "gpu", price: 1285 },
+            { name: "MSI SHADOW 2X RTX5060 8GB", category: "gpu", price: 1500 },
+            { name: "COLORFUL GAMING DUO RTX5060 8GB", category: "gpu", price: 1475 },
+            { name: "ASUS PRIME RTX5060 8GB", category: "gpu", price: 1700 },
+            { name: "ZOTAC TWIN EDGE RTX5060 8GB", category: "gpu", price: 1525 },
+            { name: "IGAME ULTRA WHITE DUO RTX5060 8GB", category: "gpu", price: 1635 },
+            { name: "ASROCK CHALLENGER RX9060XT 16GB", category: "gpu", price: 1749 },
+            { name: "ASUS DUAL RX9060XT 16GB", category: "gpu", price: 1850 },
+            { name: "SAPPHIRE PULSE RX9060XT 16GB", category: "gpu", price: 1850 },
+            { name: "XFX SWIFT RX9060XT OC 16GB", category: "gpu", price: 1900 },
+            { name: "ASUS PRIME RX9060XT 16GB", category: "gpu", price: 2050 },
+            { name: "COLORFUL GAMING DUO RTX5060TI 16GB", category: "gpu", price: 2200 },
+            { name: "COLORFUL BATTLEAX RTX5070 12GB", category: "gpu", price: 2850 },
+            { name: "IGAME ULTRA WHITE RTX5070 12GB", category: "gpu", price: 3005 },
+            { name: "IGAME ULTRA BLACK RTX5070 12GB", category: "gpu", price: 2980 },
+            { name: "ASUS PRIME RX9070XT 16GB", category: "gpu", price: 3350 },
+            { name: "HIKSEMI HIKER 16GB 3200MHz DDR4", category: "ram", price: 510 },
+            { name: "FANXIANG UD02R 8GB 3200MHz DDR4", category: "ram", price: 280 },
+            { name: "KINGBANK KJXB 8GB 3200MHz", category: "ram", price: 280 },
+            { name: "KINGBANK KJXB 16GB 3200MHz", category: "ram", price: 510 },
+            { name: "KINGBANK KJXS 32GB 3200MHz (16GBx2)", category: "ram", price: 970 },
+            { name: "COLORFUL BATTLEAX 16GB 6000MHz DDR5 Black", category: "ram", price: 900 },
+            { name: "COLORFUL BATTLEAX 16GB 6000MHz DDR5 White", category: "ram", price: 935 },
+            { name: "KINGSTON FURY BEAST 16GB 6000MHz Black", category: "ram", price: 1135 },
+            { name: "KINGSTON FURY BEAST 16GB 6000MHz Kit (8GBx2)", category: "ram", price: 1145 },
+            { name: "KINGSTON FURY BEAST RGB 16GB 6000MHz", category: "ram", price: 1200 },
+            { name: "KINGSTON FURY BEAST RGB 16GB 6000MHz CL30", category: "ram", price: 1300 },
+            { name: "ACER HT200 32GB 6000MHz Silver", category: "ram", price: 1900 },
+            { name: "ACER PREDATOR VESTA II 32GB 6000MHz RGB", category: "ram", price: 1800 },
+            { name: "ACER PALLAS II 32GB 6000MHz Silver", category: "ram", price: 1750 },
+            { name: "GSKILL RIPJAWS M5 NEO RGB 32GB 6000MHz", category: "ram", price: 1800 },
+            { name: "Kingston FURY Beast 32GB 6000MHz CL30 EXPO Black RGB", category: "ram", price: 2050 },
+            { name: "Kingston FURY Beast 32GB 6000MHz CL30 White", category: "ram", price: 2050 },
+            { name: "KINGBANK KRRB SOARBLADE 32GB 6000MHz CL36", category: "ram", price: 1800 },
+            { name: "HIKSEMI WAVE 512GB NVMe Gen3", category: "storage", price: 380 },
+            { name: "ACER FA100 512GB NVMe Gen3", category: "storage", price: 380 },
+            { name: "ACER FA100 1TB NVMe Gen3", category: "storage", price: 685 },
+            { name: "ACER FA200 500GB NVMe Gen4", category: "storage", price: 485 },
+            { name: "ACER FA200 1TB NVMe Gen4", category: "storage", price: 725 },
+            { name: "PUSKILLS 1TB NVMe Gen3", category: "storage", price: 645 },
+            { name: "MSI SPATIUM M450 500GB Gen4", category: "storage", price: 415 },
+            { name: "MSI SPATIUM M450 1TB Gen4", category: "storage", price: 685 },
+            { name: "KINGBANK KP260 PLUS 1TB Gen4", category: "storage", price: 735 },
+            { name: "HUAWEI EKITSTOR XTREME 200E 1TB Gen4", category: "storage", price: 750 },
+            { name: "T-FORCE Z44A5 512GB Gen4", category: "storage", price: 430 },
+            { name: "T-FORCE Z44A5 1TB Gen4", category: "storage", price: 745 },
+            { name: "T-FORCE Z44A5 2TB Gen4", category: "storage", price: 1335 },
+            { name: "T-FORCE VULCAN 512GB SATA SSD", category: "storage", price: 320 },
+            { name: "BRYT M.2 512GB NVMe", category: "storage", price: 340 },
+            { name: "GIGABYTE P650SS 650W 80+ Silver", category: "psu", price: 230 },
+            { name: "AISURIX 550W 80+ Standard", category: "psu", price: 135 },
+            { name: "AISURIX 600W 80+", category: "psu", price: 145 },
+            { name: "AISURIX 650W 80+", category: "psu", price: 150 },
+            { name: "AISURIX 700W 80+", category: "psu", price: 155 },
+            { name: "SEGOTEP AN550W 80+", category: "psu", price: 185 },
+            { name: "SEGOTEP AN650W 80+", category: "psu", price: 200 },
+            { name: "SEGOTEP AN650W White", category: "psu", price: 215 },
+            { name: "SEGOTEP AN750W 80+", category: "psu", price: 220 },
+            { name: "1STPLAYER ACK 650W 80+", category: "psu", price: 210 },
+            { name: "1STPLAYER ACK 750W 80+", category: "psu", price: 245 },
+            { name: "1STPLAYER ACK 650W Bronze", category: "psu", price: 240 },
+            { name: "1STPLAYER ACK 750W Bronze", category: "psu", price: 285 },
+            { name: "1STPLAYER DK6.0 600W Bronze", category: "psu", price: 210 },
+            { name: "1STPLAYER DK7.0 700W Bronze", category: "psu", price: 245 },
+            { name: "1STPLAYER ACK 750W Gold", category: "psu", price: 365 },
+            { name: "1STPLAYER ACK 850W Gold", category: "psu", price: 390 },
+            { name: "THERMALRIGHT TB750 Bronze", category: "psu", price: 295 },
+            { name: "THERMALRIGHT KG750 Gold", category: "psu", price: 345 },
+            { name: "COOLER MASTER MWE V3 750W Gold", category: "psu", price: 400 },
+            { name: "Thermalright Assassin X 120 SE Black", category: "cooler", price: 110 },
+            { name: "Thermalright Assassin X 120 SE White", category: "cooler", price: 115 },
+            { name: "Thermalright Assassin X 120 SE ARGB Black", category: "cooler", price: 125 },
+            { name: "Thermalright Peerless Assassin 120 SE", category: "cooler", price: 170 },
+            { name: "VALKYRIE AQ125 Black", category: "cooler", price: 110 },
+            { name: "VALKYRIE AQ125 ARGB Black", category: "cooler", price: 125 },
+            { name: "Snowman MT660-V4D Black", category: "cooler", price: 180 },
+            { name: "Thermalright Frozen Infinity 240 Black", category: "cooler", price: 200 },
+            { name: "Thermalright Frozen Infinity 360 White", category: "cooler", price: 280 },
+            { name: "VALKYRIE GLA-240 AIO Black", category: "cooler", price: 285 },
+            { name: "ID-COOLING FX240 LCD ARGB", category: "cooler", price: 265 },
+            { name: "VALKYRIE B240-GT Black", category: "cooler", price: 380 },
+            { name: "Segotep LUMI 3T Black (6 ARGB Fans)", category: "casing", price: 250 },
+            { name: "Segotep LUMI 3T White (6 ARGB Fans)", category: "casing", price: 260 },
+            { name: "Segotep BRAVE W1 Black", category: "casing", price: 160 },
+            { name: "Segotep BRAVE W1 White", category: "casing", price: 165 },
+            { name: "Segotep ENDURA 240S Black", category: "casing", price: 205 },
+            { name: "Segotep ENDURA 240S White", category: "casing", price: 215 },
+            { name: "1STPLAYER BV5 Black", category: "casing", price: 160 },
+            { name: "1STPLAYER BV6 Black", category: "casing", price: 200 },
+            { name: "TECWARE VXO M TG Black", category: "casing", price: 155 },
+            { name: "TECWARE TIMBER M TG Black", category: "casing", price: 200 },
+            { name: "Formula V Crystal Z6M V2 Black", category: "casing", price: 235 },
+            { name: "GS24F14 23.8\" 144Hz IPS", category: "monitor", price: 325 },
+            { name: "MF2408-A 23.8\" 120Hz IPS", category: "monitor", price: 335 },
+            { name: "MF2708-A 27\" 120Hz IPS", category: "monitor", price: 410 },
+            { name: "MD2425-V 23.8\" 180Hz IPS", category: "monitor", price: 435 },
+            { name: "24G50Z 24\" 260Hz IPS", category: "monitor", price: 510 },
+            { name: "27G50Z 27\" 260Hz IPS", category: "monitor", price: 550 },
+            { name: "GS27QA 27\" 180Hz QHD IPS", category: "monitor", price: 630 },
+            { name: "Microsoft Windows 11 Home (ESD)", category: "software", price: 230 },
+            { name: "Microsoft Windows 11 Pro (ESD)", category: "software", price: 300 },
+            { name: "Microsoft Office Home & Business 2024 (ESD)", category: "software", price: 850 }
         ];
+
+        const DEFAULT_NOTES = {
+            INVOICE: "Thank you for your business and trust in us. We appreciate your purchase and look forward to serving you again. Please keep this invoice for your records. If you have any questions regarding your order, warranty, or support, feel free to contact us.",
+            RECEIPT: "Thank you for your purchase. Payment has been received in full. We sincerely appreciate your support and hope you enjoy your new PC and accessories. Please retain this receipt for warranty and reference purposes.",
+            QUOTATION: "Thank you for considering us for your custom PC build. This quotation is valid for 7 days unless otherwise stated. An 80% deposit payment is required before work can commence. The remaining balance must be settled upon completion and prior to collection or delivery of the system."
+        };
+
         let isPaid = false;
         const tbody = document.getElementById('itemsBody');
         const searchInput = document.getElementById('itemSearch');
         const searchDropdown = document.getElementById('searchDropdown');
 
-        function reindexRows() { [...tbody.children].forEach((row, i) => { const c = row.querySelector('.index-counter'); if(c) c.textContent = `#${i+1}`; }); }
+        function reindexRows() {
+            [...tbody.children].forEach((row, i) => {
+                const c = row.querySelector('.index-counter');
+                if(c) c.textContent = `#${i+1}`;
+            });
+        }
         function getCurrencySymbol() { return document.getElementById('invCurrency').value === 'USD' ? '$' : 'RM'; }
         function formatMoney(v) { return `${getCurrencySymbol()} ${Math.abs(v).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`; }
         function gv(id) { return document.getElementById(id)?.value || ''; }
@@ -409,23 +532,24 @@ JIn Southville 1, Southville City,
             const docSerial = gv('invNumber'), dateIssued = fmtDate(gv('invDate')), dateLimit = fmtDate(gv('invDueDate'));
             const bName = gv('bankName'), bHolder = gv('acctName'), bRouteNo = gv('acctNumber');
             const notes = gv('notesText');
+            
             let rowsHtml = '';
             items.forEach((item,i) => {
                 const det = item.detail ? `<span class="inv-item-detail">${escapeHtml(item.detail)}</span>` : '';
+                // BUG FIX: Replaced corrupted NonNull string with proper closing/opening </td><td> tags.
                 rowsHtml += `<tr><td style="text-align:center">${i+1}</td><td><span class="inv-item-name">${escapeHtml(item.name)}</span>${det}</td><td class="right">${item.qty}</td><td class="right">${formatMoney(item.price)}</td><td class="right">${formatMoney(item.amount)}</td></tr>`;
             });
-            if(!rowsHtml) rowsHtml = '<tr><td colspan="5" style="text-align:center">No items added</td></tr>';
+            if(!rowsHtml) rowsHtml = `<tr><td colspan="5" style="text-align:center">No items added</td></tr>`;
             
             let label = "";
             if(docType === "INVOICE") label = "INVOICE";
             else if(docType === "QUOTATION") label = "QUOTATION";
             else label = "RECEIPT";
             
-            // Bank details only for Invoice (not for Quotation or Receipt)
             const showBankDetails = (docType === "INVOICE") && (bName || bHolder || bRouteNo);
             const bankHtml = showBankDetails ? `<div><h4>Bank Transfer Details</h4><p>Bank: ${escapeHtml(bName)}<br>Account: ${escapeHtml(bHolder)}<br>Number: ${escapeHtml(bRouteNo)}</p></div>` : '';
             const notesHtml = notes ? `<div><h4>Notes</h4><p style="white-space:pre-line;">${escapeHtml(notes)}</p></div>` : '';
-            const footer = `<div style="display:flex; justify-content:space-between; margin-top:24px; padding-top:16px; border-top:1px solid #e2e8f0;"><div>${bankHtml}${notesHtml}</div><div>${isPaid ? '<div class="paid-stamp">PAID</div>' : ''}</div></div>`;
+            const footer = `<div style="display:flex; justify-content:space-between; margin-top:24px; padding-top:16px; border-top:1px solid #e2e8f0;"><div>${bankHtml}${notesHtml}</div><div>${isPaid && docType !== 'QUOTATION' ? '<div class="paid-stamp">PAID</div>' : ''}</div></div>`;
             
             const contactLines = [];
             if(custPhone) contactLines.push(`📞 ${escapeHtml(custPhone)}`);
@@ -457,7 +581,7 @@ JIn Southville 1, Southville City,
             const q = searchInput.value.toLowerCase().trim();
             if(!q) { searchDropdown.classList.remove('show'); return; }
             const f = PRODUCT_LIST.filter(i => i.name.toLowerCase().includes(q));
-            searchDropdown.innerHTML = f.length ? f.map(i => `<div class="dropdown-item" onclick="app.selectSearchItem('${escapeAttr(i.name)}', ${i.price})"><span style="font-weight:700;">${escapeHtml(i.name)}</span><span style="font-size:0.75rem;">${getCurrencySymbol()} ${i.price.toFixed(2)}</span></div>`).join('') : '<div class="dropdown-item" style="text-align:center;">No items</div>';
+            searchDropdown.innerHTML = f.length ? f.map(i => `<div class="dropdown-item" onclick="app.selectSearchItem('${escapeAttr(i.name)}', ${i.price})"><span style="font-weight:700;">${escapeHtml(i.name)}</span><span style="font-size:0.7rem; color:#aaa;">${i.category.toUpperCase()}</span><span style="font-size:0.75rem;">${getCurrencySymbol()} ${i.price.toFixed(2)}</span></div>`).join('') : '<div class="dropdown-item" style="text-align:center;">No items</div>';
             searchDropdown.classList.add('show');
         }
 
@@ -475,49 +599,292 @@ JIn Southville 1, Southville City,
         function selectSearchItem(name, price) { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = name; r.querySelector('.item-price').value = price.toFixed(2); searchInput.value = ''; searchDropdown.classList.remove('show'); updatePreview(); }
         function togglePaidStamp() { 
             const docType = document.getElementById('docTypeSelect').value;
-            if(docType === "QUOTATION") return; // no stamp for quotations
+            if(docType === "QUOTATION") return;
             isPaid = !isPaid; 
             document.getElementById('paidNavBtn').classList.toggle('active', isPaid); 
             updatePreview(); 
         }
-        function handleDocTypeSwitch() { 
+        function autoGenerateName() { 
             const t = document.getElementById('docTypeSelect').value; 
-            const lbl = document.getElementById('formSerialLabel'); 
-            const inp = document.getElementById('invNumber'); 
-            const btn = document.getElementById('paidNavBtn');
-            if(t === "QUOTATION") { 
-                lbl.textContent = "Quotation No."; 
-                if(inp.value.startsWith("INV-") || inp.value.startsWith("RCP-")) inp.value = "QTN-2026-0042"; 
-                isPaid = false; 
-                btn.classList.remove('active'); 
-                btn.disabled = true; 
-            } else if(t === "RECEIPT") {
-                lbl.textContent = "Receipt No."; 
-                if(inp.value.startsWith("INV-") || inp.value.startsWith("QTN-")) inp.value = "RCP-2026-0042"; 
-                btn.disabled = false; 
-            } else { // INVOICE
-                lbl.textContent = "Invoice No."; 
-                if(inp.value.startsWith("QTN-") || inp.value.startsWith("RCP-")) inp.value = "INV-2026-0042"; 
-                btn.disabled = false; 
+            const c = gv('custName') || 'Client'; 
+            const d = new Date().toISOString().split('T')[0]; 
+            let prefix = t === "INVOICE" ? "Invoice" : (t === "QUOTATION" ? "Quotation" : "Receipt");
+            document.getElementById('storageKeyName').value = `${prefix} - ${c} - ${d}`; 
+        }
+
+        function getCurrentPayload() { 
+            return { 
+                docType: gv('docTypeSelect'), compName: gv('compName'), compSSM: gv('compSSM'), compAddr: gv('compAddr'),
+                compPhone: gv('compPhone'), compEmail: gv('compEmail'), custName: gv('custName'), custPhone: gv('custPhone'),
+                custEmail: gv('custEmail'), custCompany: gv('custCompany'), custAddr: gv('custAddr'), invNumber: gv('invNumber'),
+                invCurrency: gv('invCurrency'), invDate: gv('invDate'), invDueDate: gv('invDueDate'), discountType: gv('discountType'),
+                discountValue: gv('discountValue'), bankName: gv('bankName'), acctName: gv('acctName'), acctNumber: gv('acctNumber'),
+                notesText: gv('notesText'), items: readFormLineItems(), paidState: isPaid, timestamp: Date.now()
+            }; 
+        }
+        
+        function saveToLocalStorage() { 
+            let key = document.getElementById('storageKeyName').value.trim(); 
+            if(!key) { 
+                const t = document.getElementById('docTypeSelect').value; 
+                let pfx = t === "INVOICE" ? "Invoice" : (t === "QUOTATION" ? "Quotation" : "Receipt");
+                key = `${pfx} - ${gv('custName')||'Unnamed'}`; 
+                document.getElementById('storageKeyName').value = key; 
             } 
+            const payload = getCurrentPayload(); 
+            let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); 
+            const meta = { name: key, type: payload.docType, serial: payload.invNumber, totalDisplay: document.getElementById('grandTotalDisplay').value, date: new Date().toLocaleDateString() }; 
+            const ex = idx.findIndex(i => i.name.toLowerCase() === key.toLowerCase()); 
+            if(ex > -1 && !confirm(`Overwrite "${key}"?`)) return; 
+            if(ex > -1) idx[ex] = meta; else idx.push(meta); 
+            localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); 
+            localStorage.setItem(`fge_doc_file_${key.toLowerCase()}`, JSON.stringify(payload)); 
+            refreshStorageIndexView(); 
+            alert(`"${key}" saved.`); 
+        }
+        
+        function refreshStorageIndexView() { 
+            const list = document.getElementById('localDocsList'); 
+            const idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); 
+            if(!idx.length) { list.innerHTML = '<div style="padding:10px; text-align:center;">No saved files.</div>'; return; } 
+            list.innerHTML = idx.map(m => `<div class="doc-entry"><div class="doc-entry-info"><span class="doc-entry-title">${escapeHtml(m.name)}</span><div class="doc-entry-meta"><span class="doc-entry-type">${m.type}</span><span>${m.serial}</span><span>${m.totalDisplay}</span></div></div><div class="doc-entry-actions"><button class="btn btn-sm" onclick="app.loadStoredDocument('${escapeAttr(m.name.toLowerCase())}')"><i class="fa-solid fa-folder-open"></i></button><button class="btn btn-sm btn-icon-danger" onclick="app.purgeStoredDocument('${escapeAttr(m.name.toLowerCase())}', '${escapeAttr(m.name)}')"><i class="fa-solid fa-trash"></i></button></div></div>`).join(''); 
+        }
+        
+        function loadStoredDocument(key) { 
+            const raw = localStorage.getItem(`fge_doc_file_${key}`); 
+            if(!raw) return alert("Not found"); 
+            try { 
+                const d = JSON.parse(raw); 
+                const m = (JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]')).find(i => i.name.toLowerCase() === key); 
+                document.getElementById('storageKeyName').value = m ? m.name : key; 
+                
+                ['docTypeSelect','compName','compSSM','compAddr','compPhone','compEmail','custName','custPhone','custEmail','custCompany','custAddr','invNumber','invCurrency','invDate','invDueDate','discountType','discountValue','bankName','acctName','acctNumber','notesText'].forEach(id => { 
+                    if(d[id] !== undefined) document.getElementById(id).value = d[id];
+                }); 
+                
+                tbody.innerHTML = ''; 
+                if(d.items && d.items.length) {
+                    d.items.forEach(item => { 
+                        appendRowEntry(true); 
+                        const r = tbody.lastChild; 
+                        r.querySelector('.item-desc').value = item.name || ''; 
+                        r.querySelector('.item-detail').value = item.detail || ''; 
+                        r.querySelector('.item-qty').value = item.qty || 1; 
+                        r.querySelector('.item-price').value = (item.price || 0).toFixed(2); 
+                    });
+                } else {
+                    appendRowEntry(true); 
+                }
+                reindexRows();
+                
+                isPaid = d.paidState === true; 
+                document.getElementById('paidNavBtn').classList.toggle('active', isPaid); 
+                
+                const docType = d.docType || 'INVOICE';
+                const lbl = document.getElementById('formSerialLabel');
+                const btnPaid = document.getElementById('paidNavBtn');
+                if(docType === "QUOTATION") {
+                    lbl.textContent = "Quotation No.";
+                    btnPaid.disabled = true;
+                    isPaid = false;
+                    btnPaid.classList.remove('active');
+                } else if(docType === "RECEIPT") {
+                    lbl.textContent = "Receipt No.";
+                    btnPaid.disabled = false;
+                } else {
+                    lbl.textContent = "Invoice No.";
+                    btnPaid.disabled = false;
+                }
+                
+                updatePreview(); 
+                alert(`Loaded "${m ? m.name : key}"`); 
+            } catch(e) { console.error(e); alert("Load error: invalid data"); } 
+        }
+        
+        function purgeStoredDocument(key, name) { 
+            if(!confirm(`Delete "${name}"?`)) return; 
+            let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); 
+            idx = idx.filter(i => i.name.toLowerCase() !== key); 
+            localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); 
+            localStorage.removeItem(`fge_doc_file_${key}`); 
+            refreshStorageIndexView(); 
+        }
+        
+        function exportToJsonFile() { 
+            const data = getCurrentPayload(); 
+            const clientName = (data.custName || "client").replace(/[^a-z0-9]/gi, '_').replace(/_+/g,'_').replace(/^_|_$/g,'') || "client"; 
+            const phone = (data.custPhone || "no-phone").replace(/[^0-9+]/g, '').replace(/[^a-z0-9]/gi,'_') || "no-phone"; 
+            const filename = `${clientName}_${phone}.json`.substring(0,100); 
+            const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'}); 
+            const url = URL.createObjectURL(blob); 
+            const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); 
+            URL.revokeObjectURL(url); alert("JSON exported."); 
+        }
+        
+        function importFromJsonFile(files) { 
+            if(!files.length) return; 
+            const reader = new FileReader(); 
+            reader.onload = e => { 
+                try { 
+                    const d = JSON.parse(e.target.result); 
+                    ['docTypeSelect','compName','compSSM','compAddr','compPhone','compEmail','custName','custPhone','custEmail','custCompany','custAddr','invNumber','invCurrency','invDate','invDueDate','discountType','discountValue','bankName','acctName','acctNumber','notesText'].forEach(id => { 
+                        if(d[id] !== undefined) document.getElementById(id).value = d[id]; 
+                    }); 
+                    tbody.innerHTML = ''; 
+                    if(d.items && d.items.length) {
+                        d.items.forEach(item => { 
+                            appendRowEntry(true); 
+                            const r = tbody.lastChild; 
+                            r.querySelector('.item-desc').value = item.name || ''; 
+                            r.querySelector('.item-detail').value = item.detail || ''; 
+                            r.querySelector('.item-qty').value = item.qty || 1; 
+                            r.querySelector('.item-price').value = (item.price || 0).toFixed(2); 
+                        });
+                    } else { appendRowEntry(true); }
+                    reindexRows();
+                    isPaid = d.paidState === true; 
+                    document.getElementById('paidNavBtn').classList.toggle('active', isPaid); 
+                    
+                    const docType = d.docType || 'INVOICE';
+                    const lbl = document.getElementById('formSerialLabel');
+                    const btnPaid = document.getElementById('paidNavBtn');
+                    if(docType === "QUOTATION") {
+                        lbl.textContent = "Quotation No.";
+                        btnPaid.disabled = true;
+                        isPaid = false;
+                        btnPaid.classList.remove('active');
+                    } else if(docType === "RECEIPT") {
+                        lbl.textContent = "Receipt No.";
+                        btnPaid.disabled = false;
+                    } else {
+                        lbl.textContent = "Invoice No.";
+                        btnPaid.disabled = false;
+                    }
+                    updatePreview(); 
+                    alert("JSON loaded."); 
+                } catch(err) { alert("Invalid JSON"); } 
+            }; 
+            reader.readAsText(files[0]); 
+        }
+        
+        function updateDocTypeUI(preserveNotes = false) {
+            const t = document.getElementById('docTypeSelect').value;
+            const lbl = document.getElementById('formSerialLabel');
+            const inp = document.getElementById('invNumber');
+            const btn = document.getElementById('paidNavBtn');
+            if(t === "QUOTATION") {
+                lbl.textContent = "Quotation No.";
+                if(inp.value.startsWith("INV-") || inp.value.startsWith("RCP-")) inp.value = "QTN-2026-0042";
+                btn.disabled = true;
+                isPaid = false;
+                btn.classList.remove('active');
+            } else if(t === "RECEIPT") {
+                lbl.textContent = "Receipt No.";
+                if(inp.value.startsWith("INV-") || inp.value.startsWith("QTN-")) inp.value = "RCP-2026-0042";
+                btn.disabled = false;
+            } else {
+                lbl.textContent = "Invoice No.";
+                if(inp.value.startsWith("QTN-") || inp.value.startsWith("RCP-")) inp.value = "INV-2026-0042";
+                btn.disabled = false;
+            }
+            if(!preserveNotes) {
+                document.getElementById('notesText').value = DEFAULT_NOTES[t] || DEFAULT_NOTES.INVOICE;
+            }
+            updatePreview();
+        }
+        
+        async function buildPdfBlob() { 
+            const src = document.getElementById('invoicePreview'); 
+            const clone = src.cloneNode(true); 
+            clone.style.width = '750px'; 
+            const cc = document.getElementById('pdfCloneContainer'); 
+            cc.innerHTML = ''; cc.appendChild(clone); 
+            cc.style.visibility = 'visible'; cc.style.position = 'fixed'; cc.style.top = '0'; cc.style.left = '0'; cc.style.width = '750px'; 
+            await new Promise(r => setTimeout(r,150)); 
+            const canvas = await html2canvas(clone, { scale: 2, backgroundColor: '#ffffff', width: 750 }); 
+            cc.innerHTML = ''; cc.style.visibility = 'hidden'; 
+            const { jsPDF } = window.jspdf; 
+            const pdf = new jsPDF('p', 'mm', 'a4'); 
+            const pw = pdf.internal.pageSize.getWidth(); 
+            const ih = (canvas.height * pw) / canvas.width; 
+            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pw, ih); 
+            return pdf.output('blob'); 
+        }
+        
+        function genFileName() { 
+            const t = document.getElementById('docTypeSelect').value; 
+            let tf = t === "INVOICE" ? "Invoice" : (t === "QUOTATION" ? "Quotation" : "Receipt"); 
+            const c = (gv('custName')||'Client').replace(/[\\/:*?"<>|]/g, ''); 
+            const inv = gv('invNumber').replace(/[\\/:*?"<>|]/g, '') || 'NoRef'; 
+            return `Fazgame_${tf}_${c}_${inv}.pdf`; 
+        }
+        
+        async function downloadPDF() { 
+            try { 
+                const blob = await buildPdfBlob(); 
+                const url = URL.createObjectURL(blob); 
+                const a = document.createElement('a'); a.href = url; a.download = genFileName(); a.click(); 
+                URL.revokeObjectURL(url); 
+            } catch(e) { alert("PDF error"); } 
+        }
+        
+        async function sharePDF() { 
+            try { 
+                const blob = await buildPdfBlob(); 
+                const file = new File([blob], genFileName(), {type:'application/pdf'}); 
+                if(navigator.share && navigator.canShare?.({files:[file]})) await navigator.share({ files: [file], title: 'Document' }); 
+                else downloadPDF(); 
+            } catch(e) { console.error(e); } 
+        }
+        
+        function clearForm() { 
+            if(!confirm('Reset all?')) return; 
+            ['storageKeyName','custName','custPhone','custEmail','custCompany','custAddr'].forEach(id => document.getElementById(id).value = ''); 
+            document.getElementById('discountType').value = 'none'; 
+            document.getElementById('discountValue').value = '0'; 
+            document.getElementById('docTypeSelect').value = 'INVOICE'; 
+            document.getElementById('invNumber').value = 'INV-2026-0042'; 
+            tbody.innerHTML = ''; 
+            isPaid = false; 
+            document.getElementById('paidNavBtn').classList.remove('active'); 
+            appendRowEntry(true); 
+            updateDocTypeUI(false);
             updatePreview(); 
         }
-        function autoGenerateName() { const t = document.getElementById('docTypeSelect').value; const c = gv('custName') || 'Client'; const d = new Date().toISOString().split('T')[0]; let prefix = ""; if(t === "INVOICE") prefix = "Invoice"; else if(t === "QUOTATION") prefix = "Quotation"; else prefix = "Receipt"; document.getElementById('storageKeyName').value = `${prefix} - ${c} - ${d}`; }
-        function getCurrentPayload() { return { docType: gv('docTypeSelect'), compName: gv('compName'), compSSM: gv('compSSM'), compAddr: gv('compAddr'), compPhone: gv('compPhone'), compEmail: gv('compEmail'), custName: gv('custName'), custPhone: gv('custPhone'), custEmail: gv('custEmail'), custCompany: gv('custCompany'), custAddr: gv('custAddr'), invNumber: gv('invNumber'), invCurrency: gv('invCurrency'), invDate: gv('invDate'), invDueDate: gv('invDueDate'), discountType: gv('discountType'), discountValue: gv('discountValue'), bankName: gv('bankName'), acctName: gv('acctName'), acctNumber: gv('acctNumber'), notesText: gv('notesText'), items: readFormLineItems(), paidState: isPaid, timestamp: Date.now() }; }
-        function saveToLocalStorage() { let key = document.getElementById('storageKeyName').value.trim(); if(!key) { const t = document.getElementById('docTypeSelect').value; let pfx = "Document"; if(t === "INVOICE") pfx = "Invoice"; else if(t === "QUOTATION") pfx = "Quotation"; else pfx = "Receipt"; key = `${pfx} - ${gv('custName')||'Unnamed'}`; document.getElementById('storageKeyName').value = key; } const payload = getCurrentPayload(); let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); const meta = { name: key, type: payload.docType, serial: payload.invNumber, totalDisplay: document.getElementById('grandTotalDisplay').value, date: new Date().toLocaleDateString() }; const ex = idx.findIndex(i => i.name.toLowerCase() === key.toLowerCase()); if(ex > -1 && !confirm(`Overwrite "${key}"?`)) return; if(ex > -1) idx[ex] = meta; else idx.push(meta); localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); localStorage.setItem(`fge_doc_file_${key.toLowerCase()}`, JSON.stringify(payload)); refreshStorageIndexView(); alert(`"${key}" saved.`); }
-        function refreshStorageIndexView() { const list = document.getElementById('localDocsList'); const idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); if(!idx.length) { list.innerHTML = '<div style="padding:10px; text-align:center;">No saved files.</div>'; return; } list.innerHTML = idx.map(m => `<div class="doc-entry"><div class="doc-entry-info"><span class="doc-entry-title">${escapeHtml(m.name)}</span><div class="doc-entry-meta"><span class="doc-entry-type">${m.type}</span><span>${m.serial}</span><span>${m.totalDisplay}</span></div></div><div class="doc-entry-actions"><button class="btn btn-sm" onclick="app.loadStoredDocument('${escapeAttr(m.name.toLowerCase())}')"><i class="fa-solid fa-folder-open"></i></button><button class="btn btn-sm btn-icon-danger" onclick="app.purgeStoredDocument('${escapeAttr(m.name.toLowerCase())}', '${escapeAttr(m.name)}')"><i class="fa-solid fa-trash"></i></button></div></div>`).join(''); }
-        function loadStoredDocument(key) { const raw = localStorage.getItem(`fge_doc_file_${key}`); if(!raw) return alert("Not found"); try { const d = JSON.parse(raw); const m = (JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]')).find(i => i.name.toLowerCase() === key); document.getElementById('storageKeyName').value = m ? m.name : key; ['docTypeSelect','compName','compSSM','compAddr','compPhone','compEmail','custName','custPhone','custEmail','custCompany','custAddr','invNumber','invCurrency','invDate','invDueDate','discountType','discountValue','bankName','acctName','acctNumber','notesText'].forEach(id => { document.getElementById(id).value = d[id] || (id==='invCurrency'?'MYR':id==='discountType'?'none':''); }); tbody.innerHTML = ''; if(d.items?.length) d.items.forEach(item => { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = item.name; r.querySelector('.item-detail').value = item.detail || ''; r.querySelector('.item-qty').value = item.qty || 1; r.querySelector('.item-price').value = parseFloat(item.price).toFixed(2); }); else appendRowEntry(true); isPaid = d.paidState || false; document.getElementById('paidNavBtn').classList.toggle('active', isPaid); handleDocTypeSwitch(); updatePreview(); } catch(e) { alert("Load error"); } }
-        function purgeStoredDocument(key, name) { if(!confirm(`Delete "${name}"?`)) return; let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); idx = idx.filter(i => i.name.toLowerCase() !== key); localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); localStorage.removeItem(`fge_doc_file_${key}`); refreshStorageIndexView(); }
-        function exportToJsonFile() { const data = getCurrentPayload(); const clientName = (data.custName || "client").replace(/[^a-z0-9]/gi, '_').replace(/_+/g,'_').replace(/^_|_$/g,'') || "client"; const phone = (data.custPhone || "no-phone").replace(/[^0-9+]/g, '').replace(/[^a-z0-9]/gi,'_') || "no-phone"; const filename = `${clientName}_${phone}.json`.substring(0,100); const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url); alert("JSON exported."); }
-        function importFromJsonFile(files) { if(!files.length) return; const reader = new FileReader(); reader.onload = e => { try { const d = JSON.parse(e.target.result); ['docTypeSelect','compName','compSSM','compAddr','compPhone','compEmail','custName','custPhone','custEmail','custCompany','custAddr','invNumber','invCurrency','invDate','invDueDate','discountType','discountValue','bankName','acctName','acctNumber','notesText'].forEach(id => { if(d[id] !== undefined) document.getElementById(id).value = d[id]; }); tbody.innerHTML = ''; if(d.items?.length) d.items.forEach(item => { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = item.name; r.querySelector('.item-detail').value = item.detail || ''; r.querySelector('.item-qty').value = item.qty || 1; r.querySelector('.item-price').value = parseFloat(item.price).toFixed(2); }); else appendRowEntry(true); isPaid = d.paidState || false; document.getElementById('paidNavBtn').classList.toggle('active', isPaid); handleDocTypeSwitch(); updatePreview(); alert("JSON loaded."); } catch(err) { alert("Invalid JSON"); } }; reader.readAsText(files[0]); }
-        async function buildPdfBlob() { const src = document.getElementById('invoicePreview'); const clone = src.cloneNode(true); clone.style.width = '750px'; const cc = document.getElementById('pdfCloneContainer'); cc.innerHTML = ''; cc.appendChild(clone); cc.style.visibility = 'visible'; cc.style.position = 'fixed'; cc.style.top = '0'; cc.style.left = '0'; cc.style.width = '750px'; await new Promise(r => setTimeout(r,150)); const canvas = await html2canvas(clone, { scale: 2, backgroundColor: '#ffffff', width: 750 }); cc.innerHTML = ''; cc.style.visibility = 'hidden'; const { jsPDF } = window.jspdf; const pdf = new jsPDF('p', 'mm', 'a4'); const pw = pdf.internal.pageSize.getWidth(); const ih = (canvas.height * pw) / canvas.width; pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pw, ih); return pdf.output('blob'); }
-        function genFileName() { const t = document.getElementById('docTypeSelect').value; let tf = "Doc"; if(t === "INVOICE") tf = "Invoice"; else if(t === "QUOTATION") tf = "Quotation"; else tf = "Receipt"; const c = (gv('custName')||'Client').replace(/[\\/:*?"<>|]/g, ''); const inv = gv('invNumber').replace(/[\\/:*?"<>|]/g, '') || 'NoRef'; return `Fazgame_${tf}_${c}_${inv}.pdf`; }
-        async function downloadPDF() { try { const blob = await buildPdfBlob(); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = genFileName(); a.click(); URL.revokeObjectURL(url); } catch(e) { alert("PDF error"); } }
-        async function sharePDF() { try { const blob = await buildPdfBlob(); const file = new File([blob], genFileName(), {type:'application/pdf'}); if(navigator.share && navigator.canShare?.({files:[file]})) await navigator.share({ files: [file], title: 'Document' }); else downloadPDF(); } catch(e) { console.error(e); } }
-        function clearForm() { if(!confirm('Reset all?')) return; ['storageKeyName','custName','custPhone','custEmail','custCompany','custAddr'].forEach(id => document.getElementById(id).value = ''); document.getElementById('discountType').value = 'none'; document.getElementById('discountValue').value = '0'; document.getElementById('docTypeSelect').value = 'INVOICE'; document.getElementById('invNumber').value = 'INV-2026-0042'; tbody.innerHTML = ''; isPaid = false; document.getElementById('paidNavBtn').classList.remove('active'); appendRowEntry(true); handleDocTypeSwitch(); updatePreview(); }
-        function init() { document.getElementById('invDate').value = new Date().toISOString().split('T')[0]; const due = new Date(); due.setDate(due.getDate()+14); document.getElementById('invDueDate').value = due.toISOString().split('T')[0]; searchInput.addEventListener('input', runSearchProcessing); searchInput.addEventListener('focus', runSearchProcessing); document.addEventListener('click', e => { if(!e.target.closest('.item-search-area')) searchDropdown.classList.remove('show'); }); appendRowEntry(true); appendRowEntry(true); refreshStorageIndexView(); updatePreview(); document.getElementById('discountType').addEventListener('change', updatePreview); document.getElementById('discountValue').addEventListener('input', updatePreview); document.getElementById('invCurrency').addEventListener('change', updatePreview); document.getElementById('docTypeSelect').addEventListener('change', handleDocTypeSwitch); }
-        return { init, updatePreview, deleteRowEntry, selectSearchItem, togglePaidStamp, handleDocTypeSwitch, autoGenerateName, saveToLocalStorage, loadStoredDocument, purgeStoredDocument, exportToJsonFile, importFromJsonFile, downloadPDF, sharePDF, clearForm, appendRowEntry };
+        
+        function init() { 
+            document.getElementById('invDate').value = new Date().toISOString().split('T')[0]; 
+            const due = new Date(); due.setDate(due.getDate()+14); 
+            document.getElementById('invDueDate').value = due.toISOString().split('T')[0]; 
+            searchInput.addEventListener('input', runSearchProcessing); 
+            searchInput.addEventListener('focus', runSearchProcessing); 
+            document.addEventListener('click', e => { if(!e.target.closest('.item-search-area')) searchDropdown.classList.remove('show'); }); 
+            
+            // BUG FIX: Global listener for real-time preview updates across all text fields
+            document.querySelector('.main-container').addEventListener('input', (e) => {
+                const ignoreIds = ['itemSearch', 'storageKeyName', 'importJsonInput'];
+                if (e.target.matches('input, textarea, select') && !ignoreIds.includes(e.target.id)) {
+                    updatePreview();
+                }
+            });
+
+            appendRowEntry(true); appendRowEntry(true); 
+            refreshStorageIndexView(); 
+            updateDocTypeUI(false);
+            updatePreview(); 
+            document.getElementById('discountType').addEventListener('change', updatePreview); 
+            document.getElementById('discountValue').addEventListener('input', updatePreview); 
+            document.getElementById('invCurrency').addEventListener('change', updatePreview); 
+            document.getElementById('docTypeSelect').addEventListener('change', () => updateDocTypeUI(false)); 
+        }
+        
+        return { 
+            init, updatePreview, deleteRowEntry, selectSearchItem, togglePaidStamp, 
+            autoGenerateName, saveToLocalStorage, loadStoredDocument, purgeStoredDocument, 
+            exportToJsonFile, importFromJsonFile, downloadPDF, sharePDF, clearForm, appendRowEntry 
+        };
     })();
+    
     document.addEventListener('DOMContentLoaded', app.init);
 </script>
 </body>
