@@ -50,7 +50,7 @@
             position: sticky; top: 0; z-index: 1000;
             background: var(--header-bg); backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur); border-bottom: var(--glass-border);
-            padding: 12px 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); flex-shrink: 0;
+            padding: 12px 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
         @media (min-width: 768px) { header { padding: 16px 24px; } }
         .header-inner {
@@ -58,7 +58,7 @@
             justify-content: space-between; flex-wrap: wrap; gap: 16px;
         }
         .header-left { display: flex; align-items: center; gap: 15px; }
-        .header-left .logo-img { height: 40px; width: auto; opacity: 0.95; transition: opacity 0.3s ease; }
+        .header-left .logo-img { height: 40px; width: auto; opacity: 0.95; }
         .header-left .logo-text {
             font-family: 'Clash Display', sans-serif; font-weight: 700; font-size: 24px;
             letter-spacing: -0.5px; white-space: nowrap;
@@ -67,13 +67,12 @@
         .header-right-group { display: flex; align-items: center; gap: 16px; }
         .header-logos { display: flex; gap: 12px; align-items: center; }
         @media (min-width: 768px) { .header-logos { gap: 20px; } }
-        .header-logos img { width: 20px; transition: var(--transition); }
-        body:not(.light-mode) .header-logos img { filter: invert(1); opacity: 0.7; }
+        .header-logos img { width: 20px; filter: invert(1); opacity: 0.7; transition: var(--transition); }
         .header-logos img:hover { opacity: 1; transform: translateY(-2px); }
         .btn-icon {
             padding: 14px; border-radius: var(--radius-md); background: var(--surface-light);
             color: var(--text); display: flex; align-items: center; justify-content: center;
-            border: 1.5px solid var(--border); cursor: pointer; transition: 0.2s; text-decoration: none; flex-shrink: 0;
+            border: 1.5px solid var(--border); cursor: pointer; transition: 0.2s; text-decoration: none;
         }
         .btn-icon:active { transform: scale(0.95); }
         @media (max-width: 680px) {
@@ -104,12 +103,11 @@
         .form-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 120px; }
         .form-group label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
         .form-group input, .form-group select, .form-group textarea {
-            padding: 14px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-md);
+            padding: 14px; border: 1.5px solid var(--border); border-radius: var(--radius-md);
             font-size: 16px; background: var(--surface-light); color: var(--text); font-family: var(--font);
-            width: 100%; outline: none; transition: all 0.2s; appearance: none;
+            width: 100%; outline: none; transition: all 0.2s;
         }
         .form-group input[type="date"] { appearance: auto; -webkit-appearance: auto; }
-        .form-group input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.8); cursor: pointer; opacity: 1; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); background: rgba(255,215,0,0.02); }
         .form-group textarea { resize: vertical; min-height: 80px; }
         .input-error { border-color: var(--danger) !important; box-shadow: 0 0 0 3px rgba(255,74,104,0.15) !important; }
@@ -123,10 +121,11 @@
         .btn:active { transform: scale(0.97); }
         .btn-accent { background: var(--accent); color: #0a0a0f; box-shadow: 0 4px 15px var(--accent-glow); }
         .btn-sm { padding: 10px 14px; font-size: 0.85rem; }
-        .btn-icon-danger { background: rgba(255,74,104,0.1); color: var(--danger); border: none; padding: 10px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+        .btn-icon-danger { background: rgba(255,74,104,0.1); color: var(--danger); border: none; padding: 10px; border-radius: 8px; cursor: pointer; }
+        .json-action-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+        .json-action-group .btn { flex: 1; justify-content: center; }
 
         /* ── DOCUMENT MANAGER ── */
-        .storage-wrapper { display: flex; gap: 8px; align-items: center; }
         .doc-list-container { max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
         .doc-entry {
             display: flex; align-items: center; justify-content: space-between; padding: 12px 14px;
@@ -134,7 +133,7 @@
         }
         .doc-entry-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
         .doc-entry-title { font-size: 0.9rem; font-weight: 700; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .doc-entry-meta { font-size: 0.75rem; color: var(--text-dim); display: flex; gap: 10px; align-items: center; }
+        .doc-entry-meta { font-size: 0.75rem; color: var(--text-dim); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
         .doc-entry-type { font-weight: 800; color: var(--accent); font-size: 0.65rem; text-transform: uppercase; background: rgba(255,215,0,0.1); padding: 2px 6px; border-radius: 4px; }
         .doc-entry-actions { display: flex; gap: 8px; }
 
@@ -142,7 +141,7 @@
         .item-search-area { position: relative; margin-bottom: 8px; }
         .search-input {
             width: 100%; padding: 14px 14px 14px 40px; border-radius: var(--radius-md); border: 1.5px solid var(--border);
-            background: var(--surface-light); color: var(--text); font-size: 16px; outline: none; transition: 0.2s;
+            background: var(--surface-light); color: var(--text); font-size: 16px; outline: none;
         }
         .search-input:focus { border-color: var(--accent); }
         .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
@@ -156,355 +155,337 @@
         .dropdown-item:active { background: rgba(255,215,0,0.1); }
         #itemsBody { display: flex; flex-direction: column; gap: 12px; }
         .item-entry-card { background: var(--surface-light); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-        .item-entry-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 4px; }
+        .item-entry-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
         .item-math-row { display: flex; gap: 10px; align-items: flex-end; }
         .amount-display { font-size: 1.1rem; font-weight: 800; color: var(--accent); }
 
         /* ── DOCUMENT PREVIEW ── */
-        .preview-wrapper { width: 100%; overflow-x: auto; padding: 20px 0; -webkit-overflow-scrolling: touch; border-radius: var(--radius-lg); background: rgba(255,255,255,0.02); border: 1px dashed var(--border); }
-        .invoice-preview { background: #ffffff; color: #1e293b; padding: 40px; width: 750px; font-size: 14px; line-height: 1.5; position: relative; margin: 0 auto; }
+        .preview-wrapper { width: 100%; overflow-x: auto; padding: 20px 0; border-radius: var(--radius-lg); background: rgba(255,255,255,0.02); border: 1px dashed var(--border); }
+        .invoice-preview { background: #ffffff; color: #1e293b; padding: 40px; width: 750px; font-size: 14px; line-height: 1.5; margin: 0 auto; }
         .inv-header { display: flex; justify-content: space-between; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 2px solid #1e293b; }
-        .inv-title { font-size: 1.8rem; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: -0.5px; line-height: 1.1; }
-        .info-grid-inv { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 20px; }
+        .inv-title { font-size: 1.8rem; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: -0.5px; }
         .inv-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        .inv-table th { background: #f1f5f9; padding: 10px 8px; font-size: 12px; text-transform: uppercase; color: #475569; letter-spacing: 0.5px; text-align: left; }
-        .inv-table td { padding: 12px 8px; border-bottom: 1px solid #e2e8f0; font-size: 14px; vertical-align: top; }
-        .inv-table th.right, .inv-table td.right { text-align: right; color: #0f172a; }
+        .inv-table th { background: #f1f5f9; padding: 10px 8px; font-size: 12px; text-transform: uppercase; color: #475569; text-align: left; }
+        .inv-table td { padding: 12px 8px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        .inv-table th.right, .inv-table td.right { text-align: right; }
         .inv-item-name { font-weight: 700; color: #0f172a; display: block; }
-        .inv-item-detail { font-size: 12px; color: #64748b; margin-top: 4px; display: block; white-space: pre-line; line-height: 1.4; }
+        .inv-item-detail { font-size: 12px; color: #64748b; margin-top: 4px; display: block; white-space: pre-line; }
         .totals-section { display: flex; justify-content: flex-end; margin-top: 16px; }
         .totals-table { width: 280px; border-collapse: collapse; }
-        .totals-table td { padding: 8px 10px; font-size: 14px; color: #475569; }
+        .totals-table td { padding: 8px 10px; }
         .grand-total { border-top: 2px solid #1e293b; }
-        .grand-total td { color: #0f172a !important; padding: 12px 10px; font-weight: 800; font-size: 16px; }
-        .payment-details, .notes-section { color: #475569; }
-        .payment-details h4, .notes-section h4 { color: #0f172a; font-size: 13px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .paid-stamp { font-size: 3rem; font-weight: 900; color: #dc2626; letter-spacing: 8px; text-transform: uppercase; border: 5px solid #dc2626; padding: 10px 30px; border-radius: 16px; pointer-events: none; transform: rotate(-15deg); opacity: 0.65; display: inline-block; }
+        .grand-total td { font-weight: 800; font-size: 16px; color: #0f172a; }
+        .paid-stamp { font-size: 3rem; font-weight: 900; color: #dc2626; letter-spacing: 8px; text-transform: uppercase; border: 5px solid #dc2626; padding: 10px 30px; border-radius: 16px; transform: rotate(-15deg); opacity: 0.65; display: inline-block; }
 
-        /* ── BOTTOM NAV ── */
+        /* ── BOTTOM NAV (no yellow/black circle on download) ── */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; background: rgba(16,16,22,0.9);
-            border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid var(--border); display: flex; justify-content: space-between;
             padding: 10px 16px calc(10px + var(--safe-area-bottom)); z-index: 200;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
         }
         .nav-item {
             display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 0.65rem;
             font-weight: 700; color: var(--text-dim); background: transparent; border: none; cursor: pointer;
-            padding: 8px; border-radius: 12px; transition: all 0.2s; flex: 1; font-family: var(--font);
+            padding: 8px; border-radius: 12px; transition: 0.2s; flex: 1; font-family: var(--font);
         }
         .nav-item i { font-size: 1.3rem; margin-bottom: 2px; }
         .nav-item.active { color: var(--accent); }
         .nav-item:active { background: rgba(255,255,255,0.05); }
-        .nav-item:disabled { opacity: 0.3; pointer-events: none; }
+        /* Download button - no circle, flat like others */
         .nav-fab {
-            background: linear-gradient(135deg, var(--accent), #e6b800); color: #000 !important;
-            width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 8px 20px var(--accent-glow); margin-top: -24px; flex-direction: row; font-size: 1.5rem;
+            background: transparent;
+            width: auto;
+            height: auto;
+            border-radius: 12px;
+            margin-top: 0;
+            box-shadow: none;
+            border: none;
+            color: var(--text-dim) !important;
         }
+        .nav-fab i { font-size: 1.3rem; margin-bottom: 2px; }
+        .nav-fab:active { transform: scale(0.95); background: rgba(255,255,255,0.05); }
 
-        /* ── PDF CLONE ── */
+        /* ── UTILITY ── */
         .pdf-clone-container { position: fixed; top: -9999px; left: -9999px; width: 750px; visibility: hidden; }
-
-        /* ── A4 PRINT ── */
         @media print {
             @page { size: A4 portrait; margin: 0.5cm; }
-            html, body { width: 100%; height: auto; margin: 0; padding: 0; background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            header, .main-container>.card, .bottom-nav, .pdf-clone-container, .no-print { display: none !important; }
-            .main-container { padding: 0; margin: 0; max-width: none; width: 100%; }
-            .preview-wrapper { padding: 0; border: none; overflow: visible; background: transparent; width: 100%; }
-            .invoice-preview { width: 100% !important; max-width: 100% !important; height: auto !important; margin: 0; padding: 0; border: none; box-shadow: none; transform: none; page-break-after: avoid; page-break-inside: avoid; }
+            body * { visibility: hidden; }
+            .invoice-preview, .invoice-preview * { visibility: visible; }
+            .invoice-preview { position: absolute; top: 0; left: 0; width: 100%; margin: 0; padding: 20px; }
+            header, .main-container>.card, .bottom-nav, .no-print { display: none !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ═══════════ HEADER ═══════════ -->
-    <header>
-        <div class="header-inner">
-            <div class="header-left">
-                <img src="images/logo1.png" alt="FAZGAME Logo" class="logo-img" onerror="this.src='https://placehold.co/300x300/222/ffd84d?text=FAZGAME';">
-                <div class="logo-text"><span class="yellow-text">FAZ</span>GAME | <span class="yellow-text">INVOICE</span></div>
-            </div>
-            <div class="header-right-group">
-                <div class="header-logos">
-                    <img src="https://api.iconify.design/simple-icons/playstation.svg" alt="PS">
-                    <img src="https://api.iconify.design/simple-icons/xbox.svg" alt="Xbox">
-                    <img src="https://api.iconify.design/simple-icons/nintendoswitch.svg" alt="Switch">
-                    <img src="https://api.iconify.design/mdi/desktop-classic.svg" alt="PC">
-                </div>
-                <a href="index.html" class="btn-icon" title="Back to Home"><i class="fa-solid fa-arrow-left"></i></a>
-            </div>
+<header>
+    <div class="header-inner">
+        <div class="header-left">
+            <img src="images/logo1.png" alt="FAZGAME Logo" class="logo-img" onerror="this.src='https://placehold.co/300x300/222/ffd84d?text=FAZGAME';">
+            <div class="logo-text"><span class="yellow-text">FAZ</span>GAME | <span class="yellow-text">INVOICE</span></div>
         </div>
-    </header>
-
-    <!-- ═══════════ MAIN ═══════════ -->
-    <div class="main-container">
-
-        <!-- File Manager -->
-        <div class="card collapsible collapsed" id="storageCard">
-            <div class="card-header" onclick="toggleCard('storageCard')">
-                <i class="fa-solid fa-folder-open"></i> File Manager <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+        <div class="header-right-group">
+            <div class="header-logos">
+                <img src="https://api.iconify.design/simple-icons/playstation.svg" alt="PS">
+                <img src="https://api.iconify.design/simple-icons/xbox.svg" alt="Xbox">
+                <img src="https://api.iconify.design/simple-icons/nintendoswitch.svg" alt="Switch">
+                <img src="https://api.iconify.design/mdi/desktop-classic.svg" alt="PC">
             </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label>Profile Name</label>
-                    <div class="storage-wrapper">
-                        <input type="text" id="storageKeyName" placeholder="e.g., Fikri Rig v1">
-                        <button class="btn-icon" onclick="app.autoGenerateName()"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
-                    </div>
-                </div>
-                <button class="btn btn-accent" onclick="app.saveToLocalStorage()" style="width:100%;"><i class="fa-solid fa-cloud-arrow-up"></i> Save Current Layout</button>
-                <div style="font-size:0.7rem; text-transform:uppercase; color:var(--text-dim); margin-top:12px; font-weight:700;">Saved Documents</div>
-                <div class="doc-list-container" id="localDocsList"></div>
-            </div>
+            <a href="index.html" class="btn-icon" title="Back to Home"><i class="fa-solid fa-arrow-left"></i></a>
         </div>
+    </div>
+</header>
 
-        <!-- Settings -->
-        <div class="card">
-            <div class="card-header"><i class="fa-solid fa-sliders"></i> Settings</div>
-            <div class="card-body">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Doc Type</label>
-                        <select id="docTypeSelect" onchange="app.handleDocTypeSwitch()">
-                            <option value="INVOICE">Invoice</option>
-                            <option value="QUOTATION">Quotation</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Currency</label>
-                        <select id="invCurrency" oninput="app.updatePreview()">
-                            <option value="MYR">MYR (RM)</option>
-                            <option value="USD">USD ($)</option>
-                        </select>
-                    </div>
+<div class="main-container">
+    <!-- File Manager Card -->
+    <div class="card collapsible collapsed" id="storageCard">
+        <div class="card-header" onclick="toggleCard('storageCard')">
+            <i class="fa-solid fa-folder-open"></i> File Manager <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label>Profile Name</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="storageKeyName" placeholder="e.g., Fikri Rig v1" style="flex:1">
+                    <button class="btn-icon" onclick="app.autoGenerateName()"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
                 </div>
             </div>
-        </div>
-
-        <!-- Company Details -->
-        <div class="card collapsible collapsed" id="companyCard">
-            <div class="card-header" onclick="toggleCard('companyCard')">
-                <i class="fa-solid fa-building"></i> Company Details <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+            <button class="btn btn-accent" onclick="app.saveToLocalStorage()"><i class="fa-solid fa-cloud-arrow-up"></i> Save</button>
+            <div class="json-action-group">
+                <button class="btn btn-sm" onclick="app.exportToJsonFile()"><i class="fa-solid fa-file-export"></i> Export JSON</button>
+                <label class="btn btn-sm" style="cursor:pointer; background:var(--surface);"><i class="fa-solid fa-file-import"></i> Import JSON<input type="file" id="importJsonInput" accept=".json" style="display:none;" onchange="app.importFromJsonFile(this.files)"></label>
             </div>
-            <div class="card-body">
-                <div class="form-group"><label>Company Name</label><input type="text" id="compName" value="FAZ GAME EMPIRE" oninput="app.updatePreview()"></div>
-                <div class="form-group"><label>SSM Reg No</label><input type="text" id="compSSM" value="LA0077351-H" oninput="app.updatePreview()"></div>
-                <div class="form-group"><label>Address</label><textarea id="compAddr" oninput="app.updatePreview()">Block B, Cerrado Executive Suites, JIn Southville 1, Southville City, 43800 Dengkil Selangor</textarea></div>
-                <div class="form-row">
-                    <div class="form-group"><label>Phone</label><input type="tel" id="compPhone" value="0163691936" oninput="app.updatePreview()"></div>
-                    <div class="form-group"><label>Email</label><input type="email" id="compEmail" value="fazgame.empire@gmail.com" oninput="app.updatePreview()"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Client & Billing -->
-        <div class="card">
-            <div class="card-header"><i class="fa-solid fa-user-tag"></i> Client & Billing</div>
-            <div class="card-body">
-                <div class="form-group"><label>Client Name <span style="color:var(--danger);">*</span></label><input type="text" id="custName" placeholder="e.g. Ahmad Fikri" oninput="app.updatePreview()"></div>
-                <div class="form-group"><label>Phone <span style="color:var(--danger);">*</span></label><input type="tel" id="custPhone" placeholder="e.g. 0123456789" oninput="app.updatePreview()"></div>
-                <div class="form-group"><label>Email (Optional)</label><input type="email" id="custEmail" placeholder="e.g. ahmad@email.com" oninput="app.updatePreview()"></div>
-                <div class="form-group"><label>Company Name (Optional)</label><input type="text" id="custCompany" placeholder="e.g. Fikri Enterprise" oninput="app.updatePreview()"></div>
-                <div class="form-group"><label>Billing Address (Optional)</label><textarea id="custAddr" placeholder="e.g. Jalan Ampang, 68000 Ampang" oninput="app.updatePreview()"></textarea></div>
-                <hr style="border-color: var(--border); margin: 8px 0;">
-                <div class="form-group"><label id="formSerialLabel">Invoice No.</label><input type="text" id="invNumber" value="INV-2026-0042" oninput="app.updatePreview()"></div>
-                <div class="form-row">
-                    <div class="form-group"><label>Date Issued</label><input type="date" id="invDate" oninput="app.updatePreview()"></div>
-                    <div class="form-group"><label>Due Date</label><input type="date" id="invDueDate" oninput="app.updatePreview()"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Line Items -->
-        <div class="card">
-            <div class="card-header"><i class="fa-solid fa-box-open"></i> Line Items</div>
-            <div class="card-body">
-                <div class="item-search-area">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" class="search-input" id="itemSearch" placeholder="Search product database..." autocomplete="off">
-                    <div class="search-dropdown" id="searchDropdown"></div>
-                </div>
-                <div id="itemsBody"></div>
-                <button class="btn btn-sm" style="width:100%; border:1.5px dashed var(--border); background:transparent;" onclick="app.appendRowEntry()"><i class="fa-solid fa-plus"></i> Add Custom Item</button>
-            </div>
-        </div>
-
-        <!-- Summary & Discount -->
-        <div class="card">
-            <div class="card-header"><i class="fa-solid fa-calculator"></i> Summary & Discounts</div>
-            <div class="card-body">
-                <div class="form-row">
-                    <div class="form-group"><label>Discount Type</label><select id="discountType" onchange="app.updatePreview()"><option value="none">No Discount</option><option value="percent">Percentage (%)</option><option value="fixed">Fixed Amount</option></select></div>
-                    <div class="form-group"><label>Discount Value</label><input type="number" id="discountValue" value="0" step="0.01" oninput="app.updatePreview()"></div>
-                </div>
-                <div class="form-row" style="background:var(--surface-light); padding:12px; border-radius:var(--radius-md); margin-top:8px;">
-                    <div class="form-group"><label>Subtotal</label><input type="text" id="subtotalDisplay" readonly style="background:transparent; border:none; padding:0; font-size:18px;"></div>
-                    <div class="form-group"><label>Grand Total</label><input type="text" id="grandTotalDisplay" readonly style="color:var(--accent); font-weight:800; background:transparent; border:none; padding:0; font-size:22px; text-align:right;"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Payment & Notes -->
-        <div class="card collapsible collapsed" id="paymentCard">
-            <div class="card-header" onclick="toggleCard('paymentCard')"><i class="fa-solid fa-credit-card"></i> Payment & Notes <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
-            <div class="card-body">
-                <div class="form-group"><label>Bank Name</label><input type="text" id="bankName" value="OCBC Bank" oninput="app.updatePreview()"></div>
-                <div class="form-group"><label>Account Name</label><input type="text" id="acctName" value="FAZ GAME EMPIRE" oninput="app.updatePreview()"></div>
-                <div class="form-group"><label>Account Number</label><input type="text" id="acctNumber" value="1061030056" oninput="app.updatePreview()"></div>
-                <hr style="border-color: var(--border); margin: 8px 0;">
-                <div class="form-group"><label>Footer Notes</label><textarea id="notesText" oninput="app.updatePreview()">Thank you for your purchase.</textarea></div>
-            </div>
-        </div>
-
-        <div class="no-print" style="text-align:center; margin-top:10px;">
-            <span style="font-size:0.8rem; font-weight:700; color:var(--text-dim); text-transform:uppercase; letter-spacing:2px;"><i class="fa-solid fa-eye"></i> Document Preview</span>
-        </div>
-
-        <div class="preview-wrapper">
-            <div class="invoice-preview" id="invoicePreview"></div>
+            <div style="font-size:0.7rem; text-transform:uppercase; margin-top:12px; font-weight:700; color:var(--text-dim);">Saved Documents</div>
+            <div class="doc-list-container" id="localDocsList"></div>
         </div>
     </div>
 
-    <!-- ═══════════ BOTTOM NAV ═══════════ -->
-    <div class="bottom-nav">
-        <button class="nav-item" onclick="app.clearForm()" title="Reset Form"><i class="fa-solid fa-rotate-right"></i><span>Reset</span></button>
-        <button class="nav-item" onclick="app.submitToGoogleSheets()" title="Save to Sheets">
-            <i class="fa-solid fa-cloud-arrow-up"></i><span>Save</span>
-        </button>
-        <button class="nav-item" id="paidNavBtn" onclick="app.togglePaidStamp()"><i class="fa-solid fa-certificate"></i><span>Stamp</span></button>
-        <button class="nav-item nav-fab" onclick="app.downloadPDF()"><i class="fa-solid fa-download"></i></button>
-        <button class="nav-item" onclick="app.sharePDF()"><i class="fa-solid fa-share-nodes"></i><span>Share</span></button>
-        <button class="nav-item" onclick="app.printInvoice()"><i class="fa-solid fa-print"></i><span>Print</span></button>
+    <!-- Settings -->
+    <div class="card">
+        <div class="card-header"><i class="fa-solid fa-sliders"></i> Settings</div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group"><label>Doc Type</label><select id="docTypeSelect" onchange="app.handleDocTypeSwitch()"><option value="INVOICE">Invoice</option><option value="QUOTATION">Quotation</option></select></div>
+                <div class="form-group"><label>Currency</label><select id="invCurrency"><option value="MYR">MYR (RM)</option><option value="USD">USD ($)</option></select></div>
+            </div>
+        </div>
     </div>
 
-    <div class="pdf-clone-container" id="pdfCloneContainer"></div>
+    <!-- Company Details -->
+    <div class="card collapsible collapsed" id="companyCard">
+        <div class="card-header" onclick="toggleCard('companyCard')"><i class="fa-solid fa-building"></i> Company Details <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
+        <div class="card-body">
+            <div class="form-group"><label>Company Name</label><input type="text" id="compName" value="FAZ GAME EMPIRE" oninput="app.updatePreview()"></div>
+            <div class="form-group"><label>SSM Reg No</label><input type="text" id="compSSM" value="LA0077351-H" oninput="app.updatePreview()"></div>
+            <div class="form-group"><label>Address</label><textarea id="compAddr" rows="3" oninput="app.updatePreview()">Block B, Cerrado Executive Suites,
+JIn Southville 1, Southville City,
+43800 Dengkil Selangor</textarea></div>
+            <div class="form-row"><div class="form-group"><label>Phone</label><input type="tel" id="compPhone" value="0163691936" oninput="app.updatePreview()"></div><div class="form-group"><label>Email</label><input type="email" id="compEmail" value="fazgame.empire@gmail.com" oninput="app.updatePreview()"></div></div>
+        </div>
+    </div>
 
-    <script>
-        window.toggleCard = function(id) { document.getElementById(id)?.classList.toggle('collapsed'); };
+    <!-- Client & Billing -->
+    <div class="card">
+        <div class="card-header"><i class="fa-solid fa-user-tag"></i> Client & Billing</div>
+        <div class="card-body">
+            <div class="form-group"><label>Client Name <span style="color:var(--danger);">*</span></label><input type="text" id="custName" placeholder="e.g. Ahmad Fikri" oninput="app.updatePreview()"></div>
+            <div class="form-group"><label>Phone <span style="color:var(--danger);">*</span></label><input type="tel" id="custPhone" placeholder="e.g. 0123456789" oninput="app.updatePreview()"></div>
+            <div class="form-group"><label>Email (Optional)</label><input type="email" id="custEmail" placeholder="e.g. ahmad@email.com" oninput="app.updatePreview()"></div>
+            <div class="form-group"><label>Company Name (Optional)</label><input type="text" id="custCompany" placeholder="e.g. Fikri Enterprise" oninput="app.updatePreview()"></div>
+            <div class="form-group"><label>Billing Address (Optional)</label><textarea id="custAddr" rows="2" placeholder="e.g. Jalan Ampang, 68000 Ampang" oninput="app.updatePreview()"></textarea></div>
+            <hr style="border-color:var(--border);">
+            <div class="form-group"><label id="formSerialLabel">Invoice No.</label><input type="text" id="invNumber" value="INV-2026-0042" oninput="app.updatePreview()"></div>
+            <div class="form-row"><div class="form-group"><label>Date Issued</label><input type="date" id="invDate" oninput="app.updatePreview()"></div><div class="form-group"><label>Due Date</label><input type="date" id="invDueDate" oninput="app.updatePreview()"></div></div>
+        </div>
+    </div>
 
-        const app = (function() {
-            // 🔗 YOUR GOOGLE APPS SCRIPT URL (development version)
-            const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwY4bdOJ5KLtkHmMyUV2eJv2DTx_Ma7zW-I08OIRG2V/dev";
+    <!-- Line Items -->
+    <div class="card">
+        <div class="card-header"><i class="fa-solid fa-box-open"></i> Line Items</div>
+        <div class="card-body">
+            <div class="item-search-area">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" class="search-input" id="itemSearch" placeholder="Search product database..." autocomplete="off">
+                <div class="search-dropdown" id="searchDropdown"></div>
+            </div>
+            <div id="itemsBody"></div>
+            <button class="btn btn-sm" style="width:100%; border:1.5px dashed var(--border); background:transparent;" onclick="app.appendRowEntry()"><i class="fa-solid fa-plus"></i> Add Custom Item</button>
+        </div>
+    </div>
 
-            const PRODUCT_LIST = [
-                { name: "AMD Ryzen 5 5500", price: 415 }, { name: "AMD Ryzen 5 5600", price: 540 }, { name: "AMD Ryzen 5 5600X (Tray)", price: 585 }, { name: "AMD Ryzen 7 5700X", price: 680 }, { name: "AMD Ryzen 7 5800X", price: 830 }, { name: "AMD Ryzen 7 7800X3D", price: 1320 }, { name: "AMD Ryzen 5 7500F", price: 565 }, { name: "AMD Ryzen 9 7950X", price: 2050 }, { name: "AMD Ryzen 5 8400F (Tray)", price: 550 }, { name: "AMD Ryzen 5 7600 (Tray)", price: 700 }, { name: "AMD Ryzen 5 7600X (Tray)", price: 785 }, { name: "AMD Ryzen 7 7700 (Tray)", price: 930 }, { name: "AMD Ryzen 7 7700X (Tray)", price: 1010 }, { name: "AMD Ryzen 7 9700X (Tray)", price: 1070 }, { name: "AMD Ryzen 9 9900X (Tray)", price: 1720 }, { name: "AMD Ryzen 9 9950X (Tray)", price: 2050 }, { name: "AMD Ryzen 9 9950X3D (Tray)", price: 2800 },
-                { name: "MSI A520M-A PRO", price: 245 }, { name: "GIGABYTE A520M-A PRO", price: 245 }, { name: "MSI B550M-A PRO", price: 345 }, { name: "MSI B550M PRO-VDH WIFI", price: 465 }, { name: "ASROCK A520M/AC (WIFI)", price: 300 }, { name: "ASUS PRIME B550M-A WIFI II", price: 480 }, { name: "MSI A620AM EVO PRO", price: 350 }, { name: "GIGABYTE B650M GAMING WIFI", price: 600 }, { name: "ASROCK B650M-H/M.2 + WIFI", price: 500 }, { name: "ASROCK B850M-X WIFI R2.0", price: 580 }, { name: "GIGABYTE B850M FORCE WIFI 6E", price: 615 }, { name: "Colorful CVN B850I Gaming Frozen ITX", price: 760 }, { name: "GIGABYTE A620M-H", price: 350 }, { name: "MSI B850M GAMING PRO WIFI 6E", price: 735 }, { name: "GIGABYTE B850M EAGLE WIFI6E ICE", price: 795 }, { name: "GIGABYTE B650M GAMING PLUS WIFI", price: 630 }, { name: "GIGABYTE B850M GAMING X WIFI 6E", price: 830 }, { name: "ASUS B850M AYW GAMING WIFI", price: 665 }, { name: "MSI TOMAHAWK B850 MAX WIFI", price: 1210 }, { name: "MSI PRO B850M-P WIFI", price: 730 },
-                { name: "MSI VENTUS 2X RTX3050 6GB", price: 900 }, { name: "GIGABYTE WINDFORCE RTX5050 8GB", price: 1285 }, { name: "MSI SHADOW 2X RTX5060 8GB", price: 1500 }, { name: "COLORFUL GAMING DUO RTX5060 8GB", price: 1475 }, { name: "ASUS PRIME RTX5060 8GB", price: 1700 }, { name: "ZOTAC TWIN EDGE RTX5060 8GB", price: 1525 }, { name: "IGAME ULTRA WHITE DUO RTX5060 8GB", price: 1635 }, { name: "ASROCK CHALLENGER RX9060XT 16GB", price: 1749 }, { name: "ASUS DUAL RX9060XT 16GB", price: 1850 }, { name: "SAPPHIRE PULSE RX9060XT 16GB", price: 1850 }, { name: "XFX SWIFT RX9060XT OC 16GB", price: 1900 }, { name: "ASUS PRIME RX9060XT 16GB", price: 2050 }, { name: "COLORFUL GAMING DUO RTX5060TI 16GB", price: 2200 }, { name: "COLORFUL BATTLEAX RTX5070 12GB", price: 2850 }, { name: "IGAME ULTRA WHITE RTX5070 12GB", price: 3005 }, { name: "IGAME ULTRA BLACK RTX5070 12GB", price: 2980 }, { name: "ASUS PRIME RX9070XT 16GB", price: 3350 },
-                { name: "HIKSEMI HIKER 16GB 3200MHz DDR4", price: 510 }, { name: "FANXIANG UD02R 8GB 3200MHz DDR4", price: 280 }, { name: "KINGBANK KJXB 8GB 3200MHz", price: 280 }, { name: "KINGBANK KJXB 16GB 3200MHz", price: 510 }, { name: "KINGBANK KJXS 32GB 3200MHz (16GBx2)", price: 970 }, { name: "COLORFUL BATTLEAX 16GB 6000MHz DDR5 Black", price: 900 }, { name: "COLORFUL BATTLEAX 16GB 6000MHz DDR5 White", price: 935 }, { name: "KINGSTON FURY BEAST 16GB 6000MHz Black", price: 1135 }, { name: "KINGSTON FURY BEAST 16GB 6000MHz Kit (8GBx2)", price: 1145 }, { name: "KINGSTON FURY BEAST RGB 16GB 6000MHz", price: 1200 }, { name: "KINGSTON FURY BEAST RGB 16GB 6000MHz CL30", price: 1300 }, { name: "ACER HT200 32GB 6000MHz Silver", price: 1900 }, { name: "ACER PREDATOR VESTA II 32GB 6000MHz RGB", price: 1800 }, { name: "ACER PALLAS II 32GB 6000MHz Silver", price: 1750 }, { name: "GSKILL RIPJAWS M5 NEO RGB 32GB 6000MHz", price: 1800 }, { name: "Kingston FURY Beast 32GB 6000MHz CL30 EXPO Black RGB", price: 2050 }, { name: "Kingston FURY Beast 32GB 6000MHz CL30 White", price: 2050 }, { name: "KINGBANK KRRB SOARBLADE 32GB 6000MHz CL36", price: 1800 },
-                { name: "HIKSEMI WAVE 512GB NVMe Gen3", price: 380 }, { name: "ACER FA100 512GB NVMe Gen3", price: 380 }, { name: "ACER FA100 1TB NVMe Gen3", price: 685 }, { name: "ACER FA200 500GB NVMe Gen4", price: 485 }, { name: "ACER FA200 1TB NVMe Gen4", price: 725 }, { name: "PUSKILLS 1TB NVMe Gen3", price: 645 }, { name: "MSI SPATIUM M450 500GB Gen4", price: 415 }, { name: "MSI SPATIUM M450 1TB Gen4", price: 685 }, { name: "KINGBANK KP260 PLUS 1TB Gen4", price: 735 }, { name: "HUAWEI EKITSTOR XTREME 200E 1TB Gen4", price: 750 }, { name: "T-FORCE Z44A5 512GB Gen4", price: 430 }, { name: "T-FORCE Z44A5 1TB Gen4", price: 745 }, { name: "T-FORCE Z44A5 2TB Gen4", price: 1335 }, { name: "T-FORCE VULCAN 512GB SATA SSD", price: 320 }, { name: "BRYT M.2 512GB NVMe", price: 340 },
-                { name: "GIGABYTE P650SS 650W 80+ Silver", price: 230 }, { name: "AISURIX 550W 80+ Standard", price: 135 }, { name: "AISURIX 600W 80+", price: 145 }, { name: "AISURIX 650W 80+", price: 150 }, { name: "AISURIX 700W 80+", price: 155 }, { name: "SEGOTEP AN550W 80+", price: 185 }, { name: "SEGOTEP AN650W 80+", price: 200 }, { name: "SEGOTEP AN650W White", price: 215 }, { name: "SEGOTEP AN750W 80+", price: 220 }, { name: "1STPLAYER ACK 650W 80+", price: 210 }, { name: "1STPLAYER ACK 750W 80+", price: 245 }, { name: "1STPLAYER ACK 650W Bronze", price: 240 }, { name: "1STPLAYER ACK 750W Bronze", price: 285 }, { name: "1STPLAYER DK6.0 600W Bronze", price: 210 }, { name: "1STPLAYER DK7.0 700W Bronze", price: 245 }, { name: "1STPLAYER ACK 750W Gold", price: 365 }, { name: "1STPLAYER ACK 850W Gold", price: 390 }, { name: "THERMALRIGHT TB750 Bronze", price: 295 }, { name: "THERMALRIGHT KG750 Gold", price: 345 }, { name: "COOLER MASTER MWE V3 750W Gold", price: 400 },
-                { name: "Thermalright Assassin X 120 SE Black", price: 110 }, { name: "Thermalright Assassin X 120 SE White", price: 115 }, { name: "Thermalright Assassin X 120 SE ARGB Black", price: 125 }, { name: "Thermalright Peerless Assassin 120 SE", price: 170 }, { name: "VALKYRIE AQ125 Black", price: 110 }, { name: "VALKYRIE AQ125 ARGB Black", price: 125 }, { name: "Snowman MT660-V4D Black", price: 180 }, { name: "Thermalright Frozen Infinity 240 Black", price: 200 }, { name: "Thermalright Frozen Infinity 360 White", price: 280 }, { name: "VALKYRIE GLA-240 AIO Black", price: 285 }, { name: "ID-COOLING FX240 LCD ARGB", price: 265 }, { name: "VALKYRIE B240-GT Black", price: 380 },
-                { name: "Segotep LUMI 3T Black (6 ARGB Fans)", price: 250 }, { name: "Segotep LUMI 3T White (6 ARGB Fans)", price: 260 }, { name: "Segotep BRAVE W1 Black", price: 160 }, { name: "Segotep BRAVE W1 White", price: 165 }, { name: "Segotep ENDURA 240S Black", price: 205 }, { name: "Segotep ENDURA 240S White", price: 215 }, { name: "1STPLAYER BV5 Black", price: 160 }, { name: "1STPLAYER BV6 Black", price: 200 }, { name: "TECWARE VXO M TG Black", price: 155 }, { name: "TECWARE TIMBER M TG Black", price: 200 }, { name: "Formula V Crystal Z6M V2 Black", price: 235 },
-                { name: "GS24F14 23.8\" 144Hz IPS", price: 325 }, { name: "MF2408-A 23.8\" 120Hz IPS", price: 335 }, { name: "MF2708-A 27\" 120Hz IPS", price: 410 }, { name: "MD2425-V 23.8\" 180Hz IPS", price: 435 }, { name: "24G50Z 24\" 260Hz IPS", price: 510 }, { name: "27G50Z 27\" 260Hz IPS", price: 550 }, { name: "GS27QA 27\" 180Hz QHD IPS", price: 630 },
-                { name: "Microsoft Windows 11 Home (ESD)", price: 230 }, { name: "Microsoft Windows 11 Pro (ESD)", price: 300 }, { name: "Microsoft Office Home & Business 2024 (ESD)", price: 850 }
-            ];
+    <!-- Summary & Discount -->
+    <div class="card">
+        <div class="card-header"><i class="fa-solid fa-calculator"></i> Summary & Discounts</div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group"><label>Discount Type</label><select id="discountType"><option value="none">No Discount</option><option value="percent">Percentage (%)</option><option value="fixed">Fixed Amount</option></select></div>
+                <div class="form-group"><label>Discount Value</label><input type="number" id="discountValue" value="0" step="0.01"></div>
+            </div>
+            <div class="form-row" style="background:var(--surface-light); padding:12px; border-radius:var(--radius-md);">
+                <div class="form-group"><label>Subtotal</label><input type="text" id="subtotalDisplay" readonly style="background:transparent; border:none; font-size:18px;"></div>
+                <div class="form-group"><label>Grand Total</label><input type="text" id="grandTotalDisplay" readonly style="color:var(--accent); font-weight:800; background:transparent; border:none; font-size:22px; text-align:right;"></div>
+            </div>
+        </div>
+    </div>
 
-            let isPaid = false;
-            const tbody = document.getElementById('itemsBody');
-            const searchInput = document.getElementById('itemSearch');
-            const searchDropdown = document.getElementById('searchDropdown');
+    <!-- Payment & Notes -->
+    <div class="card collapsible collapsed" id="paymentCard">
+        <div class="card-header" onclick="toggleCard('paymentCard')"><i class="fa-solid fa-credit-card"></i> Payment & Notes <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
+        <div class="card-body">
+            <div class="form-group"><label>Bank Name</label><input type="text" id="bankName" value="OCBC Bank" oninput="app.updatePreview()"></div>
+            <div class="form-group"><label>Account Name</label><input type="text" id="acctName" value="FAZ GAME EMPIRE" oninput="app.updatePreview()"></div>
+            <div class="form-group"><label>Account Number</label><input type="text" id="acctNumber" value="1061030056" oninput="app.updatePreview()"></div>
+            <hr style="border-color:var(--border);">
+            <div class="form-group"><label>Footer Notes</label><textarea id="notesText" rows="2" oninput="app.updatePreview()">Thank you for your purchase.</textarea></div>
+        </div>
+    </div>
 
-            function reindexRows() { [...tbody.children].forEach((row, i) => { const c = row.querySelector('.index-counter'); if (c) c.textContent = `#${i + 1}`; }); }
+    <div class="no-print" style="text-align:center; margin-top:10px;"><span style="font-size:0.8rem; font-weight:700; color:var(--text-dim);"><i class="fa-solid fa-eye"></i> Document Preview</span></div>
+    <div class="preview-wrapper"><div class="invoice-preview" id="invoicePreview"></div></div>
+</div>
 
-            function initializeSystem() {
-                searchInput.addEventListener('input', runSearchProcessing);
-                searchInput.addEventListener('focus', runSearchProcessing);
-                searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { const f = searchDropdown.querySelector('.dropdown-item:first-child'); if (f && searchDropdown.classList.contains('show')) f.click(); } });
-                document.addEventListener('click', function(e) { if (!e.target.closest('.item-search-area')) searchDropdown.classList.remove('show'); });
-                document.getElementById('invDate').value = new Date().toISOString().split('T')[0];
-                const due = new Date();
-                due.setDate(due.getDate() + 14);
-                document.getElementById('invDueDate').value = due.toISOString().split('T')[0];
-                appendRowEntry(true);
-                appendRowEntry(true);
-                const rows = tbody.querySelectorAll('.item-entry-card');
-                if (rows.length >= 2) { rows[0].querySelector('.item-desc').value = PRODUCT_LIST[0].name; rows[0].querySelector('.item-price').value = PRODUCT_LIST[0].price.toFixed(2); rows[1].querySelector('.item-desc').value = PRODUCT_LIST[38].name; rows[1].querySelector('.item-price').value = PRODUCT_LIST[38].price.toFixed(2); }
-                refreshStorageIndexView();
-                updatePreview();
-            }
+<!-- Bottom Navigation (no print, no save to sheets) -->
+<div class="bottom-nav">
+    <button class="nav-item" onclick="app.clearForm()"><i class="fa-solid fa-rotate-right"></i><span>Reset</span></button>
+    <button class="nav-item" id="paidNavBtn" onclick="app.togglePaidStamp()"><i class="fa-solid fa-certificate"></i><span>Stamp</span></button>
+    <button class="nav-item nav-fab" onclick="app.downloadPDF()"><i class="fa-solid fa-download"></i></button>
+    <button class="nav-item" onclick="app.sharePDF()"><i class="fa-solid fa-share-nodes"></i><span>Share</span></button>
+</div>
 
-            function validateRequiredFields() {
-                let ok = true;
-                const n = document.getElementById('custName'), p = document.getElementById('custPhone');
-                [n, p].forEach(i => { if (!i.value.trim()) { i.classList.add('input-error'); ok = false; } else i.classList.remove('input-error'); });
-                if (!ok) { alert('Please fill in Client Name and Phone.'); const card = document.getElementById('custName').closest('.card'); if (card.classList.contains('collapsed')) card.classList.remove('collapsed'); }
-                return ok;
-            }
+<div class="pdf-clone-container" id="pdfCloneContainer"></div>
 
-            function handleDocTypeSwitch() {
-                const t = document.getElementById('docTypeSelect').value;
-                const lbl = document.getElementById('formSerialLabel'), inp = document.getElementById('invNumber'), btn = document.getElementById('paidNavBtn');
-                if (t === "QUOTATION") { lbl.textContent = "Quotation No."; if (inp.value.startsWith("INV-")) inp.value = "QTN-2026-0042"; isPaid = false; btn.classList.remove('active'); btn.disabled = true; }
-                else { lbl.textContent = "Invoice No."; if (inp.value.startsWith("QTN-")) inp.value = "INV-2026-0042"; btn.disabled = false; }
-                updatePreview();
-            }
+<script>
+    window.toggleCard = function(id) { document.getElementById(id)?.classList.toggle('collapsed'); };
 
-            function runSearchProcessing() { const q = searchInput.value.toLowerCase().trim(); if (!q) { searchDropdown.innerHTML = ''; searchDropdown.classList.remove('show'); return; } const f = PRODUCT_LIST.filter(i => i.name.toLowerCase().includes(q)); searchDropdown.innerHTML = f.length === 0 ? '<div class="dropdown-item" style="color:var(--text-dim); text-align:center;">No matching items</div>' : f.map(i => `<div class="dropdown-item" onclick="app.selectSearchItem('${escapeAttr(i.name)}', ${i.price})"><span style="font-weight:700;">${escapeHtml(i.name)}</span><span style="font-size:0.75rem; color:var(--text-dim)">Price: ${getCurrencySymbol()} ${i.price.toFixed(2)}</span></div>`).join(''); searchDropdown.classList.add('show'); }
-            function selectSearchItem(name, price) { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = name; r.querySelector('.item-price').value = price.toFixed(2); searchInput.value = ''; searchDropdown.classList.remove('show'); updatePreview(); }
-            function appendRowEntry(silent = false) { const el = document.createElement('div'); el.className = 'item-entry-card'; el.innerHTML = `<div class="item-entry-header"><span class="index-counter" style="font-weight:800; color:var(--text-dim); font-size:0.8rem;"></span><button type="button" class="btn-icon-danger" onclick="app.deleteRowEntry(this)"><i class="fa-solid fa-trash-can"></i></button></div><div class="form-group"><input class="item-desc" placeholder="Item Name / Product" oninput="app.updatePreview()"></div><div class="form-group"><textarea class="item-detail" placeholder="Specs or Details (Optional)" oninput="app.updatePreview()" style="resize:vertical; min-height:60px;" rows="2"></textarea></div><div class="item-math-row"><div class="form-group" style="flex:0 0 80px;"><label>Qty</label><input class="item-qty" type="number" value="1" step="1" min="1" oninput="app.updatePreview()" style="text-align:center; padding:14px 8px;"></div><div class="form-group" style="flex:1;"><label>Unit Price</label><input class="item-price" type="number" value="0.00" step="0.01" style="text-align:right;" oninput="app.updatePreview()"></div></div><div class="form-group" style="align-items:flex-end; margin-top:8px; padding-top:12px; border-top:1px dashed var(--border);"><label style="margin-bottom:4px; font-size:0.65rem;">Item Total</label><div class="amount-display" style="font-size:1.1rem;">RM 0.00</div></div>`; tbody.appendChild(el); reindexRows(); if (!silent) updatePreview(); }
-            function deleteRowEntry(btn) { if (tbody.children.length <= 1) return; btn.closest('.item-entry-card').remove(); reindexRows(); updatePreview(); }
-            function readFormLineItems() { const rows = []; tbody.querySelectorAll('.item-entry-card').forEach(r => { const name = r.querySelector('.item-desc')?.value || ''; const detail = r.querySelector('.item-detail')?.value || ''; const qty = parseFloat(r.querySelector('.item-qty')?.value) || 0; const price = parseFloat(r.querySelector('.item-price')?.value) || 0; const amt = qty * price; r.querySelector('.amount-display').textContent = formatMoney(amt); rows.push({ name, detail, qty, price, amount: amt }); }); return rows; }
-            const getCurrencySymbol = () => document.getElementById('invCurrency').value === 'USD' ? '$' : 'RM';
-            function formatMoney(v) { return `${getCurrencySymbol()} ${Math.abs(v).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; }
-            function executeCalculations() { const items = readFormLineItems(); const sub = items.reduce((a, c) => a + c.amount, 0); const dType = document.getElementById('discountType').value; const dVal = parseFloat(document.getElementById('discountValue').value) || 0; let disc = 0; if (dType === 'percent') disc = sub * (dVal / 100); else if (dType === 'fixed') disc = Math.min(dVal, sub); const tot = sub - disc; document.getElementById('subtotalDisplay').value = formatMoney(sub); document.getElementById('grandTotalDisplay').value = formatMoney(tot); return { items, subtotal: sub, discount: disc, total: tot }; }
-            function updatePreview() { const n = document.getElementById('custName'), p = document.getElementById('custPhone'); if (n.value.trim()) n.classList.remove('input-error'); if (p.value.trim()) p.classList.remove('input-error'); const { items, subtotal, discount, total } = executeCalculations(); const docType = document.getElementById('docTypeSelect').value; const cName = gv('compName'), cSSM = gv('compSSM'), cAddr = gv('compAddr'), cPhone = gv('compPhone'), cEmail = gv('compEmail'); const custName = gv('custName'), custPhone = gv('custPhone'), custEmail = gv('custEmail'), custCo = gv('custCompany'), custAddr = gv('custAddr'); const docSerial = gv('invNumber'), dateIssued = fmtDate(gv('invDate')), dateLimit = fmtDate(gv('invDueDate')); const bName = gv('bankName'), bHolder = gv('acctName'), bRouteNo = gv('acctNumber'); const notes = gv('notesText'); let rowsHtml = ''; items.forEach((item, i) => { const det = item.detail ? `<span class="inv-item-detail">${escapeHtml(item.detail)}</span>` : ''; rowsHtml += `<tr><td style="text-align:center; color:#64748b; font-size:12px;">${i + 1}</td><td><span class="inv-item-name">${escapeHtml(item.name)}</span>${det}</td><td class="right">${item.qty}</td><td class="right">${formatMoney(item.price)}</td><td class="right" style="font-weight:700; color:#0f172a;">${formatMoney(item.amount)}</td></tr>`; }); if (!rowsHtml) rowsHtml = '<tr><td colspan="5" style="text-align:center; color:#94a3b8;">No items added</td></tr>'; const label = docType === "QUOTATION" ? "QUOTATION" : "INVOICE"; const footer = `<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-top:24px; padding-top:16px; border-top:1px solid #e2e8f0;"><div style="flex:1;">${(docType==="INVOICE"&&(bName||bHolder||bRouteNo))?`<div class="payment-details" style="margin-top:0; padding-top:0; border-top:none;"><h4>Bank Transfer Details</h4><p style="color:#475569; font-size:13px; line-height:1.5;">Bank: <strong>${escapeHtml(bName)}</strong><br>Account Holder: <strong>${escapeHtml(bHolder)}</strong><br>Account Number: <strong>${escapeHtml(bRouteNo)}</strong></p></div>`:''}${notes?`<div class="notes-section" style="${(docType==="INVOICE"&&(bName||bHolder||bRouteNo))?'margin-top:16px;':'margin-top:0;'}"><h4>Notes</h4><p style="color:#64748b; font-size:13px; white-space:pre-line; line-height:1.5;">${escapeHtml(notes)}</p></div>`:''}</div><div style="width:250px; display:flex; justify-content:center; align-items:center; align-self:stretch;">${isPaid?`<div class="paid-stamp">PAID</div>`:''}</div></div>`; const contact = []; if (custPhone) contact.push(`📞 ${escapeHtml(custPhone)}`); if (custEmail) contact.push(`✉️ ${escapeHtml(custEmail)}`); const contactHtml = contact.length ? `<p style="font-size:13px; color:#64748b; margin-top:2px;">${contact.join('  |  ')}</p>` : ''; document.getElementById('invoicePreview').innerHTML = `<div class="inv-header"><div style="display:flex; gap:16px; align-items:flex-start;"><div style="width:110px; display:flex; align-items:center; justify-content:center;"><img src="logo.png" alt="Logo" style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'"></div><div style="display:flex; flex-direction:column; justify-content:flex-start; padding-top:4px;"><h3 style="font-size:1.6rem; font-weight:800; color:#0f172a; margin-bottom:4px; line-height:1.1;">${escapeHtml(cName)}</h3><p style="font-size:12px; color:#475569; font-weight:600;">SSM: ${escapeHtml(cSSM)}</p><p style="white-space:pre-line; color:#475569; font-size:12px; margin-top:6px; max-width:280px; line-height:1.4;">${escapeHtml(cAddr)}</p><p style="font-size:12px; color:#475569; margin-top:6px;">📞 ${escapeHtml(cPhone)}  |  ✉️ ${escapeHtml(cEmail)}</p></div></div><div style="text-align:right; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end;"><div class="inv-title">${label}</div><div style="font-size:12px; color:#475569; text-align:right; margin-top:10px;"><p style="font-size:14px; font-weight:700; color:#0f172a;">Ref No: ${escapeHtml(docSerial)}</p><p style="margin-top:4px;">Date: <strong>${dateIssued}</strong></p><p>Due Date: <strong>${dateLimit}</strong></p></div></div></div><div class="info-grid-inv"><div><h4 style="font-size:12px; text-transform:uppercase; color:#64748b; letter-spacing:0.5px; margin-bottom:6px;">Bill To</h4><p style="font-size:16px; font-weight:700; color:#0f172a;">${escapeHtml(custName)||'—'}</p>${contactHtml}${custCo?`<p style="font-size:13px; font-weight:600; color:#475569; margin-top:4px;">${escapeHtml(custCo)}</p>`:''}${custAddr?`<p style="white-space:pre-line; font-size:13px; color:#475569; margin-top:2px; max-width:400px; line-height:1.4;">${escapeHtml(custAddr)}</p>`:''}</div></div><table class="inv-table"><thead><tr><th style="width:5%; text-align:center;">#</th><th style="width:50%;">Description</th><th class="right" style="width:10%;">Qty</th><th class="right" style="width:15%;">Unit Price</th><th class="right" style="width:20%;">Total</th></tr></thead><tbody>${rowsHtml}</tbody></table><div class="totals-section"><table class="totals-table"><tr><td style="padding-left:0;">Subtotal</td><td class="right" style="font-weight:600; color:#0f172a;">${formatMoney(subtotal)}</td></tr>${discount>0?`<tr><td style="padding-left:0; color:#dc2626;">Discount</td><td class="right" style="font-weight:600; color:#dc2626;">-${formatMoney(discount)}</td></tr>`:''}<tr class="grand-total"><td style="padding-left:0; font-weight:800;">Total Amount</td><td class="right">${formatMoney(total)}</td></tr></table></div>${footer}`; }
-            function togglePaidStamp() { if (document.getElementById('docTypeSelect').value === "QUOTATION") return; isPaid = !isPaid; document.getElementById('paidNavBtn').classList.toggle('active', isPaid); updatePreview(); }
-            function gv(id) { return document.getElementById(id)?.value || ''; }
-            function escapeHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-            function fmtDate(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('en-MY', { day: 'numeric', month: 'long', year: 'numeric' }); }
-            function escapeAttr(s) { return s.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-            function autoGenerateName() { const t = document.getElementById('docTypeSelect').value; const c = gv('custName') || 'Client'; const d = new Date().toISOString().split('T')[0]; document.getElementById('storageKeyName').value = `${t==='QUOTATION'?'Quotation':'Invoice'} - ${c} - ${d}`; }
-            function saveToLocalStorage() { if (!validateRequiredFields()) return; const inp = document.getElementById('storageKeyName'); let key = inp.value.trim(); if (!key) { const pfx = document.getElementById('docTypeSelect').value === "QUOTATION" ? "Quotation" : "Invoice"; key = `${pfx} - ${gv('custName')||'Unnamed'}`; inp.value = key; } const payload = { docType: gv('docTypeSelect'), compName: gv('compName'), compSSM: gv('compSSM'), compAddr: gv('compAddr'), compPhone: gv('compPhone'), compEmail: gv('compEmail'), custName: gv('custName'), custPhone: gv('custPhone'), custEmail: gv('custEmail'), custCompany: gv('custCompany'), custAddr: gv('custAddr'), invNumber: gv('invNumber'), invCurrency: gv('invCurrency'), invDate: gv('invDate'), invDueDate: gv('invDueDate'), discountType: gv('discountType'), discountValue: gv('discountValue'), bankName: gv('bankName'), acctName: gv('acctName'), acctNumber: gv('acctNumber'), notesText: gv('notesText'), items: readFormLineItems(), paidState: isPaid, timestamp: Date.now() }; let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); const meta = { name: key, type: payload.docType, serial: payload.invNumber, totalDisplay: document.getElementById('grandTotalDisplay').value, date: new Date().toLocaleDateString('en-MY', { day: 'numeric', month: 'short' }) }; const ex = idx.findIndex(i => i.name.toLowerCase() === key.toLowerCase()); if (ex > -1) { if (!confirm(`Overwrite "${key}"?`)) return; idx[ex] = meta; } else idx.push(meta); localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); localStorage.setItem(`fge_doc_file_${key.toLowerCase()}`, JSON.stringify(payload)); refreshStorageIndexView(); alert(`"${key}" saved.`); }
-            function refreshStorageIndexView() { const list = document.getElementById('localDocsList'); const idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); if (!idx.length) { list.innerHTML = '<div style="font-size:0.8rem; color:var(--text-dim); padding:10px; text-align:center; font-style:italic;">No saved files found.</div>'; return; } list.innerHTML = idx.map(m => `<div class="doc-entry"><div class="doc-entry-info"><span class="doc-entry-title">${escapeHtml(m.name)}</span><div class="doc-entry-meta"><span class="doc-entry-type">${m.type}</span><span>Ref: ${escapeHtml(m.serial)}</span><span style="color:#fff; font-weight:700;">${m.totalDisplay}</span></div></div><div class="doc-entry-actions"><button class="btn btn-sm" style="border-color:rgba(255,215,0,0.3);" onclick="app.loadStoredDocument('${escapeAttr(m.name.toLowerCase())}')"><i class="fa-solid fa-folder-open"></i></button><button class="btn btn-sm btn-icon-danger" onclick="app.purgeStoredDocument('${escapeAttr(m.name.toLowerCase())}', '${escapeAttr(m.name)}')"><i class="fa-solid fa-trash"></i></button></div></div>`).join(''); }
-            function loadStoredDocument(key) { const raw = localStorage.getItem(`fge_doc_file_${key}`); if (!raw) return alert("File not found."); try { const d = JSON.parse(raw); const idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); const m = idx.find(i => i.name.toLowerCase() === key); document.getElementById('storageKeyName').value = m ? m.name : key; ['docTypeSelect','compName','compSSM','compAddr','compPhone','compEmail','custName','custPhone','custEmail','custCompany','custAddr','invNumber','invCurrency','invDate','invDueDate','discountType','discountValue','bankName','acctName','acctNumber','notesText'].forEach(id => { document.getElementById(id).value = d[id] || (id==='invCurrency'?'MYR':id==='discountType'?'none':''); }); tbody.innerHTML = ''; if (d.items && d.items.length) { d.items.forEach(item => { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = item.name || ''; r.querySelector('.item-detail').value = item.detail || ''; r.querySelector('.item-qty').value = item.qty || 1; r.querySelector('.item-price').value = parseFloat(item.price).toFixed(2); }); } else appendRowEntry(true); isPaid = d.paidState || false; document.getElementById('paidNavBtn').classList.toggle('active', isPaid); handleDocTypeSwitch(); updatePreview(); } catch (e) { alert("Error loading document."); } }
-            function purgeStoredDocument(key, name) { if (!confirm(`Delete "${name}"?`)) return; let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); idx = idx.filter(i => i.name.toLowerCase() !== key); localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); localStorage.removeItem(`fge_doc_file_${key}`); refreshStorageIndexView(); }
-            async function buildPdfBlob() { const src = document.getElementById('invoicePreview'); const clone = src.cloneNode(true); clone.style.width = '750px'; clone.style.maxWidth = '750px'; clone.style.margin = '0'; clone.style.transform = 'none'; const cc = document.getElementById('pdfCloneContainer'); cc.innerHTML = ''; cc.appendChild(clone); cc.style.visibility = 'visible'; cc.style.position = 'fixed'; cc.style.top = '0'; cc.style.left = '0'; cc.style.zIndex = '-1'; cc.style.width = '750px'; await new Promise(r => setTimeout(r, 150)); const canvas = await html2canvas(clone, { scale: 2, backgroundColor: '#ffffff', useCORS: true, width: 750, windowWidth: 750 }); cc.innerHTML = ''; cc.style.visibility = 'hidden'; cc.style.top = '-9999px'; cc.style.left = '-9999px'; const { jsPDF } = window.jspdf; const pdf = new jsPDF('p', 'mm', 'a4'); const pw = pdf.internal.pageSize.getWidth(); const ih = (canvas.height * pw) / canvas.width; pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pw, ih); return pdf.output('blob'); }
-            function genFileName() { const t = document.getElementById('docTypeSelect').value; const tf = t.charAt(0).toUpperCase() + t.slice(1).toLowerCase(); const c = (gv('custName').trim() || 'Client').replace(/[\\/:*?"<>|]/g, ''); const inv = gv('invNumber').trim() || 'No-Ref'; return `Fazgame_${tf}_${c}_${inv}.pdf`; }
-            async function downloadPDF() { if (!validateRequiredFields()) return; try { const blob = await buildPdfBlob(); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = genFileName(); a.click(); URL.revokeObjectURL(url); } catch (e) { alert("Error generating PDF."); } }
-            async function sharePDF() { if (!validateRequiredFields()) return; try { const blob = await buildPdfBlob(); const file = new File([blob], genFileName(), { type: 'application/pdf' }); if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: genFileName().replace('.pdf', ''), text: 'Document generated via Invoice System.' }); } else downloadPDF(); } catch (e) { console.error("Share failed:", e); } }
-            function printInvoice() { if (!validateRequiredFields()) return; const el = document.getElementById('invoicePreview'); const ow = el.style.width; const ot = document.title; document.title = genFileName().replace('.pdf', ''); el.style.width = '750px'; setTimeout(() => { window.print(); el.style.width = ow; document.title = ot; }, 10); }
-            function clearForm() { if (!confirm('Reset current configurations?')) return; ['storageKeyName','custName','custPhone','custEmail','custCompany','custAddr'].forEach(id => document.getElementById(id).value = ''); document.getElementById('discountType').value = 'none'; document.getElementById('discountValue').value = '0'; document.getElementById('docTypeSelect').value = 'INVOICE'; document.getElementById('invNumber').value = 'INV-2026-0042'; document.getElementById('custName').classList.remove('input-error'); document.getElementById('custPhone').classList.remove('input-error'); tbody.innerHTML = ''; isPaid = false; document.getElementById('paidNavBtn').classList.remove('active'); appendRowEntry(true); handleDocTypeSwitch(); updatePreview(); }
+    const app = (function() {
+        // Product database (shortened for readability, but functional)
+        const PRODUCT_LIST = [
+            { name: "AMD Ryzen 5 5500", price: 415 }, { name: "AMD Ryzen 5 5600", price: 540 }, { name: "AMD Ryzen 7 5700X", price: 680 }, { name: "AMD Ryzen 7 5800X", price: 830 }, { name: "AMD Ryzen 7 7800X3D", price: 1320 }, { name: "MSI B550M-A PRO", price: 345 }, { name: "MSI B550M PRO-VDH WIFI", price: 465 }, { name: "GIGABYTE B650M GAMING WIFI", price: 600 }, { name: "MSI VENTUS 2X RTX3050 6GB", price: 900 }, { name: "GIGABYTE WINDFORCE RTX5050 8GB", price: 1285 }, { name: "MSI SHADOW 2X RTX5060 8GB", price: 1500 }, { name: "Thermalright Assassin X 120 SE", price: 110 }, { name: "Segotep LUMI 3T Black", price: 250 }, { name: "GS24F14 23.8\" 144Hz IPS", price: 325 }
+        ];
+        let isPaid = false;
+        const tbody = document.getElementById('itemsBody');
+        const searchInput = document.getElementById('itemSearch');
+        const searchDropdown = document.getElementById('searchDropdown');
 
-            // ── GOOGLE SHEETS SUBMISSION ─────────────────────
-            async function submitToGoogleSheets() {
-                if (!validateRequiredFields()) return;
-                const { items, subtotal, discount, total } = executeCalculations();
-                const payload = {
-                    docType: gv('docTypeSelect'),
-                    invNumber: gv('invNumber'),
-                    custName: gv('custName'),
-                    custPhone: gv('custPhone'),
-                    custEmail: gv('custEmail'),
-                    subtotal: subtotal,
-                    discount: discount,
-                    grandTotal: total,
-                    items: items,
-                    notes: gv('notesText')
-                };
-                try {
-                    await fetch(GOOGLE_SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    alert("Invoice data sent to Google Sheets!");
-                } catch (error) {
-                    alert("Failed to send: " + error.message);
-                }
-            }
+        function reindexRows() { [...tbody.children].forEach((row, i) => { const c = row.querySelector('.index-counter'); if(c) c.textContent = `#${i+1}`; }); }
+        function getCurrencySymbol() { return document.getElementById('invCurrency').value === 'USD' ? '$' : 'RM'; }
+        function formatMoney(v) { return `${getCurrencySymbol()} ${Math.abs(v).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`; }
+        function gv(id) { return document.getElementById(id)?.value || ''; }
+        function escapeHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+        function fmtDate(d) { if(!d) return '—'; return new Date(d).toLocaleDateString('en-MY', { day:'numeric', month:'long', year:'numeric' }); }
+        function escapeAttr(s) { return s.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
-            return {
-                init: initializeSystem, updatePreview, deleteRowEntry, selectSearchItem,
-                togglePaidStamp, handleDocTypeSwitch, autoGenerateName, saveToLocalStorage,
-                loadStoredDocument, purgeStoredDocument, downloadPDF, sharePDF, printInvoice,
-                clearForm, appendRowEntry, submitToGoogleSheets
-            };
-        })();
+        function readFormLineItems() {
+            const rows = [];
+            tbody.querySelectorAll('.item-entry-card').forEach(r => {
+                const name = r.querySelector('.item-desc')?.value || '';
+                const detail = r.querySelector('.item-detail')?.value || '';
+                const qty = parseFloat(r.querySelector('.item-qty')?.value) || 0;
+                const price = parseFloat(r.querySelector('.item-price')?.value) || 0;
+                const amt = qty * price;
+                r.querySelector('.amount-display').textContent = formatMoney(amt);
+                rows.push({ name, detail, qty, price, amount: amt });
+            });
+            return rows;
+        }
 
-        document.addEventListener('DOMContentLoaded', app.init);
-    </script>
+        function executeCalculations() {
+            const items = readFormLineItems();
+            const sub = items.reduce((a,c) => a + c.amount, 0);
+            const dType = document.getElementById('discountType').value;
+            const dVal = parseFloat(document.getElementById('discountValue').value) || 0;
+            let disc = 0;
+            if(dType === 'percent') disc = sub * (dVal/100);
+            else if(dType === 'fixed') disc = Math.min(dVal, sub);
+            const tot = sub - disc;
+            document.getElementById('subtotalDisplay').value = formatMoney(sub);
+            document.getElementById('grandTotalDisplay').value = formatMoney(tot);
+            return { items, subtotal: sub, discount: disc, total: tot };
+        }
+
+        function updatePreview() {
+            const { items, subtotal, discount, total } = executeCalculations();
+            const docType = document.getElementById('docTypeSelect').value;
+            const cName = gv('compName'), cSSM = gv('compSSM'), cAddr = gv('compAddr'), cPhone = gv('compPhone'), cEmail = gv('compEmail');
+            const custName = gv('custName'), custPhone = gv('custPhone'), custEmail = gv('custEmail'), custCo = gv('custCompany'), custAddr = gv('custAddr');
+            const docSerial = gv('invNumber'), dateIssued = fmtDate(gv('invDate')), dateLimit = fmtDate(gv('invDueDate'));
+            const bName = gv('bankName'), bHolder = gv('acctName'), bRouteNo = gv('acctNumber');
+            const notes = gv('notesText');
+            let rowsHtml = '';
+            items.forEach((item,i) => {
+                const det = item.detail ? `<span class="inv-item-detail">${escapeHtml(item.detail)}</span>` : '';
+                rowsHtml += `<tr><td style="text-align:center">${i+1}</td><td><span class="inv-item-name">${escapeHtml(item.name)}</span>${det}</td><td class="right">${item.qty}</td><td class="right">${formatMoney(item.price)}</td><td class="right">${formatMoney(item.amount)}</td></tr>`;
+            });
+            if(!rowsHtml) rowsHtml = '<tr><td colspan="5" style="text-align:center">No items added</td></tr>';
+            const label = docType === "QUOTATION" ? "QUOTATION" : "INVOICE";
+            const footer = `<div style="display:flex; justify-content:space-between; margin-top:24px; padding-top:16px; border-top:1px solid #e2e8f0;"><div>${(docType==="INVOICE" && (bName||bHolder||bRouteNo)) ? `<div><h4>Bank Transfer Details</h4><p>Bank: ${escapeHtml(bName)}<br>Account: ${escapeHtml(bHolder)}<br>Number: ${escapeHtml(bRouteNo)}</p></div>` : ''}${notes ? `<div><h4>Notes</h4><p style="white-space:pre-line;">${escapeHtml(notes)}</p></div>` : ''}</div><div>${isPaid ? '<div class="paid-stamp">PAID</div>' : ''}</div></div>`;
+            const contactLines = [];
+            if(custPhone) contactLines.push(`📞 ${escapeHtml(custPhone)}`);
+            if(custEmail) contactLines.push(`✉️ ${escapeHtml(custEmail)}`);
+            const contactHtml = contactLines.length ? `<p style="font-size:13px; color:#64748b; margin-top:2px;">${contactLines.join('  |  ')}</p>` : '';
+            // Company info block with proper line breaks (address preserved, phone & email separate lines)
+            const companyHtml = `
+                <h3 style="font-size:1.6rem; font-weight:800; margin-bottom:4px;">${escapeHtml(cName)}</h3>
+                <p style="font-size:12px; color:#475569; font-weight:600; margin-bottom:6px;">SSM: ${escapeHtml(cSSM)}</p>
+                <p style="white-space:pre-line; color:#475569; font-size:12px; margin-bottom:6px;">${escapeHtml(cAddr)}</p>
+                <p style="font-size:12px; color:#475569; margin-bottom:4px;">📞 ${escapeHtml(cPhone)}</p>
+                <p style="font-size:12px; color:#475569;">✉️ ${escapeHtml(cEmail)}</p>
+            `;
+            document.getElementById('invoicePreview').innerHTML = `
+                <div class="inv-header">
+                    <div style="display:flex; gap:16px;">
+                        <div style="width:100px;"><img src="logo.png" style="width:100%;" onerror="this.style.display='none'"></div>
+                        <div>${companyHtml}</div>
+                    </div>
+                    <div style="text-align:right;"><div class="inv-title">${label}</div><div><p>Ref No: ${escapeHtml(docSerial)}</p><p>Date: ${dateIssued}</p><p>Due Date: ${dateLimit}</p></div></div>
+                </div>
+                <div><h4>Bill To</h4><p style="font-size:16px; font-weight:700;">${escapeHtml(custName)||'—'}</p>${contactHtml}${custCo ? `<p>${escapeHtml(custCo)}</p>` : ''}${custAddr ? `<p style="white-space:pre-line;">${escapeHtml(custAddr)}</p>` : ''}</div>
+                <table class="inv-table"><thead><tr><th>#</th><th>Description</th><th class="right">Qty</th><th class="right">Unit Price</th><th class="right">Total</th></tr></thead><tbody>${rowsHtml}</tbody></table>
+                <div class="totals-section"><table class="totals-table"><tr><td>Subtotal</td><td class="right">${formatMoney(subtotal)}</td></tr>${discount>0 ? `<tr><td style="color:#dc2626;">Discount</td><td class="right" style="color:#dc2626;">-${formatMoney(discount)}</td></tr>` : ''}<tr class="grand-total"><td>Total Amount</td><td class="right">${formatMoney(total)}</td></tr></table></div>
+                ${footer}
+            `;
+        }
+
+        function runSearchProcessing() {
+            const q = searchInput.value.toLowerCase().trim();
+            if(!q) { searchDropdown.classList.remove('show'); return; }
+            const f = PRODUCT_LIST.filter(i => i.name.toLowerCase().includes(q));
+            searchDropdown.innerHTML = f.length ? f.map(i => `<div class="dropdown-item" onclick="app.selectSearchItem('${escapeAttr(i.name)}', ${i.price})"><span style="font-weight:700;">${escapeHtml(i.name)}</span><span style="font-size:0.75rem;">${getCurrencySymbol()} ${i.price.toFixed(2)}</span></div>`).join('') : '<div class="dropdown-item" style="text-align:center;">No items</div>';
+            searchDropdown.classList.add('show');
+        }
+
+        function appendRowEntry(silent=false) {
+            const el = document.createElement('div'); el.className = 'item-entry-card';
+            el.innerHTML = `<div class="item-entry-header"><span class="index-counter" style="font-weight:800;"></span><button class="btn-icon-danger" onclick="app.deleteRowEntry(this)"><i class="fa-solid fa-trash-can"></i></button></div>
+            <div class="form-group"><input class="item-desc" placeholder="Item Name" oninput="app.updatePreview()"></div>
+            <div class="form-group"><textarea class="item-detail" placeholder="Details (optional)" rows="2" oninput="app.updatePreview()"></textarea></div>
+            <div class="item-math-row"><div class="form-group" style="flex:0 0 80px;"><label>Qty</label><input class="item-qty" type="number" value="1" min="1" oninput="app.updatePreview()"></div><div class="form-group"><label>Unit Price</label><input class="item-price" type="number" value="0.00" step="0.01" oninput="app.updatePreview()"></div></div>
+            <div class="form-group"><label>Item Total</label><div class="amount-display">RM 0.00</div></div>`;
+            tbody.appendChild(el); reindexRows(); if(!silent) updatePreview();
+        }
+
+        function deleteRowEntry(btn) { if(tbody.children.length > 1) btn.closest('.item-entry-card').remove(); reindexRows(); updatePreview(); }
+        function selectSearchItem(name, price) { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = name; r.querySelector('.item-price').value = price.toFixed(2); searchInput.value = ''; searchDropdown.classList.remove('show'); updatePreview(); }
+        function togglePaidStamp() { if(document.getElementById('docTypeSelect').value === "QUOTATION") return; isPaid = !isPaid; document.getElementById('paidNavBtn').classList.toggle('active', isPaid); updatePreview(); }
+        function handleDocTypeSwitch() { const t = document.getElementById('docTypeSelect').value; const lbl = document.getElementById('formSerialLabel'); const inp = document.getElementById('invNumber'); const btn = document.getElementById('paidNavBtn'); if(t === "QUOTATION") { lbl.textContent = "Quotation No."; if(inp.value.startsWith("INV-")) inp.value = "QTN-2026-0042"; isPaid = false; btn.classList.remove('active'); btn.disabled = true; } else { lbl.textContent = "Invoice No."; if(inp.value.startsWith("QTN-")) inp.value = "INV-2026-0042"; btn.disabled = false; } updatePreview(); }
+        function autoGenerateName() { const t = document.getElementById('docTypeSelect').value; const c = gv('custName') || 'Client'; const d = new Date().toISOString().split('T')[0]; document.getElementById('storageKeyName').value = `${t==='QUOTATION'?'Quotation':'Invoice'} - ${c} - ${d}`; }
+        function getCurrentPayload() { return { docType: gv('docTypeSelect'), compName: gv('compName'), compSSM: gv('compSSM'), compAddr: gv('compAddr'), compPhone: gv('compPhone'), compEmail: gv('compEmail'), custName: gv('custName'), custPhone: gv('custPhone'), custEmail: gv('custEmail'), custCompany: gv('custCompany'), custAddr: gv('custAddr'), invNumber: gv('invNumber'), invCurrency: gv('invCurrency'), invDate: gv('invDate'), invDueDate: gv('invDueDate'), discountType: gv('discountType'), discountValue: gv('discountValue'), bankName: gv('bankName'), acctName: gv('acctName'), acctNumber: gv('acctNumber'), notesText: gv('notesText'), items: readFormLineItems(), paidState: isPaid, timestamp: Date.now() }; }
+        function saveToLocalStorage() { let key = document.getElementById('storageKeyName').value.trim(); if(!key) { const pfx = document.getElementById('docTypeSelect').value === "QUOTATION" ? "Quotation" : "Invoice"; key = `${pfx} - ${gv('custName')||'Unnamed'}`; document.getElementById('storageKeyName').value = key; } const payload = getCurrentPayload(); let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); const meta = { name: key, type: payload.docType, serial: payload.invNumber, totalDisplay: document.getElementById('grandTotalDisplay').value, date: new Date().toLocaleDateString() }; const ex = idx.findIndex(i => i.name.toLowerCase() === key.toLowerCase()); if(ex > -1 && !confirm(`Overwrite "${key}"?`)) return; if(ex > -1) idx[ex] = meta; else idx.push(meta); localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); localStorage.setItem(`fge_doc_file_${key.toLowerCase()}`, JSON.stringify(payload)); refreshStorageIndexView(); alert(`"${key}" saved.`); }
+        function refreshStorageIndexView() { const list = document.getElementById('localDocsList'); const idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); if(!idx.length) { list.innerHTML = '<div style="padding:10px; text-align:center;">No saved files.</div>'; return; } list.innerHTML = idx.map(m => `<div class="doc-entry"><div class="doc-entry-info"><span class="doc-entry-title">${escapeHtml(m.name)}</span><div class="doc-entry-meta"><span class="doc-entry-type">${m.type}</span><span>${m.serial}</span><span>${m.totalDisplay}</span></div></div><div class="doc-entry-actions"><button class="btn btn-sm" onclick="app.loadStoredDocument('${escapeAttr(m.name.toLowerCase())}')"><i class="fa-solid fa-folder-open"></i></button><button class="btn btn-sm btn-icon-danger" onclick="app.purgeStoredDocument('${escapeAttr(m.name.toLowerCase())}', '${escapeAttr(m.name)}')"><i class="fa-solid fa-trash"></i></button></div></div>`).join(''); }
+        function loadStoredDocument(key) { const raw = localStorage.getItem(`fge_doc_file_${key}`); if(!raw) return alert("Not found"); try { const d = JSON.parse(raw); const m = (JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]')).find(i => i.name.toLowerCase() === key); document.getElementById('storageKeyName').value = m ? m.name : key; ['docTypeSelect','compName','compSSM','compAddr','compPhone','compEmail','custName','custPhone','custEmail','custCompany','custAddr','invNumber','invCurrency','invDate','invDueDate','discountType','discountValue','bankName','acctName','acctNumber','notesText'].forEach(id => { document.getElementById(id).value = d[id] || (id==='invCurrency'?'MYR':id==='discountType'?'none':''); }); tbody.innerHTML = ''; if(d.items?.length) d.items.forEach(item => { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = item.name; r.querySelector('.item-detail').value = item.detail || ''; r.querySelector('.item-qty').value = item.qty || 1; r.querySelector('.item-price').value = parseFloat(item.price).toFixed(2); }); else appendRowEntry(true); isPaid = d.paidState || false; document.getElementById('paidNavBtn').classList.toggle('active', isPaid); handleDocTypeSwitch(); updatePreview(); } catch(e) { alert("Load error"); } }
+        function purgeStoredDocument(key, name) { if(!confirm(`Delete "${name}"?`)) return; let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); idx = idx.filter(i => i.name.toLowerCase() !== key); localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); localStorage.removeItem(`fge_doc_file_${key}`); refreshStorageIndexView(); }
+        function exportToJsonFile() { const data = getCurrentPayload(); const clientName = (data.custName || "client").replace(/[^a-z0-9]/gi, '_').replace(/_+/g,'_').replace(/^_|_$/g,'') || "client"; const phone = (data.custPhone || "no-phone").replace(/[^0-9+]/g, '').replace(/[^a-z0-9]/gi,'_') || "no-phone"; const filename = `${clientName}_${phone}.json`.substring(0,100); const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url); alert("JSON exported."); }
+        function importFromJsonFile(files) { if(!files.length) return; const reader = new FileReader(); reader.onload = e => { try { const d = JSON.parse(e.target.result); ['docTypeSelect','compName','compSSM','compAddr','compPhone','compEmail','custName','custPhone','custEmail','custCompany','custAddr','invNumber','invCurrency','invDate','invDueDate','discountType','discountValue','bankName','acctName','acctNumber','notesText'].forEach(id => { if(d[id] !== undefined) document.getElementById(id).value = d[id]; }); tbody.innerHTML = ''; if(d.items?.length) d.items.forEach(item => { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = item.name; r.querySelector('.item-detail').value = item.detail || ''; r.querySelector('.item-qty').value = item.qty || 1; r.querySelector('.item-price').value = parseFloat(item.price).toFixed(2); }); else appendRowEntry(true); isPaid = d.paidState || false; document.getElementById('paidNavBtn').classList.toggle('active', isPaid); handleDocTypeSwitch(); updatePreview(); alert("JSON loaded."); } catch(err) { alert("Invalid JSON"); } }; reader.readAsText(files[0]); }
+        async function buildPdfBlob() { const src = document.getElementById('invoicePreview'); const clone = src.cloneNode(true); clone.style.width = '750px'; const cc = document.getElementById('pdfCloneContainer'); cc.innerHTML = ''; cc.appendChild(clone); cc.style.visibility = 'visible'; cc.style.position = 'fixed'; cc.style.top = '0'; cc.style.left = '0'; cc.style.width = '750px'; await new Promise(r => setTimeout(r,150)); const canvas = await html2canvas(clone, { scale: 2, backgroundColor: '#ffffff', width: 750 }); cc.innerHTML = ''; cc.style.visibility = 'hidden'; const { jsPDF } = window.jspdf; const pdf = new jsPDF('p', 'mm', 'a4'); const pw = pdf.internal.pageSize.getWidth(); const ih = (canvas.height * pw) / canvas.width; pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pw, ih); return pdf.output('blob'); }
+        function genFileName() { const t = document.getElementById('docTypeSelect').value; const tf = t.charAt(0).toUpperCase() + t.slice(1).toLowerCase(); const c = (gv('custName')||'Client').replace(/[\\/:*?"<>|]/g, ''); const inv = gv('invNumber').replace(/[\\/:*?"<>|]/g, '') || 'NoRef'; return `Fazgame_${tf}_${c}_${inv}.pdf`; }
+        async function downloadPDF() { try { const blob = await buildPdfBlob(); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = genFileName(); a.click(); URL.revokeObjectURL(url); } catch(e) { alert("PDF error"); } }
+        async function sharePDF() { try { const blob = await buildPdfBlob(); const file = new File([blob], genFileName(), {type:'application/pdf'}); if(navigator.share && navigator.canShare?.({files:[file]})) await navigator.share({ files: [file], title: 'Invoice' }); else downloadPDF(); } catch(e) { console.error(e); } }
+        function clearForm() { if(!confirm('Reset all?')) return; ['storageKeyName','custName','custPhone','custEmail','custCompany','custAddr'].forEach(id => document.getElementById(id).value = ''); document.getElementById('discountType').value = 'none'; document.getElementById('discountValue').value = '0'; document.getElementById('docTypeSelect').value = 'INVOICE'; document.getElementById('invNumber').value = 'INV-2026-0042'; tbody.innerHTML = ''; isPaid = false; document.getElementById('paidNavBtn').classList.remove('active'); appendRowEntry(true); handleDocTypeSwitch(); updatePreview(); }
+        function init() { document.getElementById('invDate').value = new Date().toISOString().split('T')[0]; const due = new Date(); due.setDate(due.getDate()+14); document.getElementById('invDueDate').value = due.toISOString().split('T')[0]; searchInput.addEventListener('input', runSearchProcessing); searchInput.addEventListener('focus', runSearchProcessing); document.addEventListener('click', e => { if(!e.target.closest('.item-search-area')) searchDropdown.classList.remove('show'); }); appendRowEntry(true); appendRowEntry(true); refreshStorageIndexView(); updatePreview(); document.getElementById('discountType').addEventListener('change', updatePreview); document.getElementById('discountValue').addEventListener('input', updatePreview); document.getElementById('invCurrency').addEventListener('change', updatePreview); document.getElementById('docTypeSelect').addEventListener('change', handleDocTypeSwitch); }
+        return { init, updatePreview, deleteRowEntry, selectSearchItem, togglePaidStamp, handleDocTypeSwitch, autoGenerateName, saveToLocalStorage, loadStoredDocument, purgeStoredDocument, exportToJsonFile, importFromJsonFile, downloadPDF, sharePDF, clearForm, appendRowEntry };
+    })();
+    document.addEventListener('DOMContentLoaded', app.init);
+</script>
 </body>
 </html>
