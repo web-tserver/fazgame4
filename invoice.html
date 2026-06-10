@@ -564,8 +564,8 @@ JIn Southville 1, Southville City,
             `;
             document.getElementById('invoicePreview').innerHTML = `
                 <div class="inv-header">
-                    <div style="display:flex; gap:16px;">
-                        <div style="width:100px;"><img src="logo.png" style="width:100%;" onerror="this.style.display='none'"></div>
+                    <div style="display:flex; gap:24px; align-items:center;">
+                        <div style="width:160px; flex-shrink:0;"><img src="logo.png" style="width:100%; height:auto; object-fit:contain;" onerror="this.style.display='none'"></div>
                         <div>${companyHtml}</div>
                     </div>
                     <div style="text-align:right;"><div class="inv-title">${label}</div><div><p>Ref No: ${escapeHtml(docSerial)}</p><p>Date: ${dateIssued}</p><p>Due Date: ${dateLimit}</p></div></div>
