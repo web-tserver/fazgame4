@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#08080d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>FAZGAME | Invoice System</title>
+    <title>FAZGAME | Invoice & Receipt System</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -177,7 +177,7 @@
         .grand-total td { font-weight: 800; font-size: 16px; color: #0f172a; }
         .paid-stamp { font-size: 3rem; font-weight: 900; color: #dc2626; letter-spacing: 8px; text-transform: uppercase; border: 5px solid #dc2626; padding: 10px 30px; border-radius: 16px; transform: rotate(-15deg); opacity: 0.65; display: inline-block; }
 
-        /* ── BOTTOM NAV (no yellow/black circle on download) ── */
+        /* ── BOTTOM NAV (neutral download) ── */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; background: rgba(16,16,22,0.9);
             border-top: 1px solid var(--border); display: flex; justify-content: space-between;
@@ -192,21 +192,13 @@
         .nav-item i { font-size: 1.3rem; margin-bottom: 2px; }
         .nav-item.active { color: var(--accent); }
         .nav-item:active { background: rgba(255,255,255,0.05); }
-        /* Download button - no circle, flat like others */
         .nav-fab {
-            background: transparent;
-            width: auto;
-            height: auto;
-            border-radius: 12px;
-            margin-top: 0;
-            box-shadow: none;
-            border: none;
-            color: var(--text-dim) !important;
+            background: transparent; width: auto; height: auto; border-radius: 12px;
+            margin-top: 0; box-shadow: none; border: none; color: var(--text-dim) !important;
         }
         .nav-fab i { font-size: 1.3rem; margin-bottom: 2px; }
         .nav-fab:active { transform: scale(0.95); background: rgba(255,255,255,0.05); }
 
-        /* ── UTILITY ── */
         .pdf-clone-container { position: fixed; top: -9999px; left: -9999px; width: 750px; visibility: hidden; }
         @media print {
             @page { size: A4 portrait; margin: 0.5cm; }
@@ -223,7 +215,7 @@
     <div class="header-inner">
         <div class="header-left">
             <img src="images/logo1.png" alt="FAZGAME Logo" class="logo-img" onerror="this.src='https://placehold.co/300x300/222/ffd84d?text=FAZGAME';">
-            <div class="logo-text"><span class="yellow-text">FAZ</span>GAME | <span class="yellow-text">INVOICE</span></div>
+            <div class="logo-text"><span class="yellow-text">FAZ</span>GAME | <span class="yellow-text">DOCUMENTS</span></div>
         </div>
         <div class="header-right-group">
             <div class="header-logos">
@@ -238,7 +230,7 @@
 </header>
 
 <div class="main-container">
-    <!-- File Manager Card -->
+    <!-- File Manager -->
     <div class="card collapsible collapsed" id="storageCard">
         <div class="card-header" onclick="toggleCard('storageCard')">
             <i class="fa-solid fa-folder-open"></i> File Manager <i class="fa-solid fa-chevron-down toggle-arrow"></i>
@@ -266,7 +258,13 @@
         <div class="card-header"><i class="fa-solid fa-sliders"></i> Settings</div>
         <div class="card-body">
             <div class="form-row">
-                <div class="form-group"><label>Doc Type</label><select id="docTypeSelect" onchange="app.handleDocTypeSwitch()"><option value="INVOICE">Invoice</option><option value="QUOTATION">Quotation</option></select></div>
+                <div class="form-group"><label>Document Type</label>
+                    <select id="docTypeSelect" onchange="app.handleDocTypeSwitch()">
+                        <option value="INVOICE">Invoice</option>
+                        <option value="QUOTATION">Quotation</option>
+                        <option value="RECEIPT">Receipt</option>
+                    </select>
+                </div>
                 <div class="form-group"><label>Currency</label><select id="invCurrency"><option value="MYR">MYR (RM)</option><option value="USD">USD ($)</option></select></div>
             </div>
         </div>
@@ -295,7 +293,7 @@ JIn Southville 1, Southville City,
             <div class="form-group"><label>Company Name (Optional)</label><input type="text" id="custCompany" placeholder="e.g. Fikri Enterprise" oninput="app.updatePreview()"></div>
             <div class="form-group"><label>Billing Address (Optional)</label><textarea id="custAddr" rows="2" placeholder="e.g. Jalan Ampang, 68000 Ampang" oninput="app.updatePreview()"></textarea></div>
             <hr style="border-color:var(--border);">
-            <div class="form-group"><label id="formSerialLabel">Invoice No.</label><input type="text" id="invNumber" value="INV-2026-0042" oninput="app.updatePreview()"></div>
+            <div class="form-group"><label id="formSerialLabel">Document No.</label><input type="text" id="invNumber" value="INV-2026-0042" oninput="app.updatePreview()"></div>
             <div class="form-row"><div class="form-group"><label>Date Issued</label><input type="date" id="invDate" oninput="app.updatePreview()"></div><div class="form-group"><label>Due Date</label><input type="date" id="invDueDate" oninput="app.updatePreview()"></div></div>
         </div>
     </div>
@@ -329,7 +327,7 @@ JIn Southville 1, Southville City,
         </div>
     </div>
 
-    <!-- Payment & Notes -->
+    <!-- Payment & Notes (Bank details only used for Invoice) -->
     <div class="card collapsible collapsed" id="paymentCard">
         <div class="card-header" onclick="toggleCard('paymentCard')"><i class="fa-solid fa-credit-card"></i> Payment & Notes <i class="fa-solid fa-chevron-down toggle-arrow"></i></div>
         <div class="card-body">
@@ -345,7 +343,6 @@ JIn Southville 1, Southville City,
     <div class="preview-wrapper"><div class="invoice-preview" id="invoicePreview"></div></div>
 </div>
 
-<!-- Bottom Navigation (no print, no save to sheets) -->
 <div class="bottom-nav">
     <button class="nav-item" onclick="app.clearForm()"><i class="fa-solid fa-rotate-right"></i><span>Reset</span></button>
     <button class="nav-item" id="paidNavBtn" onclick="app.togglePaidStamp()"><i class="fa-solid fa-certificate"></i><span>Stamp</span></button>
@@ -359,7 +356,7 @@ JIn Southville 1, Southville City,
     window.toggleCard = function(id) { document.getElementById(id)?.classList.toggle('collapsed'); };
 
     const app = (function() {
-        // Product database (shortened for readability, but functional)
+        // Product database (shortened but functional)
         const PRODUCT_LIST = [
             { name: "AMD Ryzen 5 5500", price: 415 }, { name: "AMD Ryzen 5 5600", price: 540 }, { name: "AMD Ryzen 7 5700X", price: 680 }, { name: "AMD Ryzen 7 5800X", price: 830 }, { name: "AMD Ryzen 7 7800X3D", price: 1320 }, { name: "MSI B550M-A PRO", price: 345 }, { name: "MSI B550M PRO-VDH WIFI", price: 465 }, { name: "GIGABYTE B650M GAMING WIFI", price: 600 }, { name: "MSI VENTUS 2X RTX3050 6GB", price: 900 }, { name: "GIGABYTE WINDFORCE RTX5050 8GB", price: 1285 }, { name: "MSI SHADOW 2X RTX5060 8GB", price: 1500 }, { name: "Thermalright Assassin X 120 SE", price: 110 }, { name: "Segotep LUMI 3T Black", price: 250 }, { name: "GS24F14 23.8\" 144Hz IPS", price: 325 }
         ];
@@ -418,13 +415,22 @@ JIn Southville 1, Southville City,
                 rowsHtml += `<tr><td style="text-align:center">${i+1}</td><td><span class="inv-item-name">${escapeHtml(item.name)}</span>${det}</td><td class="right">${item.qty}</td><td class="right">${formatMoney(item.price)}</td><td class="right">${formatMoney(item.amount)}</td></tr>`;
             });
             if(!rowsHtml) rowsHtml = '<tr><td colspan="5" style="text-align:center">No items added</td></tr>';
-            const label = docType === "QUOTATION" ? "QUOTATION" : "INVOICE";
-            const footer = `<div style="display:flex; justify-content:space-between; margin-top:24px; padding-top:16px; border-top:1px solid #e2e8f0;"><div>${(docType==="INVOICE" && (bName||bHolder||bRouteNo)) ? `<div><h4>Bank Transfer Details</h4><p>Bank: ${escapeHtml(bName)}<br>Account: ${escapeHtml(bHolder)}<br>Number: ${escapeHtml(bRouteNo)}</p></div>` : ''}${notes ? `<div><h4>Notes</h4><p style="white-space:pre-line;">${escapeHtml(notes)}</p></div>` : ''}</div><div>${isPaid ? '<div class="paid-stamp">PAID</div>' : ''}</div></div>`;
+            
+            let label = "";
+            if(docType === "INVOICE") label = "INVOICE";
+            else if(docType === "QUOTATION") label = "QUOTATION";
+            else label = "RECEIPT";
+            
+            // Bank details only for Invoice (not for Quotation or Receipt)
+            const showBankDetails = (docType === "INVOICE") && (bName || bHolder || bRouteNo);
+            const bankHtml = showBankDetails ? `<div><h4>Bank Transfer Details</h4><p>Bank: ${escapeHtml(bName)}<br>Account: ${escapeHtml(bHolder)}<br>Number: ${escapeHtml(bRouteNo)}</p></div>` : '';
+            const notesHtml = notes ? `<div><h4>Notes</h4><p style="white-space:pre-line;">${escapeHtml(notes)}</p></div>` : '';
+            const footer = `<div style="display:flex; justify-content:space-between; margin-top:24px; padding-top:16px; border-top:1px solid #e2e8f0;"><div>${bankHtml}${notesHtml}</div><div>${isPaid ? '<div class="paid-stamp">PAID</div>' : ''}</div></div>`;
+            
             const contactLines = [];
             if(custPhone) contactLines.push(`📞 ${escapeHtml(custPhone)}`);
             if(custEmail) contactLines.push(`✉️ ${escapeHtml(custEmail)}`);
             const contactHtml = contactLines.length ? `<p style="font-size:13px; color:#64748b; margin-top:2px;">${contactLines.join('  |  ')}</p>` : '';
-            // Company info block with proper line breaks (address preserved, phone & email separate lines)
             const companyHtml = `
                 <h3 style="font-size:1.6rem; font-weight:800; margin-bottom:4px;">${escapeHtml(cName)}</h3>
                 <p style="font-size:12px; color:#475569; font-weight:600; margin-bottom:6px;">SSM: ${escapeHtml(cSSM)}</p>
@@ -467,20 +473,47 @@ JIn Southville 1, Southville City,
 
         function deleteRowEntry(btn) { if(tbody.children.length > 1) btn.closest('.item-entry-card').remove(); reindexRows(); updatePreview(); }
         function selectSearchItem(name, price) { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = name; r.querySelector('.item-price').value = price.toFixed(2); searchInput.value = ''; searchDropdown.classList.remove('show'); updatePreview(); }
-        function togglePaidStamp() { if(document.getElementById('docTypeSelect').value === "QUOTATION") return; isPaid = !isPaid; document.getElementById('paidNavBtn').classList.toggle('active', isPaid); updatePreview(); }
-        function handleDocTypeSwitch() { const t = document.getElementById('docTypeSelect').value; const lbl = document.getElementById('formSerialLabel'); const inp = document.getElementById('invNumber'); const btn = document.getElementById('paidNavBtn'); if(t === "QUOTATION") { lbl.textContent = "Quotation No."; if(inp.value.startsWith("INV-")) inp.value = "QTN-2026-0042"; isPaid = false; btn.classList.remove('active'); btn.disabled = true; } else { lbl.textContent = "Invoice No."; if(inp.value.startsWith("QTN-")) inp.value = "INV-2026-0042"; btn.disabled = false; } updatePreview(); }
-        function autoGenerateName() { const t = document.getElementById('docTypeSelect').value; const c = gv('custName') || 'Client'; const d = new Date().toISOString().split('T')[0]; document.getElementById('storageKeyName').value = `${t==='QUOTATION'?'Quotation':'Invoice'} - ${c} - ${d}`; }
+        function togglePaidStamp() { 
+            const docType = document.getElementById('docTypeSelect').value;
+            if(docType === "QUOTATION") return; // no stamp for quotations
+            isPaid = !isPaid; 
+            document.getElementById('paidNavBtn').classList.toggle('active', isPaid); 
+            updatePreview(); 
+        }
+        function handleDocTypeSwitch() { 
+            const t = document.getElementById('docTypeSelect').value; 
+            const lbl = document.getElementById('formSerialLabel'); 
+            const inp = document.getElementById('invNumber'); 
+            const btn = document.getElementById('paidNavBtn');
+            if(t === "QUOTATION") { 
+                lbl.textContent = "Quotation No."; 
+                if(inp.value.startsWith("INV-") || inp.value.startsWith("RCP-")) inp.value = "QTN-2026-0042"; 
+                isPaid = false; 
+                btn.classList.remove('active'); 
+                btn.disabled = true; 
+            } else if(t === "RECEIPT") {
+                lbl.textContent = "Receipt No."; 
+                if(inp.value.startsWith("INV-") || inp.value.startsWith("QTN-")) inp.value = "RCP-2026-0042"; 
+                btn.disabled = false; 
+            } else { // INVOICE
+                lbl.textContent = "Invoice No."; 
+                if(inp.value.startsWith("QTN-") || inp.value.startsWith("RCP-")) inp.value = "INV-2026-0042"; 
+                btn.disabled = false; 
+            } 
+            updatePreview(); 
+        }
+        function autoGenerateName() { const t = document.getElementById('docTypeSelect').value; const c = gv('custName') || 'Client'; const d = new Date().toISOString().split('T')[0]; let prefix = ""; if(t === "INVOICE") prefix = "Invoice"; else if(t === "QUOTATION") prefix = "Quotation"; else prefix = "Receipt"; document.getElementById('storageKeyName').value = `${prefix} - ${c} - ${d}`; }
         function getCurrentPayload() { return { docType: gv('docTypeSelect'), compName: gv('compName'), compSSM: gv('compSSM'), compAddr: gv('compAddr'), compPhone: gv('compPhone'), compEmail: gv('compEmail'), custName: gv('custName'), custPhone: gv('custPhone'), custEmail: gv('custEmail'), custCompany: gv('custCompany'), custAddr: gv('custAddr'), invNumber: gv('invNumber'), invCurrency: gv('invCurrency'), invDate: gv('invDate'), invDueDate: gv('invDueDate'), discountType: gv('discountType'), discountValue: gv('discountValue'), bankName: gv('bankName'), acctName: gv('acctName'), acctNumber: gv('acctNumber'), notesText: gv('notesText'), items: readFormLineItems(), paidState: isPaid, timestamp: Date.now() }; }
-        function saveToLocalStorage() { let key = document.getElementById('storageKeyName').value.trim(); if(!key) { const pfx = document.getElementById('docTypeSelect').value === "QUOTATION" ? "Quotation" : "Invoice"; key = `${pfx} - ${gv('custName')||'Unnamed'}`; document.getElementById('storageKeyName').value = key; } const payload = getCurrentPayload(); let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); const meta = { name: key, type: payload.docType, serial: payload.invNumber, totalDisplay: document.getElementById('grandTotalDisplay').value, date: new Date().toLocaleDateString() }; const ex = idx.findIndex(i => i.name.toLowerCase() === key.toLowerCase()); if(ex > -1 && !confirm(`Overwrite "${key}"?`)) return; if(ex > -1) idx[ex] = meta; else idx.push(meta); localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); localStorage.setItem(`fge_doc_file_${key.toLowerCase()}`, JSON.stringify(payload)); refreshStorageIndexView(); alert(`"${key}" saved.`); }
+        function saveToLocalStorage() { let key = document.getElementById('storageKeyName').value.trim(); if(!key) { const t = document.getElementById('docTypeSelect').value; let pfx = "Document"; if(t === "INVOICE") pfx = "Invoice"; else if(t === "QUOTATION") pfx = "Quotation"; else pfx = "Receipt"; key = `${pfx} - ${gv('custName')||'Unnamed'}`; document.getElementById('storageKeyName').value = key; } const payload = getCurrentPayload(); let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); const meta = { name: key, type: payload.docType, serial: payload.invNumber, totalDisplay: document.getElementById('grandTotalDisplay').value, date: new Date().toLocaleDateString() }; const ex = idx.findIndex(i => i.name.toLowerCase() === key.toLowerCase()); if(ex > -1 && !confirm(`Overwrite "${key}"?`)) return; if(ex > -1) idx[ex] = meta; else idx.push(meta); localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); localStorage.setItem(`fge_doc_file_${key.toLowerCase()}`, JSON.stringify(payload)); refreshStorageIndexView(); alert(`"${key}" saved.`); }
         function refreshStorageIndexView() { const list = document.getElementById('localDocsList'); const idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); if(!idx.length) { list.innerHTML = '<div style="padding:10px; text-align:center;">No saved files.</div>'; return; } list.innerHTML = idx.map(m => `<div class="doc-entry"><div class="doc-entry-info"><span class="doc-entry-title">${escapeHtml(m.name)}</span><div class="doc-entry-meta"><span class="doc-entry-type">${m.type}</span><span>${m.serial}</span><span>${m.totalDisplay}</span></div></div><div class="doc-entry-actions"><button class="btn btn-sm" onclick="app.loadStoredDocument('${escapeAttr(m.name.toLowerCase())}')"><i class="fa-solid fa-folder-open"></i></button><button class="btn btn-sm btn-icon-danger" onclick="app.purgeStoredDocument('${escapeAttr(m.name.toLowerCase())}', '${escapeAttr(m.name)}')"><i class="fa-solid fa-trash"></i></button></div></div>`).join(''); }
         function loadStoredDocument(key) { const raw = localStorage.getItem(`fge_doc_file_${key}`); if(!raw) return alert("Not found"); try { const d = JSON.parse(raw); const m = (JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]')).find(i => i.name.toLowerCase() === key); document.getElementById('storageKeyName').value = m ? m.name : key; ['docTypeSelect','compName','compSSM','compAddr','compPhone','compEmail','custName','custPhone','custEmail','custCompany','custAddr','invNumber','invCurrency','invDate','invDueDate','discountType','discountValue','bankName','acctName','acctNumber','notesText'].forEach(id => { document.getElementById(id).value = d[id] || (id==='invCurrency'?'MYR':id==='discountType'?'none':''); }); tbody.innerHTML = ''; if(d.items?.length) d.items.forEach(item => { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = item.name; r.querySelector('.item-detail').value = item.detail || ''; r.querySelector('.item-qty').value = item.qty || 1; r.querySelector('.item-price').value = parseFloat(item.price).toFixed(2); }); else appendRowEntry(true); isPaid = d.paidState || false; document.getElementById('paidNavBtn').classList.toggle('active', isPaid); handleDocTypeSwitch(); updatePreview(); } catch(e) { alert("Load error"); } }
         function purgeStoredDocument(key, name) { if(!confirm(`Delete "${name}"?`)) return; let idx = JSON.parse(localStorage.getItem('fge_master_doc_index') || '[]'); idx = idx.filter(i => i.name.toLowerCase() !== key); localStorage.setItem('fge_master_doc_index', JSON.stringify(idx)); localStorage.removeItem(`fge_doc_file_${key}`); refreshStorageIndexView(); }
         function exportToJsonFile() { const data = getCurrentPayload(); const clientName = (data.custName || "client").replace(/[^a-z0-9]/gi, '_').replace(/_+/g,'_').replace(/^_|_$/g,'') || "client"; const phone = (data.custPhone || "no-phone").replace(/[^0-9+]/g, '').replace(/[^a-z0-9]/gi,'_') || "no-phone"; const filename = `${clientName}_${phone}.json`.substring(0,100); const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url); alert("JSON exported."); }
         function importFromJsonFile(files) { if(!files.length) return; const reader = new FileReader(); reader.onload = e => { try { const d = JSON.parse(e.target.result); ['docTypeSelect','compName','compSSM','compAddr','compPhone','compEmail','custName','custPhone','custEmail','custCompany','custAddr','invNumber','invCurrency','invDate','invDueDate','discountType','discountValue','bankName','acctName','acctNumber','notesText'].forEach(id => { if(d[id] !== undefined) document.getElementById(id).value = d[id]; }); tbody.innerHTML = ''; if(d.items?.length) d.items.forEach(item => { appendRowEntry(true); const r = tbody.lastChild; r.querySelector('.item-desc').value = item.name; r.querySelector('.item-detail').value = item.detail || ''; r.querySelector('.item-qty').value = item.qty || 1; r.querySelector('.item-price').value = parseFloat(item.price).toFixed(2); }); else appendRowEntry(true); isPaid = d.paidState || false; document.getElementById('paidNavBtn').classList.toggle('active', isPaid); handleDocTypeSwitch(); updatePreview(); alert("JSON loaded."); } catch(err) { alert("Invalid JSON"); } }; reader.readAsText(files[0]); }
         async function buildPdfBlob() { const src = document.getElementById('invoicePreview'); const clone = src.cloneNode(true); clone.style.width = '750px'; const cc = document.getElementById('pdfCloneContainer'); cc.innerHTML = ''; cc.appendChild(clone); cc.style.visibility = 'visible'; cc.style.position = 'fixed'; cc.style.top = '0'; cc.style.left = '0'; cc.style.width = '750px'; await new Promise(r => setTimeout(r,150)); const canvas = await html2canvas(clone, { scale: 2, backgroundColor: '#ffffff', width: 750 }); cc.innerHTML = ''; cc.style.visibility = 'hidden'; const { jsPDF } = window.jspdf; const pdf = new jsPDF('p', 'mm', 'a4'); const pw = pdf.internal.pageSize.getWidth(); const ih = (canvas.height * pw) / canvas.width; pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pw, ih); return pdf.output('blob'); }
-        function genFileName() { const t = document.getElementById('docTypeSelect').value; const tf = t.charAt(0).toUpperCase() + t.slice(1).toLowerCase(); const c = (gv('custName')||'Client').replace(/[\\/:*?"<>|]/g, ''); const inv = gv('invNumber').replace(/[\\/:*?"<>|]/g, '') || 'NoRef'; return `Fazgame_${tf}_${c}_${inv}.pdf`; }
+        function genFileName() { const t = document.getElementById('docTypeSelect').value; let tf = "Doc"; if(t === "INVOICE") tf = "Invoice"; else if(t === "QUOTATION") tf = "Quotation"; else tf = "Receipt"; const c = (gv('custName')||'Client').replace(/[\\/:*?"<>|]/g, ''); const inv = gv('invNumber').replace(/[\\/:*?"<>|]/g, '') || 'NoRef'; return `Fazgame_${tf}_${c}_${inv}.pdf`; }
         async function downloadPDF() { try { const blob = await buildPdfBlob(); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = genFileName(); a.click(); URL.revokeObjectURL(url); } catch(e) { alert("PDF error"); } }
-        async function sharePDF() { try { const blob = await buildPdfBlob(); const file = new File([blob], genFileName(), {type:'application/pdf'}); if(navigator.share && navigator.canShare?.({files:[file]})) await navigator.share({ files: [file], title: 'Invoice' }); else downloadPDF(); } catch(e) { console.error(e); } }
+        async function sharePDF() { try { const blob = await buildPdfBlob(); const file = new File([blob], genFileName(), {type:'application/pdf'}); if(navigator.share && navigator.canShare?.({files:[file]})) await navigator.share({ files: [file], title: 'Document' }); else downloadPDF(); } catch(e) { console.error(e); } }
         function clearForm() { if(!confirm('Reset all?')) return; ['storageKeyName','custName','custPhone','custEmail','custCompany','custAddr'].forEach(id => document.getElementById(id).value = ''); document.getElementById('discountType').value = 'none'; document.getElementById('discountValue').value = '0'; document.getElementById('docTypeSelect').value = 'INVOICE'; document.getElementById('invNumber').value = 'INV-2026-0042'; tbody.innerHTML = ''; isPaid = false; document.getElementById('paidNavBtn').classList.remove('active'); appendRowEntry(true); handleDocTypeSwitch(); updatePreview(); }
         function init() { document.getElementById('invDate').value = new Date().toISOString().split('T')[0]; const due = new Date(); due.setDate(due.getDate()+14); document.getElementById('invDueDate').value = due.toISOString().split('T')[0]; searchInput.addEventListener('input', runSearchProcessing); searchInput.addEventListener('focus', runSearchProcessing); document.addEventListener('click', e => { if(!e.target.closest('.item-search-area')) searchDropdown.classList.remove('show'); }); appendRowEntry(true); appendRowEntry(true); refreshStorageIndexView(); updatePreview(); document.getElementById('discountType').addEventListener('change', updatePreview); document.getElementById('discountValue').addEventListener('input', updatePreview); document.getElementById('invCurrency').addEventListener('change', updatePreview); document.getElementById('docTypeSelect').addEventListener('change', handleDocTypeSwitch); }
         return { init, updatePreview, deleteRowEntry, selectSearchItem, togglePaidStamp, handleDocTypeSwitch, autoGenerateName, saveToLocalStorage, loadStoredDocument, purgeStoredDocument, exportToJsonFile, importFromJsonFile, downloadPDF, sharePDF, clearForm, appendRowEntry };
